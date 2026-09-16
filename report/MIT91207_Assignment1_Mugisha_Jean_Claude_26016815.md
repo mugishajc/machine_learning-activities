@@ -7,8 +7,6 @@
 **Lecturer:** Dr Gustave Udahemuka
 **Submission date:** 17 September 2026
 
----
-
 ## Note on reproducibility
 
 Every number, table and figure in this report was produced by the scripts in `code/`
@@ -31,8 +29,6 @@ constructed that carries exactly the faults the question describes. The generati
 process is written out in the script, so the conclusions can be checked against a
 known ground truth. This is deliberate: it is the only way to show that a proposed
 treatment recovers the right answer, because with real data the right answer is unknown.
-
----
 
 # Question 1: Student early-warning system (12 marks)
 
@@ -159,8 +155,6 @@ internalise the label, so the prediction can contribute to the outcome it foreca
 Under Rwanda's Law No. 058/2021 relating to the protection of personal data and privacy,
 profiling students in this way also carries transparency and lawful-basis obligations
 that need to be settled before deployment, not after.
-
----
 
 # Question 2: Course-recommendation preprocessing (13 marks)
 
@@ -307,7 +301,6 @@ The second assertion is the one that catches real bugs. Any learner's first reco
 carry a prior-completion rate of zero, because at that moment they have no history. If it
 does not, an aggregate has been computed over the full series and the future has entered
 the training data.
----
 
 # Question 3: Missing data in loan default prediction (13 marks)
 
@@ -529,8 +522,6 @@ economic class, which converts a technical shortcut into a fair-lending exposure
 the argument to put to the management team: the proposal is not a simplification that
 costs a little accuracy, it is an undocumented change in credit policy.
 
----
-
 # Question 4: Feature engineering for subscription renewal (12 marks)
 
 Measured on 4,000 generated customer records with a known outcome process, so that the
@@ -688,7 +679,6 @@ releases. Validate the schema of each incoming batch against the training schema
 fail loudly on a mismatch instead of coercing. Monitor the input distributions, because
 a pipeline that is applied perfectly consistently to data that has drifted is still
 producing the wrong answer, just reproducibly.
----
 
 # Question 5: Hospital readmission prediction (13 marks)
 
@@ -898,8 +888,6 @@ alternative would defeat the purpose. The assertion at step 3 is not decoration:
 only thing standing between a correct split and a silent bug, and it costs one line. For
 model selection rather than a single split, `StratifiedGroupKFold` provides the same
 protection while preserving the class balance in each fold.
-
----
 
 # Question 6: US Crime dataset (13 marks)
 
@@ -1145,7 +1133,6 @@ pre-registered analysis plan, given that fifteen predictors offer ample scope fo
 selecting a congenial result. And an explicit causal diagram stating which variables are
 assumed to be confounders and which are on the causal path, since conditioning on a
 mediator introduces bias instead of removing it.
----
 
 # Question 7: YEGO ETA prediction (14 marks)
 
@@ -1403,8 +1390,6 @@ by any amount of cross-validation, because the leak is in the data's definition 
 Track the distribution of each input and the realised prediction error against the offline
 estimate, and retrain on a schedule instead of waiting for complaints.
 
----
-
 # Question 8: Product-launch survey analysis (12 marks)
 
 600 unique responses after cleaning, with stated willingness to purchase at 36.3%.
@@ -1573,8 +1558,6 @@ commercial variable, and the survey says nothing about either.
 Recommendation to management: treat the survey as having identified who to sell to and
 what to build first, and as having established nothing reliable about how many will buy or
 at what price. Fund the commitment test and the pilot before the full launch.
-
----
 
 # Appendix: Repository contents
 
