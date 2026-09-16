@@ -1,5 +1,6 @@
 # MIT91207 Machine Learning: Assignment 1
 
+**Mugisha Jean Claude**, registration number **26016815**.
 MSc Information Technology, Level 9, Trimester 4. University of Kigali.
 Lecturer: Dr Gustave Udahemuka. Submission date: 17 September 2026.
 
@@ -12,7 +13,7 @@ exploratory survey analysis.
 | Path | Contents |
 |---|---|
 | `report/` | Full written report, Markdown source |
-| `MIT91207_Assignment1_Mugisha_Jean_Claude.docx` | Submission document |
+| `MIT91207_Assignment1_Mugisha_Jean_Claude_26016815.docx` | Submission document |
 | `code/` | One runnable script per question |
 | `data/` | The two supplied datasets |
 | `figures/` | 11 generated figures |
