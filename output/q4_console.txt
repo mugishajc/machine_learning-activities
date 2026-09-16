@@ -1,0 +1,96 @@
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/linear_model/_logistic.py:465: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+================================================================================
+DATA
+  n=4000  renewal rate=0.587
+  cardinality: region=5, payment_method=4, customer_status=3, subscription_type=3
+
+================================================================================
+Q4(b) ENCODING STRATEGIES, LOGISTIC REGRESSION
+  One-hot nominal + ordinal tier (correct)         AUC=0.7310 (+/-0.0282)  width=14
+  Ordinal codes forced onto NOMINAL region/payment AUC=0.6424 (+/-0.0137)  width=8
+  One-hot everything incl. tier (order discarded)  AUC=0.7305 (+/-0.0283)  width=15
+  Correct encoding but NO scaling                  AUC=0.7302 (+/-0.0279)  width=14
+
+  cost of mis-encoding nominal variables as ordinal: +0.0886 AUC
+  cost of discarding the tier ordering            : +0.0005 AUC
+
+================================================================================
+Q4(b) THE SAME CHOICES UNDER A TREE MODEL
+  Ordinal codes on nominal, random forest          AUC=0.6908 (+/-0.0284)  width=8
+  One-hot nominal, random forest                   AUC=0.7069 (+/-0.0301)  width=17
+
+  a tree splits on thresholds and can isolate any integer code, so the penalty is 0.0161 AUC, far smaller than the 0.0886 seen in the linear model
+
+================================================================================
+Q4(b) WHY ARBITRARY INTEGER CODES MISLEAD A LINEAR MODEL
+  region  alphabetical code  true effect on renewal
+  Kigali                  0                     0.9
+Northern                  1                    -0.3
+Southern                  2                    -0.5
+ Eastern                  3                     0.2
+ Western                  4                    -0.4
+  correlation between the integer code and the real effect: -0.572
+  the code imposes Kigali < Northern < Southern < Eastern < Western and equal spacing;
+  neither holds, so one coefficient is fitted to a sequence that carries no meaning
+
+================================================================================
+Q4(d) DEPLOYMENT: PERSIST, DO NOT REFIT
+  saved artefact reproduces training-time output exactly: True
+  training feature width frozen at 17 columns
+  an unseen region and payment method still score without error: [0.4316 0.4884 0.3804 0.5703 0.7681]
+  refitting the transformer on a later batch instead of loading it shifts the same five customers by up to 0.0924 in predicted probability (train/serve skew)
+
+================================================================================
+Q4(d) THE REFERENCE-LEVEL TRAP
+  reference level 'Eastern' -> [[0, 0, 0, 0]]
+  unseen level 'Musanze'    -> [[0, 0, 0, 0]]
+  identical vectors: an unrecognised region is silently scored as the reference region.
+  drop='first' and handle_unknown='ignore' must not be combined in production; keep all
+  levels, or add an explicit 'unknown' category, so the two cases stay distinguishable.

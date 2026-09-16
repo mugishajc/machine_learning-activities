@@ -1,0 +1,48 @@
+================================================================================
+1. DATA
+  admissions=3558  patients=1200  admissions/patient mean=2.96 max=5
+  readmission rate=0.341
+  patients with more than one admission: 940 (78%)
+
+================================================================================
+2. Q5(b) THE SAME MODEL UNDER THREE SPLITS
+  random split over admissions   AUC=0.7455   patients appearing on BOTH sides: 581
+  grouped by patient             AUC=0.7299   patients appearing on BOTH sides: 0
+  temporal (train on first 75% of days) AUC=0.7579   patients on both sides: 561
+
+  the careless split reports +0.0156 AUC more than the grouped split (+2.1%).
+  A single split is a noisy instrument, so this gap alone proves little. The repeated
+  experiment in q5b_leakage_scaling.py estimates the effect properly.
+
+================================================================================
+3. Q5(b) CROSS-VALIDATION, GROUPED VS NOT
+  StratifiedKFold      AUC=0.7267 (+/-0.0201)   <- optimistic
+  StratifiedGroupKFold AUC=0.7289 (+/-0.0197)   <- honest
+
+================================================================================
+4. Q5(d) THE PARTITION ACTUALLY USED: train / validation / test
+  subset        admissions  patients   share  readmit rate
+  train               2195       720  61.7%         0.350
+  validation           700       240  19.7%         0.314
+  test                 663       240  18.6%         0.338
+  patient overlap between subsets: train/validation=0, train/test=0, validation/test=0
+
+================================================================================
+5. Q5(c) PERFORMANCE BY PATIENT SUBGROUP
+  overall AUC=0.7314  recall=0.438  precision=0.590
+
+          subgroup   n  base rate       AUC    recall  precision  flag rate
+insurance=mutuelle 430      0.344     0.749     0.439      0.644      0.235
+    insurance=none  98      0.347     0.701     0.529      0.529      0.347
+ insurance=private 135      0.311     0.695     0.357      0.484      0.230
+             sex=F 347      0.354     0.763     0.455      0.675      0.239
+             sex=M 316      0.320     0.699     0.416      0.506      0.263
+         age=18-45 152      0.263     0.721     0.275      0.524      0.138
+         age=46-65 300      0.347     0.736     0.433      0.616      0.243
+           age=66+ 211      0.379     0.717     0.525      0.583      0.341
+
+  widest AUC gap across subgroups: 0.0683 (sex=F vs insurance=private)
+  widest recall gap              : 0.2544 (insurance=none vs age=18-45)
+  a single overall AUC conceals both gaps, which is why the aggregate number is not enough
+
+figure: figures/q5_fig1.png

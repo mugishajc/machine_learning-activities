@@ -1,0 +1,72 @@
+==============================================================================
+A. ONE-STANDARD-ERROR RULE (Lasso)
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+/Users/jcmugisha/.venvs/mluok/lib/python3.9/site-packages/sklearn/preprocessing/_encoders.py:246: UserWarning: Found unknown categories in columns [0] during transform. These unknown categories will be encoded as all zeros
+  warnings.warn(
+best alpha            = 0.0039   CV RMSE = 5.7117 (SE 0.1536)
+1-SE threshold        = 5.8653
+largest alpha within  = 0.2868   CV RMSE = 5.8563
+
+Retained by the 1-SE model (8 of 15):
+    journey_distance_km             8.184
+    traffic_index                   6.015
+    weather_score                   1.594
+    road_type_local                 1.543
+    previous_journey_time_min       1.213
+    road_type_express              -0.885
+    road_type_highway              -0.857
+    road_slope_pct                  0.468
+Dropped (7): time_of_day_hours, traffic_proxy, distance_proxy, average_speed_kmh, driver_experience_years, passenger_rating, random_noise_feature
+
+                  Model    alpha  predictors kept  Test RMSE  Test R2
+OLS (all 15 predictors)      NaN               15     6.2366   0.7999
+     Lasso (CV-optimal)   0.0039               15     6.2355   0.8000
+      Lasso (1-SE rule)   0.2868                8     6.3680   0.7914
+
+==============================================================================
+B. COEFFICIENT STABILITY UNDER MULTICOLLINEARITY (300 bootstrap refits, n=200)
+                predictor    OLS sd  Ridge sd  reduction %  OLS sign flips %
+      journey_distance_km     1.645     0.864       47.467             0.000
+        road_type_highway     1.507     0.909       39.686             0.000
+            traffic_index     1.209     0.758       37.320             0.000
+           distance_proxy     1.180     0.768       34.956            26.333
+        road_type_express     1.075     0.747       30.462             0.333
+          road_type_local     1.040     0.742       28.648             6.667
+            traffic_proxy     0.989     0.701       29.104            41.333
+previous_journey_time_min     0.950     0.702       26.113            17.667
+        average_speed_kmh     0.620     0.540       12.882            27.667
+            weather_score     0.460     0.445        3.370             0.000
+         passenger_rating     0.448     0.416        7.149            44.000
+     random_noise_feature     0.427     0.403        5.785            39.000
+  driver_experience_years     0.426     0.413        3.145            38.667
+           road_slope_pct     0.416     0.395        5.053             3.667
+        time_of_day_hours     0.413     0.394        4.678            41.333
+
+==============================================================================
+C. TEST RMSE BY TRAINING-SET SIZE (mean of 40 random draws)
+ n_train       OLS     Ridge     Lasso  OLS - Ridge
+      30     8.520     7.688     7.544        0.832
+      50     7.344     7.182     6.972        0.162
+      80     6.833     6.847     6.693       -0.014
+     120     6.610     6.656     6.595       -0.046
+     200     6.421     6.462     6.475       -0.042
+     400     6.331     6.348     6.449       -0.016
+     800     6.253     6.252     6.393        0.001
+    1200     6.237     6.234     6.381        0.003
+
+Figure written: figures/q7_fig5_complexity.png

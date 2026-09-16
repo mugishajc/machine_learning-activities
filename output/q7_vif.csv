@@ -1,0 +1,13 @@
+predictor,VIF
+journey_distance_km,10.859606231248572
+traffic_index,7.381722459435327
+distance_proxy,7.219508916822428
+previous_journey_time_min,5.245662255112981
+traffic_proxy,5.195101986517117
+average_speed_kmh,2.486057609674284
+weather_score,1.0746680864118807
+time_of_day_hours,1.0674139508050768
+driver_experience_years,1.0143901161431552
+passenger_rating,1.0130346933585939
+road_slope_pct,1.0094751468128882
+random_noise_feature,1.0061925329900119

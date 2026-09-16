@@ -1,0 +1,14 @@
+================================================================================
+GROUP LEAKAGE VS RECORDS PER PATIENT (12 seeds each)
+  adm/patient  random AUC  grouped AUC  inflation             95% CI         p
+            1      0.7159       0.7319    -0.0160   [-0.0474,+0.0153]    0.3378
+            2      0.7469       0.7515    -0.0046   [-0.0137,+0.0045]    0.3450
+            4      0.7476       0.7353    +0.0123   [+0.0015,+0.0232]    0.0479
+            8      0.7636       0.7574    +0.0063   [-0.0005,+0.0131]    0.0990
+           16      0.7745       0.7666    +0.0079   [+0.0017,+0.0140]    0.0299
+
+  With one admission per patient the two splits are identical by construction and the
+  difference is noise. Inflation appears once patients repeat and grows with the number
+  of records each patient contributes, because a larger share of the test set consists of
+  patients the model has already fitted.
+figure: figures/q5_fig2_leakage.png

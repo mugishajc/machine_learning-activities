@@ -1,0 +1,6 @@
+strategy,k,cv_rmse,cv_rmse_sd,cv_r2,features
+All 15 predictors,15,296.8350609631365,66.08559260626171,0.09786514968432457,"M, So, Ed, Po1, Po2, LF, M.F, Pop, NW, U1, U2, Wealth, Ineq, Prob, Time"
+Filter: |r with Crime| >= 0.30,6,317.38522635956195,86.6662495164756,-0.051928186999375826,"Ed, Po1, Po2, Pop, Wealth, Prob"
+"Drop redundant (Po2,U1,Wealth)",12,280.9540259073438,58.931206324161444,0.19593184911441106,"M, So, Ed, Po1, LF, M.F, Pop, NW, U2, Ineq, Prob, Time"
+Embedded: LassoCV (a=11.39),11,250.03623052219064,52.78509623045522,0.326793585630828,"M, So, Ed, Po1, LF, M.F, NW, U1, U2, Ineq, Prob"
+Wrapper: RFE with CV,4,255.3165398210607,64.94092454680751,0.3337024213697798,"Ed, Po1, Po2, Ineq"

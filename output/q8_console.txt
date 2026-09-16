@@ -1,0 +1,58 @@
+================================================================================
+1. Q8(a) DATA QUALITY BEFORE ANY INTERPRETATION
+  responses=612  duplicate rows=12
+  after removing duplicate submissions: 600
+                      missing    %
+expected_price_band        18  3.0
+satisfaction_current       26  4.3
+  willingness among non-responders to satisfaction: 0.308 vs 0.366 (n=26)
+  overall stated willingness to purchase: 36.3%
+  margin of error on that proportion at 95%: +/-3.8 pp
+
+================================================================================
+2. Q8(b)(c) RELATIONSHIPS, WITH A TEST BEHIND EACH CHART
+
+  (i) prior use of a similar product x willingness  [nominal x binary -> grouped bar]
+willing_to_purchase    0    1
+used_similar_before          
+no                   232   93
+yes                  150  125
+      willingness: prior users 45.5% vs non-users 28.6%  (chi2 p=2.82e-05, Cramer V=0.171)
+
+  (ii) expected price band x willingness  [ordinal x binary -> ordered bar + trend test]
+                       n  willing %
+expected_price_band                
+<5k                  177       27.7
+5-15k                187       37.4
+15-30k               112       38.4
+30-50k                70       42.9
+>50k                  36       58.3
+      Spearman rho=+0.144 (p=5.10e-04): willingness RISES with the price the
+      respondent already expects to pay, so the constraint is not price sensitivity
+
+  (iii) current satisfaction x willingness  [ordinal x binary -> box plot]
+      median satisfaction, willing=2.0 vs not willing=4.0  (Mann-Whitney p=5.45e-08)
+      mean satisfaction, willing=2.68 vs not willing=3.35
+
+  (iv) preferred feature x age group  [nominal x nominal -> heatmap of column shares]
+age_group          18-24  25-34  35-44  45-54   55+
+preferred_feature                                  
+analytics           10.0   15.5    8.7    4.8  11.1
+local language      32.1   24.4   17.4   29.8  22.2
+mobile money        30.0   37.3   27.5   22.6  28.9
+multi-user          10.0   13.0   18.1   15.5  17.8
+offline mode        17.9    9.8   28.3   27.4  20.0
+      chi2 p=5.13e-04, Cramer V=0.131
+
+================================================================================
+3. Q8(c) SEGMENTS THAT CARRY THE DECISION
+                              n  willing  satisfaction  share of sample  share of all willing
+segment                                                                                      
+experienced, higher budget  100    0.540         3.011            0.167                 0.248
+experienced, lower budget   175    0.406         3.171            0.292                 0.326
+new, higher budget          126    0.325         3.000            0.210                 0.188
+new, lower budget           199    0.261         3.161            0.332                 0.239
+
+  'experienced, higher budget' is 16.7% of respondents but 24.8% of everyone willing to buy
+
+figure: figures/q8_fig1_survey.png

@@ -1,0 +1,7 @@
+strategy,cv_auc
+one-hot nominal + ordinal tier,0.7310077932328125
+ordinal on nominal,0.6424027570075814
+one-hot all,0.7305477175563185
+no scaling,0.7301882129138046
+RF ordinal on nominal,0.690823202021862
+RF one-hot,0.7069173738549659

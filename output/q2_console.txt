@@ -1,0 +1,70 @@
+        101        Data Viz    DATA SCIENCE     4.0         completed 2026-04-21              275                     2
+        110      SQL Basics       Databases     NaN       in_progress 2026-05-03               60                     1
+        111   Deep Learning           ai/ml     4.5         completed 2026-05-17             1320                     6
+        112        Data Viz    Data Science     3.5           dropped 2026-06-01              150                     3
+
+rows=15  exact duplicates=0  missing ratings=3  distinct category strings=9
+raw category labels: [' data science', 'AI / ML', 'AI/ML', 'DATA SCIENCE', 'Data  Science', 'Data Science', 'Databases', 'ai/ml', 'databases']
+
+Scale disparity (raw units):
+                           mean        std        min        max
+rating                     4.00       0.77       2.50       5.00
+minutes_watched          536.33     536.34      30.00    1450.00
+courses_taken_before       2.80       2.48       0.00       7.00
+
+================================================================================
+STEP 1  de-duplication
+  exact duplicates removed : 0
+  repeat learner-course rows removed (kept most recent): 2
+
+================================================================================
+STEP 2  category harmonisation
+  9 raw strings -> 3 canonical: ['AI/ML', 'Data Science', 'Databases']
+
+================================================================================
+STEP 3  missing ratings
+  cut-off for statistics: 2026-04-17  (train rows only, no future information)
+  category medians from training rows: {'AI/ML': 4.5, 'Data Science': 4.0, 'Databases': 3.0}
+  imputed 3 ratings; 'rating_missing' retained as a signal (non-response often means disengagement, not a neutral score)
+
+================================================================================
+STEP 4  engineered features
+  engagement_ratio      = learner minutes / median minutes for that course
+  prior_completion_rate = share of the learner's EARLIER courses completed (shift() before expanding())
+  experience_band       = banded courses_taken_before
+
+================================================================================
+STEP 5  scaling (StandardScaler fitted on training rows only)
+            variable  train mean  train scale
+       rating_filled        3.83         0.71
+     minutes_watched      496.67       479.92
+courses_taken_before        2.56         2.27
+    engagement_ratio        1.16         1.04
+
+================================================================================
+AFTER CLEANING
+ learner_id    course_title course_category  rating  rating_filled  rating_missing  engagement_ratio  prior_completion_rate experience_band
+        101 Intro to Python    Data Science     4.5            4.5               0             0.634                    0.0             new
+        101        Data Viz    Data Science     4.0            4.0               0             2.292                    1.0           light
+        102        Data Viz    Data Science     NaN            4.0               1             0.375                    0.0         regular
+        103 Intro to Python    Data Science     3.0            3.0               0             1.208                    0.0           light
+        104   Deep Learning           AI/ML     5.0            5.0               0             1.098                    0.0           heavy
+        105        Data Viz    Data Science     NaN            4.0               1             0.750                    0.0           light
+        106      SQL Basics       Databases     2.5            2.5               0             0.500                    0.0             new
+        107   Deep Learning           AI/ML     4.0            4.0               0             0.894                    0.0         regular
+        108      SQL Basics       Databases     3.5            3.5               0             4.000                    0.0           light
+        109 Intro to Python    Data Science     4.0            4.0               0             1.000                    0.0         regular
+        110      SQL Basics       Databases     NaN            3.0               1             1.000                    0.0           light
+        111   Deep Learning           AI/ML     4.5            4.5               0             1.000                    0.0           heavy
+        112        Data Viz    Data Science     3.5            3.5               0             1.250                    0.0         regular
+
+rows 15 -> 13   missing values remaining: 3
+
+================================================================================
+Q2(d)  LEAKAGE CHECK
+  train window 2026-01-05 .. 2026-04-15  (n=9)
+  test  window 2026-04-21 .. 2026-06-01  (n=4)
+  overlap: NONE
+  first-ever record for any learner carrying non-zero history: False (must be False)
+
+written: output/q2_cleaned.csv

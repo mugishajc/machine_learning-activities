@@ -1,0 +1,56 @@
+================================================================================
+1. MISSINGNESS PROFILE
+                 missing     %
+income               506  16.9
+years_employed       255   8.5
+credit_score         492  16.4
+employment_type      122   4.1
+
+Default rate by whether the field is missing (evidence against MCAR):
+  income          missing: 0.247   present: 0.251   Welch p = 8.66e-01  -> consistent with MCAR
+  years_employed  missing: 0.204   present: 0.254   Welch p = 5.94e-02  -> consistent with MCAR
+  credit_score    missing: 0.183   present: 0.263   Welch p = 4.45e-05  -> NOT MCAR
+
+Missingness tested against an OBSERVED COVARIATE (employment_type):
+  income          chi2 p = 4.83e-77  -> MAR, depends on employment_type
+                  missing rate by employment type: {'informal': 0.417, 'salaried': 0.068, 'self_employed': 0.177}
+  years_employed  chi2 p = 1.37e-50  -> MAR, depends on employment_type
+                  missing rate by employment type: {'informal': 0.243, 'salaried': 0.046, 'self_employed': 0.044}
+
+  Note: testing missingness against the target alone is not sufficient. income shows no
+  association with default (p = 0.87) yet is strongly associated with employment_type, so it
+  is MAR rather than MCAR. A target-only test would have wrongly cleared it.
+
+Missing credit_score concentrated in customers with no prior loans:
+no prior loans  False  True 
+score missing               
+False            2415     93
+True                0    492
+
+================================================================================
+2. WHAT ZERO-FILLING ASSERTS (Q3a)
+  true income of the 506 applicants whose income is missing:
+    min 64,895   median 302,620   max 1,390,624
+  zero-fill asserts every one of them earns 0, placing them -1.50 SD
+  below the observed median of 296,520
+  a zero credit_score is outside the legal range [300, 850] and is not a low score, it is a non-score
+  debt-to-income = loan/income becomes division by zero for 506 applicants
+
+================================================================================
+3. THREE TREATMENTS COMPARED ON IDENTICAL SPLITS (Q3d)
+  Zero-fill (management proposal)        AUC=0.6659   Brier=0.1772   features=6
+  Type-aware median + indicators         AUC=0.7575   Brier=0.1586   features=10
+  Complete-case (listwise deletion)      retains 1397/2250 training rows (62%), default rate shifts 0.250 -> 0.276
+  Complete-case then median at scoring   AUC=0.7524   Brier=0.1611   features=7
+
+================================================================================
+4. EFFECT ON INDIVIDUAL APPLICANTS (Q3d)
+  applicants in the test set with any missing field: 228 of 750
+  mean predicted default probability, those applicants:
+      zero-fill      0.2883
+      type-aware     0.2373
+  largest single shift: 0.3342 in predicted probability
+  at a 20% decline threshold, 75 applicants (32.9% of those with gaps) receive a different decision purely from the imputation choice
+  at a 30% decline threshold, 31 applicants (13.6% of those with gaps) receive a different decision purely from the imputation choice
+
+written: output/q3_predictions.csv

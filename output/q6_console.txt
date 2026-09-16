@@ -1,0 +1,135 @@
+================================================================================
+1. STRUCTURE
+observations (states): 47   variables: 16   predictors: 15
+missing: 0   observations per predictor: 3.1
+
+Descriptive statistics:
+                            meaning       mean        std        min        50%        max       skew
+M              males 14-24 per 1000     13.857      1.257     11.900     13.600     17.700      0.877
+So             southern state (0/1)      0.340      0.479      0.000      0.000      1.000      0.696
+Ed       mean schooling (years x10)     10.564      1.119      8.700     10.800     12.200     -0.340
+Po1               police spend 1960      8.500      2.972      4.500      7.800     16.600      0.950
+Po2               police spend 1959      8.023      2.796      4.100      7.300     15.700      0.901
+LF       labour-force participation      0.561      0.040      0.480      0.560      0.641      0.289
+M.F           males per 100 females     98.302      2.947     93.400     97.700    107.100      1.060
+Pop               population (100k)     36.617     38.071      3.000     25.000    168.000      1.979
+NW               non-white per 1000     10.113     10.283      0.200      7.600     42.300      1.473
+U1               unemployment 14-24      0.095      0.018      0.070      0.092      0.142      0.827
+U2               unemployment 35-39      3.398      0.845      2.000      3.400      5.800      0.579
+Wealth         median assets/income   5253.830    964.909   2880.000   5370.000   6890.000     -0.408
+Ineq              income inequality     19.400      3.990     12.600     17.600     27.600      0.392
+Prob    probability of imprisonment      0.047      0.023      0.007      0.042      0.120      0.943
+Time                  months served     26.598      7.087     12.200     25.801     44.000      0.396
+Crime             offences per 100k    905.085    386.763    342.000    831.000   1993.000      1.125
+
+================================================================================
+2. CORRELATION WITH THE TARGET
+                        meaning  r_with_Crime   p_value
+0             police spend 1960        0.6876    0.0000
+1             police spend 1959        0.6667    0.0000
+2          median assets/income        0.4413    0.0019
+3   probability of imprisonment       -0.4274    0.0027
+4             population (100k)        0.3375    0.0204
+5    mean schooling (years x10)        0.3228    0.0269
+6         males per 100 females        0.2139    0.1488
+7    labour-force participation        0.1889    0.2036
+8             income inequality       -0.1790    0.2286
+9            unemployment 35-39        0.1773    0.2331
+10                months served        0.1499    0.3147
+11         southern state (0/1)       -0.0906    0.5446
+12         males 14-24 per 1000       -0.0895    0.5498
+13           unemployment 14-24       -0.0505    0.7362
+14           non-white per 1000        0.0326    0.8278
+
+================================================================================
+3. REDUNDANCY AMONG PREDICTORS (|r| >= 0.60)
+ var_1  var_2       r
+   Po1    Po2   0.994
+Wealth   Ineq  -0.884
+   Po2 Wealth   0.794
+   Po1 Wealth   0.787
+    Ed   Ineq  -0.769
+    So     NW   0.767
+    U1     U2   0.746
+    So   Ineq   0.737
+    Ed Wealth   0.736
+    So     Ed  -0.703
+    NW   Ineq   0.677
+     M Wealth  -0.670
+    Ed     NW  -0.665
+   Po2   Ineq  -0.648
+     M   Ineq   0.639
+    So Wealth  -0.637
+   Po1   Ineq  -0.631
+
+================================================================================
+4. VARIANCE INFLATION FACTORS (all 15 predictors)
+predictor       VIF   severity
+      Po2    113.56     severe
+      Po1    104.66     severe
+   Wealth     10.53     severe
+     Ineq      8.64   moderate
+       U1      6.06   moderate
+       So      5.34   moderate
+       U2      5.09   moderate
+       Ed      5.08   moderate
+       NW      4.67 acceptable
+      M.F      3.79 acceptable
+       LF      3.71 acceptable
+        M      2.89 acceptable
+     Prob      2.81 acceptable
+     Time      2.71 acceptable
+      Pop      2.54 acceptable
+
+================================================================================
+5. WHY CORRELATION ALONE MISLEADS: Po1
+  simple correlation  Po1 ~ Crime            r = 0.688
+  univariate OLS      Crime ~ Po1            beta =   263.10  p = 0.0000
+  controlled OLS      + Ineq, Ed, Prob       beta =   340.72  p = 0.0000
+  partial r (Po1,Crime | Ineq,Ed,Prob)       = 0.773
+
+  Suppression: a predictor can look irrelevant alone yet matter once others are held constant
+    Ineq    simple r=-0.179 (p=0.229)   controlled beta=  281.65 (p=0.0010)
+    M       simple r=-0.089 (p=0.550)   controlled beta=  129.99 (p=0.0164)
+    U2      simple r= 0.177 (p=0.233)   controlled beta=   14.35 (p=0.7350)
+
+================================================================================
+6. FEATURE SELECTION, THREE FAMILIES
+  All 15 predictors                  k=15  CV RMSE= 296.84 (+/-66.09)  CV R2= 0.098
+  Filter: |r with Crime| >= 0.30     k= 6  CV RMSE= 317.39 (+/-86.67)  CV R2=-0.052
+  Drop redundant (Po2,U1,Wealth)     k=12  CV RMSE= 280.95 (+/-58.93)  CV R2= 0.196
+  Embedded: LassoCV (a=11.39)        k=11  CV RMSE= 250.04 (+/-52.79)  CV R2= 0.327
+  Wrapper: RFE with CV               k= 4  CV RMSE= 255.32 (+/-64.94)  CV R2= 0.334
+
+  LassoCV retained : M, So, Ed, Po1, LF, M.F, NW, U1, U2, Ineq, Prob
+  RFE-CV retained  : Ed, Po1, Po2, Ineq
+
+================================================================================
+7. PCA AS AN ALTERNATIVE TO DROPPING VARIABLES
+  components for 80%/90%/95% of variance: 5 / 7 / 9  (of 15)
+  first 5 explained-variance ratios: [0.401 0.187 0.134 0.077 0.064]
+  PCR with 4 components: CV RMSE=354.51
+  PCR with 6 components: CV RMSE=273.60
+  PCR with 8 components: CV RMSE=272.95
+
+================================================================================
+8. RIDGE AS THE COLLINEARITY REMEDY (keeps all predictors)
+  RidgeCV alpha=10.91  CV RMSE=282.04
+predictor       OLS     Ridge  shrunk %
+      Po1    566.87    124.47     78.04
+      Po2   -302.69    104.60     65.44
+     Ineq    278.94     94.64     66.07
+       Ed    208.43     74.16     64.42
+       U2    140.20     62.73     55.26
+     Prob   -109.21    -76.18     30.25
+        M    109.20     64.38     41.05
+       U1   -103.93    -33.39     67.87
+   Wealth     91.80     31.98     65.16
+      M.F     50.74     67.66    -33.33
+       NW     42.77     37.37     12.63
+      Pop    -27.61     10.39     62.38
+       LF    -26.54     26.10      1.65
+     Time    -24.39      7.32     70.00
+       So     -1.80     42.35  -2249.88
+
+Figures: figures/q6_fig1..3

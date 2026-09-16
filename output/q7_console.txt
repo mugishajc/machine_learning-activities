@@ -1,0 +1,83 @@
+==============================================================================
+1. DATA PREPARATION
+observations: 1500   predictors: 13 (12 numeric, 1 categorical)
+missing values: 0   duplicate rows: 0
+target eta_minutes: mean=38.13 sd=13.54 min=4.81 max=93.75
+
+==============================================================================
+2. MULTICOLLINEARITY (variance inflation factors, numeric predictors)
+                predictor      VIF
+      journey_distance_km    10.86
+            traffic_index     7.38
+           distance_proxy     7.22
+previous_journey_time_min     5.25
+            traffic_proxy     5.20
+        average_speed_kmh     2.49
+            weather_score     1.07
+        time_of_day_hours     1.07
+  driver_experience_years     1.01
+         passenger_rating     1.01
+           road_slope_pct     1.01
+     random_noise_feature     1.01
+
+Correlation of each numeric predictor with eta_minutes:
+previous_journey_time_min     0.784
+journey_distance_km           0.710
+distance_proxy                0.662
+traffic_index                 0.503
+traffic_proxy                 0.431
+average_speed_kmh            -0.380
+weather_score                 0.239
+time_of_day_hours            -0.097
+driver_experience_years       0.016
+road_slope_pct                0.014
+random_noise_feature          0.006
+passenger_rating             -0.004
+
+Strongest predictor-predictor correlations:
+  journey_distance_km        <-> distance_proxy             r = 0.928
+  traffic_proxy              <-> traffic_index              r = 0.897
+  previous_journey_time_min  <-> journey_distance_km        r = 0.835
+  previous_journey_time_min  <-> distance_proxy             r = 0.782
+  traffic_index              <-> average_speed_kmh          r = 0.770
+
+==============================================================================
+3. SPLIT
+train: 1200   test (held out, touched once): 300
+
+==============================================================================
+4. MODEL FITTING (alpha chosen by 10-fold CV on training set only)
+  Linear Regression (OLS)    alpha=  0.0000  CV RMSE=5.7119
+  Ridge Regression           alpha=  1.0000  CV RMSE=5.7117
+  Lasso Regression           alpha=  0.0040  CV RMSE=5.7117
+
+==============================================================================
+5. PERFORMANCE COMPARISON
+                  Model     alpha   CV RMSE  Train RMSE  Test RMSE  Test MAE  Train R2   Test R2
+Linear Regression (OLS)       NaN    5.7119      5.6518     6.2366    4.3801    0.8223    0.7999
+       Ridge Regression    1.0000    5.7117      5.6519     6.2353    4.3775    0.8223    0.8000
+       Lasso Regression    0.0040    5.7117      5.6519     6.2355    4.3781    0.8223    0.8000
+
+==============================================================================
+6. STANDARDISED COEFFICIENTS (minutes of ETA per 1 SD of predictor)
+                           Linear Regression (OLS)  Ridge Regression  Lasso Regression
+journey_distance_km                          9.537             9.442             9.484
+traffic_index                                6.811             6.757             6.756
+road_type_highway                           -4.112            -4.071            -4.066
+road_type_express                           -3.034            -3.011            -3.007
+weather_score                                1.829             1.825             1.825
+road_type_local                              1.476             1.488             1.478
+distance_proxy                              -0.932            -0.873            -0.880
+previous_journey_time_min                    0.907             0.946             0.911
+road_slope_pct                               0.758             0.758             0.755
+average_speed_kmh                            0.313             0.301             0.295
+traffic_proxy                               -0.229            -0.201            -0.190
+driver_experience_years                      0.154             0.152             0.148
+random_noise_feature                        -0.139            -0.138            -0.134
+time_of_day_hours                            0.079             0.076             0.072
+passenger_rating                            -0.022            -0.022            -0.018
+
+Predictors eliminated by Lasso (0 of 15):
+
+Figures written: figures/q7_fig1..4
+Tables written:  output/q7_metrics.csv, q7_coefficients.csv, q7_vif.csv
