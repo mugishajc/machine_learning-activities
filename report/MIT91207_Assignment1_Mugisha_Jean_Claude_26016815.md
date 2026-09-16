@@ -44,7 +44,7 @@ that follows, because the quantity being optimised is the quality of a ranking u
 fixed capacity constraint, not the accuracy of a label.
 
 The target variable. "Poor academic outcome" is not yet a variable. It has to be
-made one, and the choice is a policy decision rather than a technical one. Three
+made one, and the choice is a policy decision and not a technical one. Three
 defensible definitions are available, and they are not equivalent:
 
 | Definition | Type | What it supports |
@@ -81,7 +81,7 @@ What the university is really buying is a ranking. With, say, four advisors and 
 students, only the top forty or so cases will ever be contacted. A model with modest
 overall accuracy but a well-ordered top decile is more useful than an accurate model that
 mixes the top decile, and this is why the evaluation in 1(c) and in Question 5 is framed
-around ranking quality and subgroup behaviour rather than raw accuracy.
+around ranking quality and subgroup behaviour, not raw accuracy.
 
 ## 1(b) Two modelling approaches (5 marks)
 
@@ -93,8 +93,7 @@ probability that is directly interpretable as a risk score, the coefficients can
 to an academic board that will reasonably ask why a particular student was flagged, and
 with L2 penalisation it behaves stably when attendance and engagement measures are
 correlated, which they invariably are. Question 7 of this report demonstrates that
-penalisation mainly buys coefficient stability rather than accuracy, which is precisely
-what is wanted when the output has to be defended.
+penalisation mainly buys coefficient stability more than accuracy, and that is what is wanted when the output has to be defended.
 
 How the prediction supports the decision: the model returns P(fail) for every enrolled
 student each week. Advisors receive a ranked list with the probability attached, banded
@@ -112,8 +111,7 @@ The relationship between engagement and attainment is not linear. Attendance ris
 model captures that saturation without anyone having to specify it, and it handles the
 interaction between prior grades and current engagement that a linear model would need to
 be told about explicitly. Ridge regression is the appropriate comparator, and on a
-first-year cohort with few features it will often match the boosted model, which is a
-result worth knowing before committing to the more complex option.
+first-year cohort with few features it will often match the boosted model, a result worth knowing before committing to the more complex option.
 
 How the prediction supports the decision: the model returns a predicted mark with an
 interval. The actionable quantity is the predicted distance from the pass mark. A student
@@ -141,7 +139,7 @@ to be part-time students, students entering through non-standard qualifications,
 students whose engagement is off-campus and therefore under-recorded by the
 learning-management system. The two errors are also not symmetric. A false negative is a
 student who fails without ever being contacted. A false positive costs an advisor twenty
-minutes. Accuracy weights these equally, which is indefensible, so the model must be
+minutes. Accuracy weights these equally, an indefensible weighting, so the model must be
 evaluated on recall within each subgroup at the operating threshold, and the threshold
 itself must be justified against that asymmetry.
 
@@ -149,7 +147,7 @@ The gap between prediction and action, and the feedback loop the system creates.
 model finds association, not cause. Low learning-management-system engagement predicts
 failure, but it is largely a symptom. A student in financial difficulty, working night
 shifts, will show low engagement, and an intervention aimed at raising their click rate
-addresses the indicator rather than the cause. The features must therefore be
+addresses the indicator and not the cause. The features must therefore be
 interrogated for whether they are actionable at all before the system is allowed to drive
 interventions, a point developed at length in Question 6(d). There is also a loop that
 most deployments overlook: once interventions begin, a successful intervention makes the
@@ -160,7 +158,7 @@ addition, a student labelled "at risk" may be treated differently by staff and m
 internalise the label, so the prediction can contribute to the outcome it forecasts.
 Under Rwanda's Law No. 058/2021 relating to the protection of personal data and privacy,
 profiling students in this way also carries transparency and lawful-basis obligations
-that need to be settled before deployment rather than after.
+that need to be settled before deployment, not after.
 
 ---
 
@@ -205,12 +203,11 @@ and weakens any content-based component. Mean-imputing ratings without an indica
 introduces a systematic bias towards recommending material that learners quietly
 abandoned. Fitting the scaler on all rows leaks the test distribution into training and
 produces an optimistic offline estimate that will not survive contact with live traffic.
-Deduplicating carelessly removes genuine repeat engagement, which is one of the strongest
-signals a recommender has.
+Deduplicating carelessly removes genuine repeat engagement, one of the strongest signals a recommender has.
 
 On what not to do. Rows with missing ratings should not be dropped. In the sample
 frame that would discard 3 of 15 records, and the discarded rows are systematically the
-disengaged learners, which is to say the population the recommender most needs to model.
+disengaged learners, that is, the population the recommender most needs to model.
 
 ## 2(b) Implementation (5 marks)
 
@@ -272,8 +269,7 @@ and how long the course happens to be. A 45-minute course watched in full and a
 1,400-minute course abandoned after 45 minutes produce the same raw value and mean
 opposite things. Normalising by the course median separates them. For the recommendation
 problem this matters because the quantity of interest is whether this learner found this
-material worth their time relative to how other learners treated it, which is a
-completion signal that does not depend on a rating being given. In the sample frame the
+material worth their time relative to how other learners treated it, a completion signal that does not depend on a rating being given. In the sample frame the
 feature ranges from 0.375 to 4.0, cleanly separating skimming from deep engagement.
 
 `prior_completion_rate` = the proportion of the learner's *earlier* courses that they
@@ -294,7 +290,7 @@ Concretely, four things are required. Records are ordered by timestamp and cut a
 so training ends before validation begins. Every fitted quantity, meaning imputation
 medians, scaler means and scales, and category vocabularies, is learned on the training
 window and applied unchanged afterwards. Any per-learner aggregate is computed with an
-expanding window over strictly earlier records, which is what `shift()` enforces above.
+expanding window over strictly earlier records, as `shift()` enforces above.
 And features that could only be known after the fact, such as final course rating or
 total watch time, are excluded from any model that scores a learner mid-course.
 
@@ -340,8 +336,7 @@ Zero is a real, meaningful value on some of these fields and not on others. A lo
 balance of zero means no outstanding debt. A missed-payment count of zero means a clean
 record. On those fields, zero-filling does not merely add noise, it writes a specific and
 usually favourable claim into the data. Applied to `n_prev_loans`, it converts "we do not
-know their borrowing history" into "they have never borrowed", which is a materially
-different statement to a credit committee.
+know their borrowing history" into "they have never borrowed", a materially different statement to a credit committee.
 
 On other fields zero is outside the admissible range entirely. A credit score is
 defined on 300 to 850. Zero is not a low score, it is not a score. Placing 492 applicants
@@ -349,14 +344,14 @@ at zero creates a cluster 300 points below the legal minimum, roughly 3.5 standa
 deviations outside the observed distribution, and any model will read that as
 overwhelming evidence of default risk. The measured consequence appears in 3(d).
 
-It destroys the geometry the model depends on. In the generated book the applicants
+The distortion reaches the geometry the model depends on. In the generated book the applicants
 with missing income truly earn between 64,895 and 1,390,624, with a median of 302,620,
 slightly above the observed median of 296,520. These are not poor applicants. They are
 mostly self-employed and informally employed people who did not supply a payslip.
 Zero-filling moves them 1.50 standard deviations below the median of the observed
 distribution, inverting their true position.
 
-It silently corrupts every derived variable. Debt-to-income is the single most
+Derived variables are corrupted silently. Debt-to-income is the single most
 important ratio in consumer lending, and `loan_amount / income` becomes a division by
 zero for all 506 affected applicants. Depending on the implementation this yields
 infinity, a NaN that propagates, or a silently clipped maximum. Any of the three makes
@@ -368,7 +363,7 @@ are the same record. These are different credit risks and, under most regulatory
 attract different treatment. The information distinguishing them has been erased rather
 than modelled.
 
-It is not random, so the damage is systematic rather than diffuse. The script tests
+The damage is also not spread evenly. Because the missingness is not random, it falls systematically. The script tests
 this directly. Testing missingness against the outcome alone is insufficient and would
 have cleared two of the three fields:
 
@@ -397,8 +392,8 @@ is absent. The two questions are separate and both have to be answered.
 
 First, classify the mechanism. Missing-completely-at-random means the gap is unrelated
 to anything, and almost nothing in a loan book qualifies. Missing-at-random means the gap
-depends on other observed variables, which is what the chi-square result above establishes
-for income: it depends on employment type, which is recorded. Conditional imputation is
+depends on other observed variables, as the chi-square result above establishes
+for income: it depends on employment type, and it is recorded. Conditional imputation is
 valid here. Missing-not-at-random means the gap depends on the unobserved value itself, and
 credit score is the clear case. The cross-tabulation shows all 492 absent scores belong to
 applicants with no prior loans:
@@ -430,8 +425,7 @@ being averaged away. This is the cheapest insurance available in the whole pipel
 
 Fourth, learn every statistic on training rows only, and persist it. A median computed
 over the full dataset leaks the test distribution; a median recomputed at scoring time
-makes today's decision depend on who else applied today, which is indefensible to an
-applicant and to a regulator.
+makes today's decision depend on who else applied today, and that is indefensible to an applicant and to a regulator.
 
 Listwise deletion should be rejected explicitly. The measurement in 3(d) shows it retains
 only 62% of training rows and shifts the observed default rate from 0.250 to 0.276, because
@@ -449,13 +443,12 @@ class MissingValueHandler(BaseEstimator, TransformerMixin):
 
     Assumptions, stated explicitly:
       1. Numeric fields are MAR given the observed data, so a median computed on the
-         training rows is an acceptable central estimate. The median is used rather than
-         the mean because every monetary field here is right-skewed.
+         training rows is an acceptable central estimate. The median is used in place of the mean because every monetary field here is right-skewed.
       2. Missingness itself may be informative, so an indicator column is retained for
          every field that is imputed. If the indicator carries no signal the model can
          ignore it; if it does, the information is not thrown away.
       3. Structurally absent values (no credit file) are a distinct category, not a low
-         value, and are flagged separately rather than imputed onto the score scale.
+         value, and are flagged separately instead of being imputed onto the score scale.
       4. All statistics are learned in fit() on training rows only and re-applied
          unchanged in transform(), so no test or production record influences them.
     """
@@ -487,9 +480,9 @@ class MissingValueHandler(BaseEstimator, TransformerMixin):
 Assumptions and their limits. The median is a point estimate, so single imputation of
 this kind understates uncertainty: the model treats an imputed income as being known as
 precisely as a reported one. Multiple imputation addresses that and should be preferred
-where the downstream use requires calibrated intervals rather than a ranking. The
+where the downstream use requires calibrated intervals and not a ranking. The
 transformer also assumes the missingness mechanism is stable between training and
-production, which is an assumption that has to be monitored rather than believed, since a
+production, an assumption that has to be monitored and not believed, since a
 change in application-form design can alter it overnight.
 
 ## 3(d) Consequences for the model and for applicants (2 marks)
@@ -541,7 +534,7 @@ costs a little accuracy, it is an undocumented change in credit policy.
 # Question 4: Feature engineering for subscription renewal (12 marks)
 
 Measured on 4,000 generated customer records with a known outcome process, so that the
-cost of each encoding choice can be quantified rather than asserted. Script:
+cost of each encoding choice can be quantified, not asserted. Script:
 `code/q4_encoding.py`.
 
 ## 4(a) Pipeline design (3 marks)
@@ -558,7 +551,7 @@ differently.
 | Ordinal | `subscription_type` (basic, standard, premium) | Ordinal encoding with the order stated explicitly | A genuine ranking exists, and one coefficient captures it |
 | Nominal | `region`, `payment_method`, `customer_status` | One-hot | No ordering exists, so none may be imposed |
 
-On scaling. Standardisation rather than min-max, because min-max is defined by the
+On scaling. Standardisation in preference to min-max, because min-max is defined by the
 observed minimum and maximum and is therefore hostage to a single outlier; a customer
 with an unusually long account compresses everyone else into a narrow band.
 Standardisation also matters for any penalised model, since a penalty applied to
@@ -603,7 +596,7 @@ is the mild error.
 Ordinal encoding. Correct for `subscription_type`, where basic, standard and premium
 form a real progression, provided the order is stated explicitly rather than left to
 alphabetical accident. Applied to nominal variables it is the severe error, costing
-0.0886 AUC, which is 12% of the model's discrimination. The reason is visible in the
+0.0886 AUC, or 12% of the model's discrimination. The reason is visible in the
 generating process:
 
 ```
@@ -622,13 +615,13 @@ model fits one coefficient to a sequence carrying no meaning, and the sign of th
 correlation between code and effect is arbitrary, being an artefact of the alphabet.
 
 Inappropriate numerical encoding, and why the model matters. The same mistake under a
-random forest costs 0.0161 AUC rather than 0.0886. A tree splits on thresholds and can
+random forest costs 0.0161 AUC against 0.0886. A tree splits on thresholds and can
 isolate any individual integer code through repeated splits, so it recovers most of the
 structure a linear model cannot. This is the part usually stated too simply. Encoding is
 not right or wrong in isolation, it is right or wrong relative to the model that consumes
 it. Ordinal codes on nominal variables are close to fatal for linear and distance-based
 methods and merely inefficient for tree ensembles. Even so, the forest still pays for it,
-so the defensible default is to encode correctly rather than to rely on the model to
+so the defensible default is to encode correctly and not to rely on the model to
 compensate.
 
 ## 4(c) Implementation (3 marks)
@@ -668,7 +661,7 @@ refitting the transformer on a later batch instead of loading it shifts the same
     five customers by up to 0.0924 in predicted probability
 ```
 
-Refitting rather than loading moved identical customers by up to 9.2 percentage points of
+Refitting instead of loading moved identical customers by up to 9.2 percentage points of
 predicted renewal probability. Nothing about those customers changed. This is train/serve
 skew, and it is silent, since both pipelines run without error and produce plausible
 numbers.
@@ -692,7 +685,7 @@ to contain no `highway` journeys folded that category into the reference level.
 
 Beyond the artefact. Pin library versions, since encoder behaviour changes between
 releases. Validate the schema of each incoming batch against the training schema and
-fail loudly on a mismatch rather than coercing. Monitor the input distributions, because
+fail loudly on a mismatch instead of coercing. Monitor the input distributions, because
 a pipeline that is applied perfectly consistently to data that has drifted is still
 producing the wrong answer, just reproducibly.
 ---
@@ -725,18 +718,17 @@ identifier before anything else, because that identifier is what makes the parti
 be trusted.
 
 4. Prepare. Diagnoses and procedures are high-cardinality codes and should be grouped
-into clinically coherent categories rather than one-hot encoded raw. Length of stay is
+into clinically coherent categories instead of one-hot encoded raw. Length of stay is
 right-skewed and log-transformed. Missing clinical values follow the type-aware strategy
 of Question 3, with the specific caution that in clinical data an absent test result
-usually means the clinician saw no reason to order it, which is information about the
-patient's presentation and must be preserved as an indicator.
+usually means the clinician saw no reason to order it, and that is information about the patient's presentation and must be preserved as an indicator.
 
 5. Partition, grouped by patient. Detailed in 5(b) and implemented in 5(d).
 
 6. Train a baseline first. Penalised logistic regression, because it is calibrated,
 auditable, and gives a floor that any more complex model must clear. Gradient boosting
 follows. A clinical model that cannot be explained to the clinicians expected to act on it
-will not be used, so interpretability is a functional requirement rather than a nicety.
+will not be used, so interpretability is a functional requirement, not a nicety.
 
 7. Evaluate on the ranking, not on accuracy. With a 34% readmission rate, a model
 predicting "never readmitted" scores 66% accuracy and is worthless. Discrimination and
@@ -763,7 +755,7 @@ retraining will progressively erase the signal.
 The strategy: split by patient, not by admission, and hold the test set back for a
 single final evaluation. Because 78% of patients contribute more than one admission, a
 partition drawn over rows places the same individual on both sides of the split. The model
-can then recognise the patient rather than the clinical pattern, and the test score
+can then recognise the patient instead of the clinical pattern, and the test score
 measures memorisation as well as skill.
 
 Measured on a single split:
@@ -821,7 +813,7 @@ and the repeated experiment is what settles it.
 
 ## 5(c) Uneven performance across patient groups (3 marks)
 
-The situation is normal rather than exceptional, and the aggregate number is what
+The situation is normal and not exceptional, and the aggregate number is what
 concealed it. An overall AUC of 0.7314 decomposes as:
 
 | Subgroup | n | Base rate | AUC | Recall | Precision | Flag rate |
@@ -844,22 +836,20 @@ number.
 
 Diagnosis before remedy. Three causes are worth separating, because they call for
 different responses. Sample size, since the uninsured group has 98 test records and its
-subgroup estimates carry wide intervals that should be reported with confidence bounds
-rather than as point values. Genuinely different relationships, which is the case here by
-construction, since the uninsured group's readmission risk was generated with an
+subgroup estimates carry wide intervals that should be reported with confidence bounds and not as point values. Genuinely different relationships, as is the case here by construction, since the uninsured group's readmission risk was generated with an
 additional term, so one global model is fitting a compromise that suits neither group.
 And differential measurement, where a group with less complete records supplies the model
-with less to work with, which is the most likely explanation for the private-insurance
+with less to work with, the most likely explanation for the private-insurance
 group being modelled worst despite not being the smallest.
 
 What should be added before deployment.
 
 Report subgroup metrics as standard, with confidence intervals, and treat the minimum
-across subgroups as the headline figure rather than the average. Add calibration by
+across subgroups as the headline figure in place of the average. Add calibration by
 subgroup, since a model can rank well within a group while being systematically
 over- or under-confident about it, and a miscalibrated risk score sends the wrong absolute
 number to a clinician. Measure equal-opportunity difference, meaning the spread in
-true-positive rate at the operating threshold, which is the 0.254 recall gap above and is
+true-positive rate at the operating threshold, the 0.254 recall gap above and is
 the fairness criterion that matches the harm at stake, namely a readmission that was
 preventable and was not prevented. Consider group-specific thresholds so that each group
 is flagged at a rate proportionate to its risk, noting that this is a policy decision with
@@ -902,7 +892,7 @@ test                 663       240   18.6%         0.338
 patient overlap between subsets: train/validation=0, train/test=0, validation/test=0
 ```
 
-The shares are approximate rather than exact because patients contribute different numbers
+The shares are approximate and not exact because patients contribute different numbers
 of admissions, and the split is over patients. That is the correct behaviour and the
 alternative would defeat the purpose. The assertion at step 3 is not decoration: it is the
 only thing standing between a correct split and a silent bug, and it costs one line. For
@@ -924,8 +914,7 @@ Step 1: begin from the constraint, not from the data. With n = 47 and p = 15, or
 least squares fitted on all predictors has 31 residual degrees of freedom. The measured
 consequence is severe: cross-validated R² for the full model is **0.098**, against an
 in-sample fit that appears far better. The model is memorising states. Any strategy that
-does not reduce dimensionality is not viable here, and this is a property of the dataset
-rather than a preference.
+does not reduce dimensionality is not viable here, and this is a property of the dataset and not a preference.
 
 Step 2: remove redundancy on structural grounds, before looking at the target. `Po1`
 and `Po2` are police expenditure in 1960 and 1959 and correlate at **r = 0.994**. They are
@@ -948,7 +937,7 @@ probability and a logit transformation is natural. `So` is already binary. The t
 itself has skew 1.125, which argues for modelling log(Crime) if the residuals show
 heteroscedasticity.
 
-Step 5: consider combining rather than discarding. `Wealth` and `Ineq` correlate at
+Step 5: consider combining instead of discarding. `Wealth` and `Ineq` correlate at
 −0.884 and both describe the same economic structure. A composite index, or principal
 components, retains the information that dropping one would discard.
 
@@ -964,15 +953,14 @@ Measured comparison, five-fold cross-validation repeated ten times:
 
 Two findings deserve emphasis. The filter method performs **worse than using everything**,
 with a negative R² meaning it predicts less well than the sample mean. Selecting on
-univariate correlation discarded variables whose contribution is conditional, which is
-exactly the failure mode Section 6(b) demonstrates. And the wrapper method reaches the
+univariate correlation discarded variables whose contribution is conditional, the failure mode Section 6(b) demonstrates. And the wrapper method reaches the
 best R² using only four predictors, `Ed`, `Po1`, `Po2`, `Ineq`, though its selection of
 both `Po1` and `Po2` shows that recursive elimination does not by itself resolve
 collinearity and still needs the structural judgement from step 2.
 
 Recommended strategy: drop `Po2` structurally, log-transform `Pop` and `NW`, then use
 Lasso with cross-validated penalty for selection, and report the result alongside a
-domain-chosen model rather than in place of it. Selection should be nested inside the
+domain-chosen model, not in place of it. Selection should be nested inside the
 cross-validation loop, otherwise the reported performance is optimistic for the same
 reason discussed in Question 5(b).
 
@@ -1011,12 +999,11 @@ so the marginal results around p = 0.02 to 0.03 should not be over-read.
 
 Relationships that look useful. Police expenditure is the strongest single correlate.
 The probability of imprisonment is the strongest negative one, consistent with a
-deterrence reading. Wealth and education both associate positively with crime, which is
-counter-intuitive until one notices they also correlate with urbanisation and with
+deterrence reading. Wealth and education both associate positively with crime, a result that puzzles until one notices they also correlate with urbanisation and with
 reporting quality.
 
 Why correlation alone is not sufficient evidence for selecting features. Four distinct
-reasons, each measured on this dataset rather than asserted.
+reasons, each measured on this dataset instead of asserted.
 
 *First, reverse causation.* `Po1` has the strongest correlation with `Crime` in the
 dataset. The natural reading, that police spending causes crime, is absurd. The plausible
@@ -1043,8 +1030,7 @@ irrelevant on its own and become strongly significant once others are held const
 Income inequality has a **negative, non-significant** simple correlation with crime. After
 controlling for police spending and wealth, its coefficient is **positive, large and
 highly significant** (p = 0.001). Both the sign and the significance reverse. A filter that
-screened at abs(r) ≥ 0.30 would have discarded `Ineq` and `M` before modelling began, and
-this is precisely why that strategy produced a negative cross-validated R² in 6(a). The
+screened at abs(r) ≥ 0.30 would have discarded `Ineq` and `M` before modelling began, and that is why that strategy produced a negative cross-validated R² in 6(a). The
 converse also appears: `U2` looks mildly promising alone and is clearly irrelevant once
 conditioned.
 
@@ -1111,7 +1097,7 @@ meaningless.
 
 Combine into components. Five principal components capture 80% of the variance and eight
 capture 95%, with principal-component regression on eight components reaching CV RMSE
-272.95, which is better than full OLS. The cost is interpretability, since a component
+272.95, better than full OLS. The cost is interpretability, since a component
 mixing wealth, education and inequality has no policy meaning, and this dataset exists to
 inform policy.
 
@@ -1158,7 +1144,7 @@ as a funding formula that allocates policing by an arbitrary population threshol
 pre-registered analysis plan, given that fifteen predictors offer ample scope for
 selecting a congenial result. And an explicit causal diagram stating which variables are
 assumed to be confounders and which are on the causal path, since conditioning on a
-mediator introduces bias rather than removing it.
+mediator introduces bias instead of removing it.
 ---
 
 # Question 7: YEGO ETA prediction (14 marks)
@@ -1184,8 +1170,7 @@ set to choose α would make the reported test error an optimistic estimate of a 
 that no longer means anything.
 
 Training. OLS has no hyperparameter. Ridge and lasso are searched over 61 values of α
-on a logarithmic grid from 10⁻³ to 10³, wide enough that the chosen value is interior
-rather than at a boundary. Every transformation sits inside a `Pipeline` so the scaler is
+on a logarithmic grid from 10⁻³ to 10³, wide enough that the chosen value is interior and not at a boundary. Every transformation sits inside a `Pipeline` so the scaler is
 refitted within each cross-validation fold, preventing the preprocessing leakage described
 in Question 5(b).
 
@@ -1241,9 +1226,9 @@ Results.
 ![Predicted versus actual](figures/q7_fig2_pred.png)
 
 The three models are indistinguishable. Test RMSE spans 6.2353 to 6.2366, a range of
-0.0013 minutes, which is eight hundredths of a second. Reporting Ridge as "the winner" on
+0.0013 minutes, or eight hundredths of a second. Reporting Ridge as "the winner" on
 that margin would be meaningless. The gap between training RMSE (5.65) and test RMSE
-(6.24) is about 10%, which is modest and consistent across all three, so none is
+(6.24) is about 10%, modest and consistent across all three, so none is
 materially overfitting.
 
 Standardised coefficients, in minutes per one standard deviation.
@@ -1306,7 +1291,7 @@ The 1-SE model retains `journey_distance_km` (8.184), `traffic_index` (6.015),
 (1.213) and `road_slope_pct` (0.468). It discards exactly the seven predictors that should
 be discarded: `random_noise_feature`, `passenger_rating`, `driver_experience_years`,
 `time_of_day_hours`, both redundant proxies, and `average_speed_kmh`. Nearly half the
-predictors removed costs 0.13 minutes of RMSE, which is eight seconds.
+predictors removed costs 0.13 minutes of RMSE, or eight seconds.
 
 Coefficient stability, 300 bootstrap refits at n = 200.
 
@@ -1322,8 +1307,7 @@ Coefficient stability, 300 bootstrap refits at n = 200.
 | random_noise_feature | 0.427 | 0.403 | 5.8% | 39.0% |
 
 Ridge reduces coefficient variance by 26% to 47% on exactly the collinear predictors and
-by only 3% to 7% on the independent ones, which is the behaviour the penalty is designed
-to produce. `traffic_proxy` changes sign in 41.3% of refits under OLS: its estimated
+by only 3% to 7% on the independent ones, the behaviour the penalty is designed to produce. `traffic_proxy` changes sign in 41.3% of refits under OLS: its estimated
 direction of effect is close to a coin toss. A model whose coefficients are quoted to a
 product team must not behave that way.
 
@@ -1397,7 +1381,7 @@ first symptom of overfitting.
 2. Prefer the simpler model when the difference is within noise, using the 1-SE rule.
 This is the measure with the largest effect in this study. Cross-validated error has a
 standard error of 0.1536, and the difference between the best and the eight-predictor model
-is 0.1446, which is inside it. The two models are statistically indistinguishable, and one
+is 0.1446, and that is inside it. The two models are statistically indistinguishable, and one
 uses seven fewer inputs. Selecting the minimum of a cross-validation curve systematically
 chooses a model slightly too complex, because the minimum of a noisy curve sits below the
 true minimum.
@@ -1413,12 +1397,11 @@ regarded as an upper bound until that is done.
 4. Audit features for availability at prediction time. As noted in 7(c),
 `average_speed_kmh` cannot be known before the journey. A feature that is unavailable at
 serving time produces a validated model that cannot be deployed, and it is not detectable
-by any amount of cross-validation, because the leak is in the data's definition rather than
-in the split.
+by any amount of cross-validation, because the leak is in the data's definition and not in the split.
 
 5. Monitor after deployment. Kigali traffic in six months is not Kigali traffic today.
 Track the distribution of each input and the realised prediction error against the offline
-estimate, and retrain on a schedule rather than waiting for complaints.
+estimate, and retrain on a schedule instead of waiting for complaints.
 
 ---
 
@@ -1440,8 +1423,7 @@ reporting a 2-point gap between subgroups as though it were real.
 
 Data quality, before any interpretation. Twelve duplicate submissions were present and
 removed. `satisfaction_current` is missing for 4.3% of respondents and
-`expected_price_band` for 3.0%. Non-response is checked for informativeness rather than
-assumed neutral: willingness among those who skipped the satisfaction question is 0.308
+`expected_price_band` for 3.0%. Non-response is checked for informativeness and not assumed neutral: willingness among those who skipped the satisfaction question is 0.308
 against 0.366 for those who answered, a gap in the direction one would expect from
 disengagement, though the subgroup of 26 is too small to conclude from.
 
@@ -1516,7 +1498,7 @@ gap at p < 0.001. Dissatisfaction points the same way, with median satisfaction 
 willing buyers against 4 among unwilling ones (p < 0.001). The two together describe a
 specific buyer: someone who has used a competing product and found it wanting. The
 implication for the launch is that positioning should be comparative and migration-focused,
-addressing people who already understand the category, rather than educational messaging
+addressing people who already understand the category, instead of educational messaging
 aimed at first-time users. It also identifies the competitor's dissatisfied base as the
 primary acquisition channel.
 
@@ -1534,7 +1516,7 @@ of the trend is better supported than its magnitude.
 Supporting finding on the feature roadmap. Preferences differ significantly by age
 (p < 0.001), but Cramér's V of 0.131 indicates a weak association. Mobile money is the top
 or joint-top preference in every age group, ranging from 22.6% to 37.3%. The practical
-conclusion is that mobile money is a universal requirement rather than a segment feature,
+conclusion is that mobile money is a universal requirement, not a segment feature,
 while offline mode shows a genuine split, at 9.8% among 25 to 34 year olds and 28.3% among
 35 to 44 year olds, and is a candidate for later differentiation rather than for the first
 release.
@@ -1559,18 +1541,17 @@ The limitation: stated willingness to purchase is not purchase. Every finding he
 rests on what 600 people said they would do about a product that does not exist and that
 they have not seen priced. Three distinct biases operate, and they do not cancel. Hypothetical
 bias, where survey willingness routinely overstates purchase by a large factor, so the
-36.3% headline is an upper bound rather than a forecast. Acquiescence and social-desirability
+36.3% headline is an upper bound and not a forecast. Acquiescence and social-desirability
 effects, where respondents give the answer the questioner appears to want. And selection,
 since the analysis can say nothing about who declined to take the survey, and non-respondents
 are plausibly the least interested. There is a further structural point: because the sample
 is dominated by people already familiar with the category, and familiarity is the strongest
-predictor of willingness, the survey may be measuring the enthusiasm of an existing market
-rather than the size of a new one.
+predictor of willingness, the survey may be measuring the enthusiasm of an existing market instead of the size of a new one.
 
 Additional evidence to obtain before committing the budget. In rough order of cost:
 
 A discrete-choice or conjoint exercise, in which respondents choose between specified
-bundles at specified prices rather than reporting an abstract willingness. This produces
+bundles at specified prices instead of reporting an abstract willingness. This produces
 price-elasticity estimates that the current ordinal price question cannot, and the ordering
 effect found in 8(c) needs exactly that test before it is trusted as a pricing rule.
 
