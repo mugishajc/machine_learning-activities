@@ -8,9 +8,11 @@ analysis. University of Kigali, MSc Information Technology, Level 9, Trimester 4
 
 | Path | Contents |
 |---|---|
-| `MIT91207_Assignment1_Mugisha_Jean_Claude_26016815.docx` | Submission document |
+| `MIT91207_Assignment1_Mugisha_Jean_Claude_26016815.ipynb` | Notebook submission, every cell executed with outputs |
+| `MIT91207_Assignment1_Mugisha_Jean_Claude_26016815.docx` | Same content as a document |
 | `report/` | Report source |
 | `code/` | One runnable script per question |
+| `tools/` | Scripts that assemble and execute the notebook |
 | `data/` | The two supplied datasets |
 | `figures/` | Generated figures |
 | `output/` | Console logs and result tables |
