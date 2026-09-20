@@ -1,0 +1,6 @@
+strategy,auc
+"Raw log, no cleaning at all",0.7554135338345864
+Drop rows with a missing rating,0.7459962406015037
+"Mean-impute ratings, no indicator",0.757156954887218
+Median-impute + missingness indicator,0.7561090225563909
+Full pipeline (+ engagement_ratio),0.7597313797313797

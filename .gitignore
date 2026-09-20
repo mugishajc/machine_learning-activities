@@ -3,3 +3,8 @@ __pycache__/
 .DS_Store
 .venv/
 Assignment 1.pdf
+.ipynb_checkpoints/
+# never publish another person's named work from this working directory
+*Gitare*
+*Nobel*
+*26016298*

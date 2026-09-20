@@ -203,6 +203,58 @@ On what not to do. Rows with missing ratings should not be dropped. In the sampl
 frame that would discard 3 of 15 records, and the discarded rows are systematically the
 disengaged learners, that is, the population the recommender most needs to model.
 
+### What each decision is actually worth
+
+The fifteen-row frame in 2(b) shows the mechanics. It is far too small to show what any
+of the operations is worth, and a pipeline justified only by argument is not justified.
+`code/q2b_impact.py` builds a realistic log, 3,727 interactions across 500 learners and
+40 courses, injects the four faults the question names, and prices each fix against a
+downstream task: predicting whether a learner completes a recommended course, trained on
+the first three quarters of the period and tested on the last.
+
+```
+duplicate rows            : 71
+distinct category strings : 13 for 5 real categories
+missing ratings           : 1286 (34.5%)
+completion rate when rating present 0.596 vs missing 0.491
+```
+
+| Treatment | Test AUC | Training rows |
+|---|---|---|
+| Raw log, no cleaning at all | 0.7554 | 2,795 |
+| Drop rows with a missing rating | 0.7460 | 1,822 |
+| Mean-impute ratings, no indicator | 0.7572 | 2,795 |
+| Median-impute plus missingness indicator | 0.7561 | 2,795 |
+| Full pipeline with `engagement_ratio` | **0.7597** | 2,741 |
+
+![Preprocessing impact](figures/q2_fig1_impact.png)
+
+Three findings, one of which corrects the argument above.
+
+Deleting incomplete rows is the expensive mistake, costing 0.0101 AUC and 35% of the
+training data at once. The rows removed are not a random sample: their completion rate is
+0.491 against 0.596 for rows with a rating, so deletion strips out precisely the
+disengaged learners the recommender exists to identify. This is the one decision in the
+pipeline with a large and unambiguous price.
+
+Cleaning the log end to end is worth 0.0043 AUC. Useful, and smaller than the confidence
+with which cleaning is usually recommended.
+
+The missingness indicator earns nothing here. Rows three and four of the table differ in
+two respects at once, so the indicator is isolated separately by holding the imputation
+rule fixed and toggling only the indicator: it is worth −0.0011 under median imputation
+and −0.0011 under mean imputation, while median against mean imputation moves the result
+by 0.0000. The effect is therefore attributable to the indicator and to nothing else, and
+the honest reading is that my argument in step 3 above is stated too generally. The indicator captures why a
+rating is absent, and in this log the reason is low engagement. But `minutes_watched` is
+already in the feature set and measures that same engagement directly: the indicator
+correlates −0.251 with it and is close to a duplicate. Question 3 is the contrasting case,
+where the identical device formed part of a treatment worth 9.2 AUC points, because a
+missing credit score signals a thin file and no other field in the loan record reveals
+that. A missingness indicator is insurance against selection that nothing else observes.
+Where another feature already observes it, the indicator is redundant, and it should be
+retained on those grounds and not as a reflex.
+
 ## 2(b) Implementation (5 marks)
 
 The full script is `code/q2_recommender_prep.py`. The core operations:
@@ -1315,6 +1367,74 @@ This explains the tie. At 30 training journeys OLS is 0.83 minutes worse than ri
 thereafter. With 1,200 journeys and 15 predictors, OLS is already well-conditioned enough
 that shrinkage has nothing left to correct.
 
+### Inference and regression assumptions
+
+RMSE measures how far predictions fall from the truth. It says nothing about whether the
+linear form is right, whether a coefficient is distinguishable from zero, or how precisely
+each effect is estimated. Those are separate questions, and on a question about linear
+regression they need answering. `code/q7c_diagnostics.py` fits the same specification
+through statsmodels to obtain them.
+
+| Predictor | Coefficient | Std error | t | p | 95% CI |
+|---|---|---|---|---|---|
+| journey_distance_km | 9.5371 | 0.5436 | 17.55 | <0.001 | 8.47 to 10.60 |
+| traffic_index | 6.8112 | 0.4476 | 15.22 | <0.001 | 5.93 to 7.69 |
+| weather_score | 1.8287 | 0.1703 | 10.74 | <0.001 | 1.49 to 2.16 |
+| road_type_highway | −4.1117 | 0.5621 | −7.32 | <0.001 | −5.21 to −3.01 |
+| road_type_express | −3.0342 | 0.4635 | −6.55 | <0.001 | −3.94 to −2.12 |
+| road_slope_pct | 0.7583 | 0.1655 | 4.58 | <0.001 | 0.43 to 1.08 |
+| road_type_local | 1.4756 | 0.4014 | 3.68 | 0.0002 | 0.69 to 2.26 |
+| previous_journey_time_min | 0.9069 | 0.3727 | 2.43 | 0.015 | 0.18 to 1.64 |
+| distance_proxy | −0.9317 | 0.4448 | −2.09 | 0.036 | −1.80 to −0.06 |
+| average_speed_kmh | 0.3130 | 0.2600 | 1.20 | 0.229 | −0.20 to 0.82 |
+| driver_experience_years | 0.1539 | 0.1656 | 0.93 | 0.353 | −0.17 to 0.48 |
+| random_noise_feature | −0.1389 | 0.1650 | −0.84 | 0.400 | −0.46 to 0.18 |
+| traffic_proxy | −0.2294 | 0.3725 | −0.62 | 0.538 | −0.96 to 0.50 |
+| time_of_day_hours | 0.0789 | 0.1698 | 0.47 | 0.642 | −0.25 to 0.41 |
+| passenger_rating | −0.0217 | 0.1652 | −0.13 | 0.896 | −0.35 to 0.30 |
+
+Nine predictors are significant at 5% and six are not. The six are exactly those the data
+description marks as uninformative or redundant, `random_noise_feature` among them, and
+their confidence intervals all straddle zero.
+
+The cross-check is the useful part. The one-standard-error lasso above kept eight
+predictors on purely predictive grounds, with no hypothesis test anywhere in the
+procedure. All eight are significant here. The only disagreement is `distance_proxy`,
+significant at p = 0.036 and dropped by the lasso. Under HC3 robust standard errors, which
+the heteroscedasticity finding below requires, that verdict flips and `distance_proxy`
+becomes non-significant too. Applied correctly, the two procedures agree completely, which
+is stronger support for the eight-predictor model than either gives on its own.
+
+Model level: R² 0.8223, adjusted R² 0.8200, F = 365.2 (p < 0.001), residual standard error
+5.69 minutes. The condition number of the design matrix is 7.3, comfortably below the
+usual threshold of 30. That is worth setting against the VIF of 10.86 reported above.
+Variance inflation is a pairwise diagnostic and flags the proxy pairs correctly, while the
+condition number measures how near-singular the matrix is as a whole. They disagree
+because the collinearity is confined to specific pairs and does not extend to the full
+matrix, which is also why OLS stayed stable enough to tie with ridge.
+
+| Assumption | Test | p | Verdict |
+|---|---|---|---|
+| Linear functional form | Ramsey RESET | 0.505 | No evidence of a missing non-linear term |
+| Constant variance | Breusch-Pagan | 0.016 | Heteroscedastic |
+| Normal residuals | Jarque-Bera | <0.001 | Non-normal, skew 0.639 |
+| Independence | Durbin-Watson | 1.970 | No autocorrelation |
+
+![Regression diagnostics](figures/q7_fig6_diagnostics.png)
+
+Two assumptions fail, and neither invalidates the model for its purpose. Ordinary least
+squares stays unbiased under heteroscedasticity; it is the standard errors that become
+unreliable, which is why the coefficient table should be read with the HC3 correction.
+Non-normal residuals matter for small-sample inference, and at n = 1,200 the central limit
+theorem covers the coefficient tests, but it does mean a prediction interval quoted to a
+passenger would be wrong in the tails. The right-skew of 0.639 says the model
+underestimates a minority of long journeys more than it overestimates short ones, and that
+is the error pattern a ride-hailing operator would care about most.
+
+Influence: 55 of 1,200 observations exceed the conventional 4/n threshold on Cook's
+distance, which is 4.6% and close to chance. The largest is 0.0616, far below 1.0, so no
+individual journey drives the fit.
+
 ## 7(c) Which model to deploy (2 marks)
 
 Recommendation: lasso at the one-standard-error penalty, giving an eight-predictor
@@ -1566,6 +1686,7 @@ at what price. Fund the commitment test and the pilot before the full launch.
 | `data/synthetic_ETA.csv` | Question 7 dataset, 1,500 journeys |
 | `data/uscrime.txt` | Question 6 dataset, 47 states |
 | `code/q2_recommender_prep.py` | Q2 preprocessing pipeline and leakage checks |
+| `code/q2b_impact.py` | Q2 measured impact of each preprocessing decision |
 | `code/q3_missing_data.py` | Q3 missingness diagnostics, `MissingValueHandler`, comparison |
 | `code/q4_encoding.py` | Q4 encoding experiments and deployment artefact |
 | `code/q5_readmission.py` | Q5 workflow, partitioning, subgroup analysis |
@@ -1573,6 +1694,7 @@ at what price. Fund the commitment test and the pilot before the full launch.
 | `code/q6_crime.py` | Q6 EDA, correlation, VIF, feature selection |
 | `code/q7_regression.py` | Q7 OLS, Ridge, Lasso comparison |
 | `code/q7b_complexity.py` | Q7 1-SE rule, bootstrap stability, learning curve |
+| `code/q7c_diagnostics.py` | Q7 coefficient inference and assumption tests |
 | `code/q8_survey_eda.py` | Q8 survey EDA and significance tests |
 | `figures/` | 11 generated figures |
 | `output/` | Console logs and result tables for every question |

@@ -1,0 +1,22 @@
+==================================================================================
+1. THE LOG AS RECEIVED
+  interactions 3727   learners 500   courses 40
+  duplicate rows            : 71
+  distinct category strings : 13 for 5 real categories
+  missing ratings           : 1286 (34.5%)
+  completion rate when rating present 0.596 vs missing 0.491
+  scale spread: minutes sd 331 vs rating sd 0.93
+
+==================================================================================
+2. WHAT EACH DECISION IS WORTH (temporal split, identical model)
+  Raw log, no cleaning at all                  AUC=0.7554  train rows= 2795  width=17
+  Drop rows with a missing rating              AUC=0.7460  train rows= 1822  width=9
+  Mean-impute ratings, no indicator            AUC=0.7572  train rows= 2795  width=9
+  Median-impute + missingness indicator        AUC=0.7561  train rows= 2795  width=10
+  Full pipeline (+ engagement_ratio)           AUC=0.7597  train rows= 2741  width=11
+
+  cleaning the log is worth +0.0043 AUC over using it raw
+  the missingness indicator alone is worth -0.0010 AUC over mean imputation
+  dropping incomplete rows costs +0.0101 AUC against imputing them
+
+figure: figures/q2_fig1_impact.png
