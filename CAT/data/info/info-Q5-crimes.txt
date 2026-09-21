@@ -1,0 +1,148 @@
+Variable description
+
+| Variable                | Description                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------- |
+| `Communityname`         | Name of the community                                                                        |
+| `state`                 | U.S. state in which the community is located                                                 |
+| `fold`                  | Fold number used for non-random 10-fold cross-validation                                     |
+| `population`            | Total population of the community                                                            |
+| `householdsize`         | Mean number of people per household                                                          |
+| `racepctblack`          | Percentage of the population that is African American                                        |
+| `racePctWhite`          | Percentage of the population that is Caucasian                                               |
+| `racePctAsian`          | Percentage of the population that is Asian                                                   |
+| `racePctHisp`           | Percentage of the population that is Hispanic                                                |
+| `agePct12t21`           | Percentage of the population aged 12–21                                                      |
+| `agePct12t29`           | Percentage of the population aged 12–29                                                      |
+| `agePct16t24`           | Percentage of the population aged 16–24                                                      |
+| `agePct65up`            | Percentage of the population aged 65 and over                                                |
+| `numbUrban`             | Number of people living in areas classified as urban                                         |
+| `pctUrban`              | Percentage of the population living in urban areas                                           |
+| `medIncome`             | Median household income                                                                      |
+| `pctWWage`              | Percentage of households receiving wage or salary income                                     |
+| `pctWFarmSelf`          | Percentage of households receiving farm or self-employment income                            |
+| `pctWInvInc`            | Percentage of households receiving investment or rental income                               |
+| `pctWSocSec`            | Percentage of households receiving Social Security income                                    |
+| `pctWPubAsst`           | Percentage of households receiving public assistance                                         |
+| `pctWRetire`            | Percentage of households receiving retirement income                                         |
+| `medFamInc`             | Median family income                                                                         |
+| `perCapInc`             | Per capita income                                                                            |
+| `whitePerCap`           | Per capita income for the Caucasian population                                               |
+| `blackPerCap`           | Per capita income for the African American population                                        |
+| `indianPerCap`          | Per capita income for the Native American population                                         |
+| `AsianPerCap`           | Per capita income for the Asian population                                                   |
+| `OtherPerCap`           | Per capita income for people of other racial backgrounds                                     |
+| `HispPerCap`            | Per capita income for the Hispanic population                                                |
+| `NumUnderPov`           | Number of people living below the poverty level                                              |
+| `PctPopUnderPov`        | Percentage of the population living below the poverty level                                  |
+| `PctLess9thGrade`       | Percentage of people aged 25 and over with less than a ninth-grade education                 |
+| `PctNotHSGrad`          | Percentage of people aged 25 and over who are not high school graduates                      |
+| `PctBSorMore`           | Percentage of people aged 25 and over with a bachelor's degree or higher                     |
+| `PctUnemployed`         | Percentage of people in the labor force who are unemployed                                   |
+| `PctEmploy`             | Percentage of people aged 16 and over who are employed                                       |
+| `PctEmplManu`           | Percentage of employed people working in manufacturing                                       |
+| `PctEmplProfServ`       | Percentage of employed people working in professional services                               |
+| `PctOccupManu`          | Percentage of employed people working in manufacturing occupations                           |
+| `PctOccupMgmtProf`      | Percentage of employed people working in management or professional occupations              |
+| `MalePctDivorce`        | Percentage of males who are divorced                                                         |
+| `MalePctNevMarr`        | Percentage of males who have never married                                                   |
+| `FemalePctDiv`          | Percentage of females who are divorced                                                       |
+| `TotalPctDiv`           | Percentage of the population who are divorced                                                |
+| `PersPerFam`            | Mean number of people per family                                                             |
+| `PctFam2Par`            | Percentage of families with children headed by two parents                                   |
+| `PctKids2Par`           | Percentage of children in family housing living with two parents                             |
+| `PctYoungKids2Par`      | Percentage of children aged 4 and under living in two-parent households                      |
+| `PctTeen2Par`           | Percentage of children aged 12–17 living in two-parent households                            |
+| `PctWorkMomYoungKids`   | Percentage of mothers of children aged 6 and under who are in the labor force                |
+| `PctWorkMom`            | Percentage of mothers of children under 18 who are in the labor force                        |
+| `NumKidsBornNeverMar`   | Number of children born to never-married women                                               |
+| `PctKidsBornNeverMar`   | Percentage of children born to never-married women                                           |
+| `NumImmig`              | Total number of foreign-born people                                                          |
+| `PctImmigRecent`        | Percentage of immigrants who arrived within the previous 3 years                             |
+| `PctImmigRec5`          | Percentage of immigrants who arrived within the previous 5 years                             |
+| `PctImmigRec8`          | Percentage of immigrants who arrived within the previous 8 years                             |
+| `PctImmigRec10`         | Percentage of immigrants who arrived within the previous 10 years                            |
+| `PctRecentImmig`        | Percentage of the population who immigrated within the previous 3 years                      |
+| `PctRecImmig5`          | Percentage of the population who immigrated within the previous 5 years                      |
+| `PctRecImmig8`          | Percentage of the population who immigrated within the previous 8 years                      |
+| `PctRecImmig10`         | Percentage of the population who immigrated within the previous 10 years                     |
+| `PctSpeakEnglOnly`      | Percentage of people who speak only English                                                  |
+| `PctNotSpeakEnglWell`   | Percentage of people who do not speak English well                                           |
+| `PctLargHouseFam`       | Percentage of family households with six or more people                                      |
+| `PctLargHouseOccup`     | Percentage of occupied households with six or more people                                    |
+| `PersPerOccupHous`      | Mean number of people per occupied household                                                 |
+| `PersPerOwnOccHous`     | Mean number of people per owner-occupied household                                           |
+| `PersPerRentOccHous`    | Mean number of people per renter-occupied household                                          |
+| `PctPersOwnOccup`       | Percentage of people living in owner-occupied households                                     |
+| `PctPersDenseHous`      | Percentage of people living in dense housing, defined as more than one person per room       |
+| `PctHousLess3BR`        | Percentage of housing units with fewer than three bedrooms                                   |
+| `MedNumBR`              | Median number of bedrooms per housing unit                                                   |
+| `HousVacant`            | Number of vacant housing units                                                               |
+| `PctHousOccup`          | Percentage of housing units that are occupied                                                |
+| `PctHousOwnOcc`         | Percentage of households that are owner occupied                                             |
+| `PctVacantBoarded`      | Percentage of vacant housing units that are boarded up                                       |
+| `PctVacMore6Mos`        | Percentage of vacant housing units that have been vacant for more than six months            |
+| `MedYrHousBuilt`        | Median year in which housing units were built                                                |
+| `PctHousNoPhone`        | Percentage of occupied housing units without a telephone                                     |
+| `PctWOFullPlumb`        | Percentage of housing units without complete plumbing facilities                             |
+| `OwnOccLowQuart`        | Lower quartile value of owner-occupied housing                                               |
+| `OwnOccMedVal`          | Median value of owner-occupied housing                                                       |
+| `OwnOccHiQuart`         | Upper quartile value of owner-occupied housing                                               |
+| `OwnOccQrange`          | Interquartile range of owner-occupied housing values                                         |
+| `RentLowQ`              | Lower quartile monthly rent                                                                  |
+| `RentMedian`            | Median monthly rent                                                                          |
+| `RentHighQ`             | Upper quartile monthly rent                                                                  |
+| `RentQrange`            | Interquartile range of monthly rent                                                          |
+| `MedRent`               | Median gross monthly rent, including utilities                                               |
+| `MedRentPctHousInc`     | Median gross rent as a percentage of household income                                        |
+| `MedOwnCostPctInc`      | Median owner housing costs as a percentage of household income for owners with a mortgage    |
+| `MedOwnCostPctIncNoMtg` | Median owner housing costs as a percentage of household income for owners without a mortgage |
+| `NumInShelters`         | Number of people living in homeless shelters                                                 |
+| `NumStreet`             | Number of homeless people counted on the street                                              |
+| `PctForeignBorn`        | Percentage of the population that is foreign born                                            |
+| `PctBornSameState`      | Percentage of the population born in the same state in which they currently live             |
+| `PctSameHouse85`        | Percentage of people living in the same house as in 1985                                     |
+| `PctSameCity85`         | Percentage of people living in the same city as in 1985                                      |
+| `PctSameState85`        | Percentage of people living in the same state as in 1985                                     |
+| `LemasSwornFT`          | Number of sworn full-time police officers                                                    |
+| `LemasSwFTPerPop`       | Number of sworn full-time police officers per 100,000 population                             |
+| `LemasSwFTFieldOps`     | Number of sworn full-time police officers assigned to field operations                       |
+| `LemasSwFTFieldPerPop`  | Number of full-time field-operation officers per 100,000 population                          |
+| `LemasTotalReq`         | Total number of requests for police service                                                  |
+| `LemasTotReqPerPop`     | Total number of police-service requests per 100,000 population                               |
+| `PolicReqPerOffic`      | Number of police-service requests per police officer                                         |
+| `PolicPerPop`           | Number of police officers per 100,000 population                                             |
+| `RacialMatchCommPol`    | Degree of similarity between the racial composition of the community and its police force    |
+| `PctPolicWhite`         | Percentage of police officers who are Caucasian                                              |
+| `PctPolicBlack`         | Percentage of police officers who are African American                                       |
+| `PctPolicHisp`          | Percentage of police officers who are Hispanic                                               |
+| `PctPolicAsian`         | Percentage of police officers who are Asian                                                  |
+| `PctPolicMinor`         | Percentage of police officers who belong to a racial or ethnic minority                      |
+| `OfficAssgnDrugUnits`   | Number of police officers assigned to special drug units                                     |
+| `NumKindsDrugsSeiz`     | Number of different types of drugs seized                                                    |
+| `PolicAveOTWorked`      | Average amount of police overtime worked                                                     |
+| `LandArea`              | Land area of the community in square miles                                                   |
+| `PopDens`               | Population density in persons per square mile                                                |
+| `PctUsePubTrans`        | Percentage of people using public transportation for commuting                               |
+| `PolicCars`             | Number of police cars                                                                        |
+| `PolicOperBudg`         | Police operating budget                                                                      |
+| `LemasPctPolicOnPatr`   | Percentage of sworn full-time police officers assigned to patrol                             |
+| `LemasGangUnitDeploy`   | Level of gang-unit deployment: none, part-time, or full-time                                 |
+| `LemasPctOfficDrugUn`   | Percentage of police officers assigned to drug units                                         |
+| `PolicBudgPerPop`       | Police operating budget per capita                                                           |
+| `murders`               | Number of murders                                                                            |
+| `murdPerPop`            | Number of murders per 100,000 population                                                     |
+| `rapes`                 | Number of rapes                                                                              |
+| `rapesPerPop`           | Number of rapes per 100,000 population                                                       |
+| `robberies`             | Number of robberies                                                                          |
+| `robbbPerPop`           | Number of robberies per 100,000 population                                                   |
+| `assaults`              | Number of assaults                                                                           |
+| `assaultPerPop`         | Number of assaults per 100,000 population                                                    |
+| `burglaries`            | Number of burglaries                                                                         |
+| `burglPerPop`           | Number of burglaries per 100,000 population                                                  |
+| `larcenies`             | Number of larcenies                                                                          |
+| `larcPerPop`            | Number of larcenies per 100,000 population                                                   |
+| `autoTheft`             | Number of motor vehicle thefts                                                               |
+| `autoTheftPerPop`       | Number of motor vehicle thefts per 100,000 population                                        |
+| `arsons`                | Number of arsons                                                                             |
+| `arsonsPerPop`          | Number of arsons per 100,000 population                                                      |
+| `crime_rate`            | Total number of crimes per 100,000 population; **target variable to be predicted**           |

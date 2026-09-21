@@ -1,0 +1,77 @@
+========================================================================================
+1. DATA QUALITY
+  communities 2,215   variables 144
+  missing cells 0   duplicate rows 0
+  non-numeric: ['Communityname', 'state']   states represented: 48
+
+  target crime_rate (offences per 100,000):
+    mean 567.6  median 374.1  sd 586.8  skew 2.24  range 0.0 to 4877.1
+    zero-crime communities: 1   Tukey outliers: 164 (7.4%)
+    right skew of 2.24 means the mean is pulled above the median by a
+    minority of high-crime communities; a log scale is the honest axis for plotting.
+
+  16 columns are other crime measures; 124 are socioeconomic or demographic
+
+========================================================================================
+2. WHAT CORRELATES WITH CRIME, AND WHY THE RANKING MISLEADS
+  top 10 correlates of crime_rate, unrestricted:
+    assaultPerPop            +0.8521   OTHER CRIME MEASURE
+    robbbPerPop              +0.7896   OTHER CRIME MEASURE
+    PctKidsBornNeverMar      +0.6867   socioeconomic
+    PctKids2Par              -0.6841   socioeconomic
+    burglPerPop              +0.6765   OTHER CRIME MEASURE
+    PctFam2Par               -0.6498   socioeconomic
+    racePctWhite             -0.6472   socioeconomic
+    murdPerPop               +0.6359   OTHER CRIME MEASURE
+    PctTeen2Par              -0.6170   socioeconomic
+    PctYoungKids2Par         -0.6119   socioeconomic
+
+  4 of the top 10 are themselves crime counts or rates. Ranking features by
+  correlation selects the target restated, not anything that explains it.
+
+  top socioeconomic and demographic correlates, crime measures excluded:
+    PctKidsBornNeverMar      +0.6867   p = 8.60e-309
+    PctKids2Par              -0.6841   p = 1.49e-305
+    PctFam2Par               -0.6498   p = 6.78e-266
+    racePctWhite             -0.6472   p = 4.23e-263
+    PctTeen2Par              -0.6170   p = 1.66e-232
+    PctYoungKids2Par         -0.6119   p = 1.10e-227
+    racepctblack             +0.5906   p = 2.21e-208
+    pctWInvInc               -0.5346   p = 6.04e-164
+    FemalePctDiv             +0.5130   p = 5.62e-149
+    TotalPctDiv              +0.5110   p = 1.21e-147
+
+========================================================================================
+3. CORRELATION MATRIX AND ITS LIMITS
+                     PctKidsBornNeverMar  PctKids2Par  PctFam2Par  racePctWhite  PctTeen2Par  PctYoungKids2Par  racepctblack  pctWInvInc  FemalePctDiv  crime_rate
+PctKidsBornNeverMar                 1.00        -0.87       -0.85         -0.80        -0.81             -0.82          0.81       -0.63          0.53        0.69
+PctKids2Par                        -0.87         1.00        0.99          0.71         0.91              0.93         -0.74        0.75         -0.74       -0.68
+PctFam2Par                         -0.85         0.99        1.00          0.65         0.92              0.94         -0.71        0.71         -0.76       -0.65
+racePctWhite                       -0.80         0.71        0.65          1.00         0.64              0.61         -0.82        0.60         -0.47       -0.65
+PctTeen2Par                        -0.81         0.91        0.92          0.64         1.00              0.85         -0.70        0.62         -0.69       -0.62
+PctYoungKids2Par                   -0.82         0.93        0.94          0.61         0.85              1.00         -0.67        0.71         -0.68       -0.61
+racepctblack                        0.81        -0.74       -0.71         -0.82        -0.70             -0.67          1.00       -0.50          0.45        0.59
+pctWInvInc                         -0.63         0.75        0.71          0.60         0.62              0.71         -0.50        1.00         -0.64       -0.53
+FemalePctDiv                        0.53        -0.74       -0.76         -0.47        -0.69             -0.68          0.45       -0.64          1.00        0.51
+crime_rate                          0.69        -0.68       -0.65         -0.65        -0.62             -0.61          0.59       -0.53          0.51        1.00
+
+  predictor pairs correlated at |r| >= 0.75: 15
+    PctKidsBornNeverMar      <-> PctKids2Par              r = -0.866
+    PctKidsBornNeverMar      <-> PctFam2Par               r = -0.847
+    PctKidsBornNeverMar      <-> racePctWhite             r = -0.805
+    PctKidsBornNeverMar      <-> PctTeen2Par              r = -0.811
+    PctKidsBornNeverMar      <-> PctYoungKids2Par         r = -0.822
+    PctKidsBornNeverMar      <-> racepctblack             r = +0.815
+
+  Pearson against Spearman, where the two disagree most:
+           variable  Pearson  Spearman      gap
+NumKidsBornNeverMar    0.214     0.696    0.482
+        NumUnderPov    0.217     0.637    0.421
+          NumStreet    0.136     0.439    0.303
+        agePct16t24    0.043     0.303    0.260
+         HousVacant    0.247     0.497    0.251
+   PctPersDenseHous    0.400     0.624    0.224
+  A gap means the relationship is monotone but not straight, so a correlation
+  coefficient understates it and a linear model would miss part of it.
+
+figure: figures/q5_fig1.png

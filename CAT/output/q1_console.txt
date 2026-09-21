@@ -1,0 +1,75 @@
+========================================================================================
+1. THE PANEL AS THE COMPANY WOULD RECEIVE IT
+  farm-season records 18,000   farms 1,800   seasons 2016 to 2025
+  low-yield rate 0.629
+
+  records per district, and missing fertiliser within each:
+           records  low_yield_rate  fertiliser_missing  share_of_data
+district                                                             
+Nyagatare     6120           0.597               0.043          0.340
+Kayonza       4290           0.629               0.062          0.238
+Bugesera      2930           0.709               0.108          0.163
+Musanze       2330           0.591               0.130          0.129
+Huye          1500           0.645               0.235          0.083
+Karongi        830           0.670               0.286          0.046
+
+  scale spread: rainfall sd 141 against soil pH sd 0.53, a ratio of about 265 to 1
+
+========================================================================================
+2. PART (c): WHY THE ORDER OF OPERATIONS CHANGES THE ANSWER
+  preprocess then split  AUC = 0.7119
+  split then preprocess  AUC = 0.7119
+  difference +0.0000
+
+  random split over farm-seasons   AUC = 0.7105  (farms on both sides: 1,694)
+  grouped by farm                  AUC = 0.6912  (farms on both sides: 0)
+  optimism from splitting rows instead of farms: +0.0193
+
+========================================================================================
+3. PART (d): TWO KINDS OF CHANGE, SEPARATED
+  trained on 2016-2021, tested season by season:
+    2016 [train]  AUC 0.7618   rainfall KS vs training 0.022 (p 4.1e-01)   mean rain 880
+    2017 [train]  AUC 0.7534   rainfall KS vs training 0.015 (p 8.6e-01)   mean rain 875
+    2018 [train]  AUC 0.7508   rainfall KS vs training 0.013 (p 9.6e-01)   mean rain 879
+    2019 [train]  AUC 0.7351   rainfall KS vs training 0.019 (p 6.6e-01)   mean rain 881
+    2020 [train]  AUC 0.7674   rainfall KS vs training 0.022 (p 4.5e-01)   mean rain 875
+    2021 [train]  AUC 0.7393   rainfall KS vs training 0.021 (p 4.9e-01)   mean rain 875
+    2022 [ live]  AUC 0.6621   rainfall KS vs training 0.312 (p 2.7e-134)   mean rain 788
+    2023 [ live]  AUC 0.6539   rainfall KS vs training 0.301 (p 1.2e-124)   mean rain 792
+    2024 [ live]  AUC 0.6675   rainfall KS vs training 0.312 (p 3.9e-134)   mean rain 788
+    2025 [ live]  AUC 0.6862   rainfall KS vs training 0.312 (p 6.8e-134)   mean rain 780
+
+  input drift, measured on the predictors alone:
+    rainfall_mm      KS 0.308  p 0.00e+00   mean 877.4 -> 787.1
+    temperature_c    KS 0.173  p 2.01e-113   mean 19.7 -> 20.2
+    pest_reports     KS 0.242  p 2.62e-222   mean 1.4 -> 2.2
+
+  relationship drift, measured as the rainfall coefficient itself:
+    2016-2021: coefficient on standardised rainfall = -0.4262
+    2022-2025: coefficient on standardised rainfall = -0.2206
+  The inputs moved and the coefficient moved. Monitoring only the inputs would
+  have caught the first and missed the second.
+
+========================================================================================
+4. PART (e): IS THE REGIONAL DIFFERENCE REAL OR IS IT THE MODEL?
+ district    n  true low-yield rate  flag rate       AUC    recall  precision  missing fertiliser  AUC 95% low  AUC 95% high  interval width
+     Huye  410                0.688      0.254     0.700     0.323      0.875               0.235        0.650         0.749           0.098
+ Bugesera  720                0.685      0.444     0.688     0.529      0.816               0.108        0.646         0.729           0.083
+  Kayonza 1040                0.636      0.238     0.669     0.309      0.823               0.062        0.641         0.699           0.058
+  Karongi  200                0.635      0.355     0.722     0.472      0.845               0.286        0.643         0.790           0.147
+Nyagatare 1420                0.597      0.186     0.690     0.245      0.788               0.043        0.665         0.721           0.056
+  Musanze  710                0.573      0.166     0.688     0.226      0.780               0.130        0.650         0.726           0.076
+
+  widest interval 0.147 for Karongi (n=200), narrowest 0.056 for Nyagatare (n=1420)
+  every district interval overlaps every other: True
+  so the apparent AUC ranking across districts is not statistically distinguishable
+
+  flag-rate spread 0.278, but the true low-yield rate also spans 0.115
+  correlation between flag rate and true rate across districts: +0.712
+  recall spread 0.303, AUC spread 0.053
+  correlation between a district's missing-data rate and the model's AUC there: +0.865
+  That coefficient rests on six points with sample sizes from 200 to 1,420 and
+  overlapping intervals, so it is not evidence of anything. It is recorded here as
+  a hypothesis to test on more districts, not as a finding.
+
+figure: figures/q1_fig1.png

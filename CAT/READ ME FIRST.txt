@@ -1,0 +1,23 @@
+MIT91207 Machine Learning
+Mugisha Jean Claude, registration number 26016815
+University of Kigali, MSc Information Technology
+
+WHAT TO SUBMIT
+  MIT91207_Mugisha_Jean_Claude_26016815.ipynb
+
+Section A, Question One, is answered in full (parts a to e).
+From Section B, Question Four and Question Five are answered, the two permitted.
+
+Every code cell has already been run, so all outputs, tables and figures are
+saved inside the notebook. It can be read without running anything.
+
+TO RE-RUN IT
+  Open the notebook in Jupyter and choose Run All. The datasets sit in data/
+  next to the notebook, which is where the code expects them.
+  Needs pandas, numpy, scikit-learn, statsmodels, scipy and matplotlib.
+
+ALSO HERE
+  data/     the four supplied datasets
+  code/     one analysis script per question answered
+  figures/  generated figures
+  output/   console logs and result tables

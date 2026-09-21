@@ -1,0 +1,1001 @@
+Age,Account_Duration_Months,Num_Transactions,Subscription_Type,Region,Payment_Method,Previous_Expenditure,Monthly_Expenditure
+56,11,13,Basic,South,Bank Transfer,79.52,53.17
+69,85,13,Premium,North,Auto-Pay,70.43,105.09
+46,26,18,Premium,South,Auto-Pay,152.39,106.72
+32,63,32,Basic,South,Credit Card,91.91,84.68
+60,89,32,Premium,East,Credit Card,26.63,123.29
+25,86,35,Premium,North,Digital Wallet,63.73,118.2
+78,59,39,Standard,West,Bank Transfer,89.53,107.78
+38,27,46,Basic,East,Auto-Pay,65.58,99.19
+56,49,29,Standard,West,Digital Wallet,73.12,89.98
+75,77,49,Standard,West,Auto-Pay,65.82,98.18
+36,33,29,Basic,North,Credit Card,17.88,80.9
+40,98,44,Basic,South,Auto-Pay,131.05,105.95
+28,105,16,Standard,North,Bank Transfer,123.49,56.64
+28,99,44,Basic,West,Bank Transfer,134.14,133.14
+41,1,47,Standard,East,Credit Card,46.54,134.43
+70,21,10,Premium,West,Bank Transfer,66.17,94.24
+53,112,30,Premium,East,Bank Transfer,127.73,126.7
+57,55,25,Basic,East,Digital Wallet,123.93,83.78
+41,6,39,Premium,North,Auto-Pay,106.2,148.91
+20,92,20,Basic,West,Credit Card,76.58,68.99
+39,81,5,Basic,South,Credit Card,183.46,46.89
+70,69,1,Standard,West,Credit Card,74.56,69.36
+19,95,30,Basic,West,Credit Card,96.57,74.75
+41,5,49,Basic,South,Credit Card,138.84,124.55
+61,102,3,Standard,North,Bank Transfer,113.17,54.96
+47,3,45,Basic,West,Digital Wallet,75.91,133.01
+55,53,14,Basic,West,Credit Card,92.77,66.01
+19,23,30,Standard,East,Digital Wallet,160.95,144.7
+77,101,4,Standard,West,Digital Wallet,62.84,69.21
+38,53,18,Standard,South,Bank Transfer,37.03,67.72
+50,37,37,Basic,East,Credit Card,69.5,98.38
+29,74,25,Standard,North,Bank Transfer,171.41,115.47
+75,74,48,Basic,East,Credit Card,26.91,104.27
+39,83,1,Basic,South,Bank Transfer,198.42,60.78
+78,17,46,Standard,South,Digital Wallet,112.79,138.96
+61,85,15,Basic,East,Credit Card,197.12,63.19
+42,78,9,Basic,North,Auto-Pay,188.41,51.08
+66,73,15,Standard,East,Digital Wallet,96.03,70.67
+44,110,49,Standard,North,Auto-Pay,47.71,124.39
+76,1,24,Standard,East,Digital Wallet,41.33,83.32
+59,51,4,Basic,South,Bank Transfer,55.6,25.58
+45,45,12,Basic,West,Credit Card,144.93,71.29
+77,77,37,Basic,West,Digital Wallet,61.86,92.03
+33,4,37,Basic,North,Bank Transfer,74.87,90.41
+32,62,43,Standard,North,Credit Card,95.27,117.29
+79,65,6,Premium,North,Credit Card,183.51,105.94
+79,113,39,Standard,South,Digital Wallet,45.98,99.25
+64,104,46,Standard,East,Credit Card,10.96,125.05
+79,32,24,Standard,South,Digital Wallet,21.42,74.72
+68,34,11,Standard,West,Credit Card,181.91,89.7
+61,92,13,Basic,North,Auto-Pay,133.03,82.45
+72,95,34,Standard,East,Bank Transfer,61.88,99.89
+69,72,25,Standard,West,Auto-Pay,43.67,99.03
+74,39,7,Basic,West,Digital Wallet,65.91,50.91
+20,26,4,Basic,West,Auto-Pay,31.81,35.51
+54,34,8,Premium,South,Digital Wallet,188.89,118.2
+68,54,20,Basic,North,Credit Card,159.0,76.11
+24,118,29,Basic,West,Credit Card,97.85,79.79
+38,3,45,Standard,North,Digital Wallet,174.34,128.97
+26,50,46,Standard,South,Auto-Pay,57.4,119.41
+56,12,10,Standard,West,Credit Card,146.25,72.71
+35,65,43,Standard,South,Bank Transfer,172.67,144.22
+21,54,34,Basic,South,Credit Card,77.79,63.32
+42,108,26,Standard,North,Bank Transfer,153.92,109.96
+77,5,41,Basic,West,Auto-Pay,66.06,99.3
+31,94,49,Premium,South,Bank Transfer,66.78,158.02
+67,94,3,Standard,West,Bank Transfer,30.34,64.69
+75,57,6,Basic,North,Bank Transfer,93.61,43.36
+26,17,5,Basic,South,Bank Transfer,148.65,54.16
+43,112,5,Basic,North,Credit Card,188.64,37.35
+70,47,47,Basic,West,Bank Transfer,124.72,107.72
+19,23,23,Basic,West,Credit Card,174.0,91.82
+37,79,49,Standard,North,Bank Transfer,166.27,124.22
+45,101,9,Standard,East,Digital Wallet,42.94,64.11
+64,85,35,Basic,South,Auto-Pay,102.31,82.92
+77,14,20,Basic,West,Bank Transfer,32.22,57.35
+24,66,49,Basic,West,Digital Wallet,139.61,108.23
+61,75,42,Premium,South,Bank Transfer,190.48,149.66
+78,51,35,Basic,North,Bank Transfer,36.05,86.44
+25,103,18,Standard,North,Bank Transfer,149.44,90.07
+64,38,17,Premium,North,Digital Wallet,130.13,125.57
+52,64,24,Standard,East,Auto-Pay,120.88,106.27
+31,98,3,Premium,East,Digital Wallet,84.12,103.37
+34,38,32,Basic,West,Auto-Pay,77.48,82.92
+53,50,35,Premium,North,Bank Transfer,18.6,143.16
+67,98,38,Basic,South,Credit Card,51.4,76.35
+57,82,13,Basic,West,Bank Transfer,12.88,55.19
+21,30,47,Standard,South,Auto-Pay,120.47,135.13
+19,79,25,Premium,West,Digital Wallet,30.11,115.76
+79,91,9,Premium,East,Bank Transfer,175.87,119.17
+23,51,4,Basic,West,Digital Wallet,109.4,32.03
+71,63,14,Basic,East,Digital Wallet,142.94,51.63
+59,98,37,Premium,West,Digital Wallet,88.06,162.18
+21,52,34,Basic,North,Bank Transfer,116.51,87.5
+71,38,11,Standard,South,Digital Wallet,189.11,86.22
+46,97,41,Premium,North,Digital Wallet,25.72,124.43
+35,88,3,Standard,West,Bank Transfer,58.25,37.21
+43,79,28,Basic,West,Digital Wallet,158.2,86.82
+61,30,29,Standard,West,Bank Transfer,28.76,86.76
+51,119,9,Basic,East,Auto-Pay,24.38,39.73
+27,106,3,Premium,South,Auto-Pay,78.69,88.7
+79,51,25,Standard,South,Auto-Pay,27.51,115.45
+53,81,34,Premium,West,Digital Wallet,121.16,137.76
+31,5,12,Basic,West,Credit Card,52.99,66.46
+48,29,42,Premium,East,Credit Card,180.18,182.13
+65,4,9,Standard,North,Digital Wallet,158.87,89.62
+32,10,15,Basic,North,Credit Card,142.94,62.72
+25,56,40,Basic,South,Bank Transfer,127.22,84.0
+31,17,25,Standard,East,Credit Card,174.06,110.89
+40,74,5,Standard,West,Digital Wallet,52.38,69.58
+77,17,11,Premium,South,Digital Wallet,175.89,137.71
+74,84,34,Basic,East,Bank Transfer,160.0,87.3
+79,88,24,Basic,North,Auto-Pay,152.15,79.85
+57,69,15,Standard,East,Digital Wallet,116.64,71.52
+38,34,38,Basic,North,Bank Transfer,56.79,79.82
+33,6,8,Standard,East,Credit Card,90.47,75.19
+62,53,5,Premium,South,Credit Card,160.78,96.57
+35,66,48,Premium,North,Bank Transfer,16.04,136.26
+64,77,26,Premium,South,Bank Transfer,158.59,145.55
+70,107,18,Standard,South,Digital Wallet,55.61,84.25
+41,43,6,Basic,North,Credit Card,37.42,40.86
+43,112,37,Standard,North,Bank Transfer,31.98,94.61
+42,75,48,Standard,West,Credit Card,15.18,131.89
+77,115,13,Premium,West,Bank Transfer,109.48,109.95
+77,111,28,Basic,West,Credit Card,51.47,102.13
+77,23,5,Standard,South,Auto-Pay,197.99,82.98
+62,55,13,Basic,South,Digital Wallet,119.14,32.47
+58,80,17,Standard,West,Credit Card,36.2,45.3
+46,95,40,Premium,South,Auto-Pay,140.86,160.92
+32,75,45,Standard,South,Credit Card,180.57,151.79
+62,118,32,Basic,North,Credit Card,151.58,84.43
+18,16,29,Premium,North,Auto-Pay,24.52,143.29
+42,8,3,Standard,South,Credit Card,180.22,93.59
+24,4,40,Basic,West,Credit Card,160.85,107.85
+26,104,34,Basic,East,Digital Wallet,40.08,84.79
+41,4,40,Basic,West,Auto-Pay,19.84,95.76
+18,56,27,Basic,East,Auto-Pay,115.89,101.46
+61,25,13,Premium,West,Bank Transfer,39.65,106.68
+25,67,45,Standard,North,Credit Card,168.57,136.29
+41,96,33,Premium,South,Digital Wallet,78.08,141.33
+28,67,6,Basic,South,Credit Card,183.45,64.37
+68,27,24,Basic,North,Credit Card,117.48,88.11
+34,93,19,Standard,East,Bank Transfer,44.71,58.07
+25,32,16,Basic,East,Credit Card,36.52,54.52
+52,50,40,Standard,East,Digital Wallet,119.53,126.05
+52,61,28,Premium,North,Digital Wallet,154.76,136.94
+50,51,33,Standard,East,Bank Transfer,158.49,125.18
+76,19,48,Standard,North,Credit Card,62.39,148.21
+22,21,41,Basic,West,Digital Wallet,48.81,91.58
+59,5,13,Basic,West,Credit Card,13.18,52.73
+56,82,43,Basic,North,Credit Card,139.05,127.43
+75,92,45,Standard,South,Credit Card,24.55,116.87
+58,42,25,Basic,West,Bank Transfer,89.94,63.23
+45,61,42,Basic,East,Credit Card,124.32,111.29
+24,22,36,Standard,North,Digital Wallet,188.05,96.99
+26,21,27,Basic,East,Credit Card,69.24,44.61
+25,70,38,Basic,East,Digital Wallet,57.46,90.87
+29,1,7,Basic,South,Credit Card,134.29,23.95
+51,5,5,Premium,East,Digital Wallet,127.66,83.42
+50,105,43,Standard,South,Digital Wallet,73.1,113.4
+65,12,45,Standard,West,Credit Card,186.34,130.04
+72,90,31,Basic,North,Credit Card,170.52,93.9
+40,46,23,Premium,East,Digital Wallet,52.56,127.74
+79,34,42,Standard,North,Auto-Pay,55.44,118.13
+41,49,10,Basic,East,Bank Transfer,107.34,43.08
+54,78,32,Premium,North,Auto-Pay,156.98,160.5
+52,90,43,Basic,East,Auto-Pay,18.37,72.71
+61,45,30,Standard,East,Credit Card,141.73,111.97
+57,27,39,Standard,East,Bank Transfer,133.16,102.84
+39,73,31,Basic,East,Auto-Pay,53.98,79.57
+44,26,18,Premium,East,Credit Card,139.46,116.3
+52,47,36,Standard,East,Auto-Pay,188.63,137.88
+18,86,2,Standard,East,Auto-Pay,18.89,55.38
+52,111,14,Basic,East,Credit Card,70.73,47.16
+54,56,13,Basic,East,Credit Card,93.25,46.84
+64,94,29,Basic,North,Credit Card,180.86,90.05
+31,107,12,Standard,South,Bank Transfer,192.83,110.98
+20,63,39,Basic,East,Auto-Pay,94.38,113.09
+18,48,2,Standard,South,Credit Card,152.51,55.16
+22,61,32,Standard,East,Digital Wallet,111.02,115.36
+43,81,13,Basic,East,Auto-Pay,112.18,37.7
+72,26,46,Standard,North,Digital Wallet,62.84,116.66
+31,36,27,Basic,West,Bank Transfer,51.22,58.6
+56,1,49,Premium,West,Credit Card,64.72,168.84
+44,8,41,Standard,North,Digital Wallet,115.7,105.57
+26,113,17,Basic,South,Bank Transfer,15.54,54.28
+32,99,40,Basic,West,Credit Card,182.38,108.97
+32,52,31,Standard,North,Digital Wallet,39.69,91.95
+43,79,34,Standard,North,Digital Wallet,51.82,120.98
+59,47,24,Standard,West,Bank Transfer,108.47,116.34
+77,56,45,Standard,South,Credit Card,144.92,131.36
+30,86,35,Basic,North,Credit Card,28.19,74.08
+68,14,48,Basic,East,Digital Wallet,70.36,87.87
+49,90,6,Basic,South,Digital Wallet,194.05,60.51
+56,28,19,Standard,South,Digital Wallet,59.85,103.72
+66,87,30,Premium,West,Credit Card,69.48,127.18
+69,78,7,Standard,West,Bank Transfer,168.93,88.03
+78,88,10,Basic,East,Bank Transfer,19.54,25.06
+49,2,41,Standard,North,Credit Card,98.28,113.47
+21,109,32,Premium,West,Auto-Pay,82.13,136.92
+47,26,34,Standard,West,Bank Transfer,70.15,105.14
+54,14,28,Premium,South,Digital Wallet,64.28,134.24
+40,59,15,Basic,West,Auto-Pay,27.36,41.37
+56,56,30,Basic,West,Auto-Pay,69.82,57.27
+62,115,37,Premium,West,Bank Transfer,18.18,144.79
+32,7,29,Standard,West,Auto-Pay,158.38,97.62
+60,3,22,Basic,South,Auto-Pay,85.66,74.93
+46,111,4,Standard,East,Bank Transfer,94.34,67.86
+53,23,20,Premium,East,Bank Transfer,179.78,109.65
+30,110,32,Standard,North,Auto-Pay,135.03,122.34
+49,107,36,Standard,West,Digital Wallet,11.53,91.38
+24,111,4,Basic,South,Credit Card,189.2,56.24
+76,109,27,Standard,North,Auto-Pay,55.06,88.26
+68,18,17,Standard,North,Auto-Pay,30.45,92.94
+39,38,12,Premium,East,Digital Wallet,155.94,129.46
+45,99,22,Premium,South,Auto-Pay,105.09,99.27
+19,115,17,Premium,South,Auto-Pay,92.42,137.42
+59,15,10,Basic,South,Credit Card,57.41,38.42
+62,64,1,Standard,East,Credit Card,114.02,86.93
+79,89,22,Standard,East,Credit Card,62.13,83.19
+74,119,26,Standard,East,Bank Transfer,181.3,105.8
+70,101,18,Standard,East,Bank Transfer,50.89,75.17
+23,28,14,Premium,East,Credit Card,178.03,114.05
+45,74,47,Standard,West,Credit Card,116.29,160.49
+45,39,29,Standard,West,Bank Transfer,167.41,109.95
+61,57,12,Basic,South,Digital Wallet,145.44,59.24
+61,17,36,Basic,North,Auto-Pay,142.37,99.33
+37,103,35,Standard,South,Auto-Pay,71.63,93.49
+47,86,12,Standard,North,Credit Card,54.44,87.68
+79,90,7,Basic,East,Digital Wallet,50.07,24.31
+28,44,29,Basic,North,Bank Transfer,172.87,83.46
+75,25,11,Standard,South,Credit Card,165.88,96.37
+72,17,33,Basic,South,Digital Wallet,93.71,87.66
+45,13,6,Basic,North,Digital Wallet,35.16,43.11
+42,84,47,Basic,West,Digital Wallet,82.63,123.39
+56,25,15,Basic,East,Bank Transfer,127.68,76.5
+79,68,32,Basic,East,Bank Transfer,96.34,88.05
+50,10,11,Basic,South,Auto-Pay,158.24,87.81
+18,67,23,Standard,West,Auto-Pay,199.55,97.79
+74,105,26,Premium,North,Digital Wallet,46.32,118.44
+44,109,34,Standard,East,Digital Wallet,97.33,107.43
+79,18,46,Standard,West,Bank Transfer,91.89,125.5
+74,111,34,Basic,East,Auto-Pay,67.85,72.05
+69,100,29,Basic,West,Digital Wallet,47.64,55.09
+30,111,4,Standard,West,Auto-Pay,22.48,55.88
+58,86,17,Basic,South,Auto-Pay,178.55,67.58
+20,34,35,Standard,East,Digital Wallet,89.77,129.86
+56,111,13,Standard,North,Bank Transfer,104.41,77.09
+23,8,41,Standard,South,Digital Wallet,184.22,127.27
+25,40,39,Basic,South,Digital Wallet,157.5,116.51
+44,113,15,Basic,North,Auto-Pay,34.8,54.75
+26,108,29,Standard,South,Digital Wallet,117.43,100.31
+79,83,29,Basic,West,Bank Transfer,94.03,73.87
+54,42,11,Standard,West,Digital Wallet,161.47,127.31
+50,41,32,Standard,East,Bank Transfer,147.6,116.98
+68,101,2,Premium,East,Bank Transfer,141.18,110.59
+59,6,47,Basic,North,Auto-Pay,74.7,92.38
+61,52,14,Premium,East,Credit Card,162.94,111.56
+41,26,20,Standard,West,Credit Card,19.95,100.39
+32,64,22,Basic,North,Auto-Pay,40.33,77.41
+76,98,11,Basic,North,Digital Wallet,73.77,56.86
+71,59,27,Standard,East,Auto-Pay,24.59,83.16
+49,56,3,Basic,West,Bank Transfer,54.65,32.34
+49,59,17,Basic,North,Credit Card,167.73,65.0
+41,109,44,Basic,West,Auto-Pay,190.17,102.69
+58,70,28,Premium,West,Digital Wallet,67.87,136.17
+69,101,29,Standard,West,Auto-Pay,60.26,102.45
+66,33,21,Standard,East,Credit Card,63.18,93.11
+79,53,47,Basic,South,Auto-Pay,62.77,99.82
+66,22,16,Basic,South,Auto-Pay,16.83,52.89
+75,21,37,Standard,North,Credit Card,186.11,121.98
+69,70,20,Standard,West,Bank Transfer,50.6,72.31
+29,70,6,Basic,East,Bank Transfer,89.8,63.92
+79,119,19,Standard,West,Credit Card,11.84,75.68
+56,112,5,Premium,West,Auto-Pay,173.01,112.34
+19,4,3,Standard,East,Credit Card,148.92,77.82
+20,94,1,Standard,South,Bank Transfer,189.88,72.59
+66,75,38,Premium,West,Digital Wallet,158.51,156.96
+54,62,15,Basic,West,Auto-Pay,69.6,42.6
+66,62,34,Standard,South,Bank Transfer,57.1,92.11
+73,94,35,Premium,East,Auto-Pay,142.57,136.16
+34,95,49,Basic,North,Credit Card,79.18,114.34
+76,24,25,Standard,South,Digital Wallet,117.58,99.79
+66,55,24,Standard,North,Credit Card,11.19,70.23
+19,9,12,Standard,North,Digital Wallet,21.76,69.18
+19,119,18,Standard,South,Auto-Pay,111.72,91.23
+45,3,15,Premium,West,Auto-Pay,117.55,104.04
+71,115,44,Standard,North,Credit Card,152.78,132.13
+40,31,16,Basic,North,Digital Wallet,35.07,57.83
+54,40,27,Premium,East,Digital Wallet,107.5,119.02
+49,101,8,Basic,West,Auto-Pay,46.95,48.29
+50,36,46,Basic,North,Credit Card,27.71,99.27
+18,24,25,Standard,East,Digital Wallet,87.99,79.61
+36,95,17,Standard,West,Auto-Pay,41.03,76.09
+79,6,29,Standard,South,Bank Transfer,52.14,99.66
+19,66,8,Premium,South,Credit Card,70.34,85.99
+70,84,15,Standard,East,Bank Transfer,59.28,68.32
+61,92,27,Standard,South,Credit Card,26.64,75.44
+43,75,46,Basic,North,Auto-Pay,27.08,89.82
+49,4,7,Premium,West,Digital Wallet,46.72,89.81
+23,79,3,Premium,North,Digital Wallet,19.61,72.06
+49,6,29,Standard,North,Digital Wallet,129.03,87.49
+72,118,44,Basic,South,Credit Card,64.59,91.03
+21,113,24,Basic,North,Auto-Pay,63.15,61.51
+72,94,3,Basic,South,Bank Transfer,73.08,48.86
+28,102,20,Basic,West,Auto-Pay,135.93,78.93
+73,51,46,Basic,West,Bank Transfer,175.42,129.0
+76,62,15,Premium,North,Credit Card,154.23,110.57
+34,57,25,Standard,East,Credit Card,148.23,103.13
+55,66,30,Basic,South,Bank Transfer,102.03,53.98
+41,79,14,Basic,South,Bank Transfer,141.82,69.47
+22,75,7,Basic,North,Bank Transfer,115.02,56.18
+69,8,17,Basic,South,Auto-Pay,51.09,52.39
+51,26,44,Basic,South,Bank Transfer,49.63,99.54
+23,51,20,Basic,East,Credit Card,66.31,42.92
+39,45,36,Standard,East,Credit Card,183.05,113.79
+28,44,9,Premium,North,Digital Wallet,114.01,111.19
+65,5,38,Basic,East,Bank Transfer,149.44,108.8
+33,70,48,Standard,North,Auto-Pay,75.85,120.09
+50,26,22,Premium,West,Auto-Pay,87.47,128.36
+26,118,2,Basic,North,Auto-Pay,33.86,31.04
+77,68,24,Basic,West,Digital Wallet,42.55,60.18
+76,19,8,Premium,North,Credit Card,167.2,108.69
+23,84,11,Basic,South,Auto-Pay,121.12,50.35
+33,97,13,Standard,East,Credit Card,74.13,58.06
+46,20,17,Standard,West,Digital Wallet,162.54,107.26
+20,113,8,Basic,North,Bank Transfer,56.84,34.71
+37,12,21,Basic,East,Bank Transfer,195.45,72.68
+77,47,18,Standard,North,Bank Transfer,75.52,63.83
+76,1,30,Basic,East,Auto-Pay,74.09,48.28
+53,90,18,Basic,East,Bank Transfer,69.26,68.46
+36,14,46,Standard,North,Auto-Pay,33.2,125.3
+43,64,47,Standard,West,Digital Wallet,31.12,131.63
+20,38,31,Basic,West,Digital Wallet,133.14,85.68
+36,37,38,Premium,South,Auto-Pay,176.27,151.38
+37,11,32,Basic,East,Credit Card,160.2,87.79
+49,100,11,Premium,South,Bank Transfer,36.81,89.47
+24,77,45,Standard,South,Bank Transfer,113.66,139.19
+69,107,25,Standard,North,Bank Transfer,30.06,85.14
+58,3,33,Standard,North,Auto-Pay,18.61,99.73
+50,33,38,Premium,North,Digital Wallet,134.71,144.4
+57,6,41,Basic,East,Bank Transfer,111.68,116.95
+56,50,8,Standard,North,Digital Wallet,25.58,35.78
+35,10,11,Basic,North,Bank Transfer,16.64,26.1
+57,5,22,Basic,East,Bank Transfer,198.05,90.11
+18,23,24,Basic,East,Auto-Pay,15.7,80.26
+28,10,41,Premium,West,Credit Card,94.46,144.37
+45,44,17,Premium,North,Auto-Pay,105.88,103.52
+74,2,12,Basic,North,Bank Transfer,32.28,58.55
+42,13,46,Basic,North,Bank Transfer,42.12,101.3
+67,40,32,Standard,West,Credit Card,76.84,118.36
+40,2,15,Standard,North,Digital Wallet,154.72,72.22
+48,84,16,Basic,West,Digital Wallet,106.35,76.89
+47,65,22,Standard,South,Bank Transfer,131.2,76.45
+59,63,28,Standard,West,Digital Wallet,197.18,111.07
+52,101,20,Premium,South,Bank Transfer,155.92,130.94
+24,73,33,Basic,North,Credit Card,92.53,86.81
+77,17,10,Standard,South,Credit Card,94.82,85.8
+33,9,40,Standard,West,Bank Transfer,127.57,98.87
+43,75,32,Standard,East,Credit Card,136.42,112.31
+65,15,33,Standard,South,Auto-Pay,105.14,122.92
+74,24,2,Standard,South,Auto-Pay,132.52,67.29
+69,38,33,Basic,North,Credit Card,14.47,61.41
+77,119,33,Premium,West,Bank Transfer,91.63,149.18
+66,35,41,Standard,South,Bank Transfer,63.0,106.47
+19,94,13,Basic,South,Credit Card,34.54,35.74
+18,95,30,Standard,South,Digital Wallet,28.91,78.83
+65,49,33,Basic,South,Auto-Pay,124.61,89.06
+79,69,13,Basic,East,Digital Wallet,109.48,62.07
+29,62,26,Premium,West,Bank Transfer,58.18,103.95
+22,60,22,Standard,North,Bank Transfer,99.48,76.26
+54,108,39,Standard,North,Digital Wallet,103.52,108.39
+49,50,2,Basic,East,Credit Card,47.05,21.05
+76,78,38,Standard,West,Digital Wallet,133.9,121.33
+72,117,39,Basic,South,Digital Wallet,158.37,110.19
+26,75,26,Basic,East,Auto-Pay,160.38,87.04
+58,9,46,Premium,West,Auto-Pay,124.47,163.27
+52,34,15,Standard,South,Digital Wallet,107.21,101.23
+36,76,34,Standard,East,Digital Wallet,21.59,101.12
+65,99,42,Basic,West,Bank Transfer,64.69,105.36
+33,35,44,Premium,North,Auto-Pay,27.72,136.83
+20,1,49,Standard,North,Auto-Pay,193.13,154.8
+37,40,40,Standard,West,Bank Transfer,35.67,101.65
+41,64,11,Standard,North,Credit Card,38.84,69.31
+71,22,3,Basic,West,Auto-Pay,179.02,38.45
+73,60,6,Basic,South,Auto-Pay,189.35,63.05
+50,64,9,Standard,West,Credit Card,155.51,67.62
+41,93,6,Basic,South,Auto-Pay,11.03,43.94
+69,72,9,Basic,East,Auto-Pay,10.26,49.0
+28,11,39,Premium,West,Credit Card,81.84,136.58
+66,105,31,Standard,East,Credit Card,37.25,119.98
+25,101,32,Standard,North,Digital Wallet,13.49,87.84
+53,14,41,Standard,South,Bank Transfer,98.17,99.53
+55,60,12,Standard,West,Bank Transfer,189.18,79.78
+57,30,8,Basic,East,Credit Card,71.53,33.05
+37,35,8,Basic,South,Credit Card,135.62,58.75
+79,85,28,Basic,South,Auto-Pay,133.92,71.21
+52,37,20,Basic,North,Digital Wallet,57.71,54.79
+65,5,47,Standard,North,Digital Wallet,133.58,137.56
+79,83,7,Basic,South,Credit Card,50.34,43.66
+42,78,11,Standard,South,Auto-Pay,33.18,63.43
+52,26,20,Basic,West,Auto-Pay,143.26,75.6
+42,62,16,Basic,South,Bank Transfer,31.55,46.39
+46,4,4,Standard,West,Bank Transfer,199.41,58.97
+35,89,6,Basic,South,Auto-Pay,44.86,32.72
+63,109,22,Basic,North,Bank Transfer,122.89,80.21
+35,42,26,Basic,West,Credit Card,88.16,72.33
+19,89,3,Basic,East,Auto-Pay,34.01,35.25
+71,18,41,Standard,North,Bank Transfer,15.29,100.3
+52,40,42,Basic,West,Digital Wallet,128.32,116.78
+33,72,14,Basic,West,Auto-Pay,163.28,36.47
+78,39,11,Standard,East,Auto-Pay,169.98,87.59
+58,104,18,Basic,West,Digital Wallet,101.72,81.34
+53,14,12,Premium,South,Credit Card,157.72,132.28
+50,32,23,Standard,East,Digital Wallet,137.84,94.89
+21,51,12,Standard,North,Auto-Pay,147.61,65.28
+50,38,13,Standard,North,Credit Card,103.59,93.94
+31,97,25,Basic,South,Bank Transfer,130.35,77.98
+38,23,45,Standard,North,Bank Transfer,163.05,131.95
+65,63,19,Basic,West,Bank Transfer,85.6,53.88
+37,15,46,Premium,West,Auto-Pay,163.14,150.32
+73,97,36,Basic,South,Digital Wallet,122.48,102.79
+25,25,45,Standard,North,Credit Card,41.52,123.02
+24,17,8,Standard,North,Bank Transfer,14.69,57.82
+20,97,29,Basic,South,Credit Card,78.92,67.17
+34,111,32,Basic,East,Auto-Pay,113.87,74.0
+50,119,44,Standard,North,Bank Transfer,169.57,116.75
+65,66,18,Premium,East,Auto-Pay,34.22,98.66
+29,78,6,Basic,North,Digital Wallet,162.04,42.69
+76,53,18,Standard,North,Auto-Pay,173.97,76.38
+68,104,19,Premium,North,Auto-Pay,38.63,115.51
+39,104,22,Premium,North,Digital Wallet,171.8,114.89
+72,51,37,Basic,West,Credit Card,198.38,120.66
+39,39,32,Standard,East,Digital Wallet,148.1,116.89
+63,51,41,Basic,East,Digital Wallet,159.11,112.05
+47,70,3,Premium,North,Auto-Pay,198.94,126.67
+55,6,28,Standard,North,Credit Card,125.04,88.08
+55,67,10,Basic,East,Bank Transfer,68.5,58.51
+62,7,35,Standard,West,Digital Wallet,169.13,117.4
+68,51,29,Basic,South,Credit Card,126.75,116.77
+71,72,15,Premium,South,Digital Wallet,120.43,109.54
+25,42,33,Premium,East,Digital Wallet,58.19,122.97
+44,64,7,Standard,North,Digital Wallet,153.7,80.86
+44,116,12,Basic,North,Digital Wallet,25.52,41.52
+51,15,49,Standard,West,Auto-Pay,185.61,134.79
+38,111,30,Basic,South,Credit Card,71.91,66.04
+47,29,21,Basic,West,Credit Card,34.28,76.49
+50,33,31,Premium,South,Credit Card,94.05,119.15
+45,116,24,Basic,East,Digital Wallet,18.07,63.64
+64,94,20,Basic,South,Auto-Pay,140.08,86.89
+50,103,37,Premium,West,Digital Wallet,181.51,168.48
+22,27,4,Basic,West,Digital Wallet,169.08,45.24
+77,36,28,Basic,West,Credit Card,34.2,68.51
+78,29,44,Premium,East,Digital Wallet,33.99,140.2
+65,38,20,Basic,South,Bank Transfer,164.55,59.51
+36,57,24,Standard,South,Digital Wallet,185.61,112.09
+21,97,49,Premium,West,Bank Transfer,97.53,159.64
+52,101,32,Premium,South,Digital Wallet,104.8,153.61
+66,27,41,Standard,North,Auto-Pay,70.47,105.49
+34,55,36,Basic,North,Auto-Pay,179.91,115.75
+61,33,34,Basic,North,Credit Card,132.53,107.84
+45,68,36,Premium,South,Digital Wallet,64.77,136.53
+47,86,2,Premium,East,Bank Transfer,66.77,59.32
+46,66,15,Standard,East,Bank Transfer,179.33,85.55
+63,10,34,Basic,East,Digital Wallet,12.59,97.47
+70,5,36,Basic,East,Bank Transfer,71.32,91.76
+23,74,6,Basic,North,Auto-Pay,115.33,55.77
+52,97,39,Standard,North,Bank Transfer,38.16,105.75
+77,118,42,Standard,West,Credit Card,27.5,108.29
+58,38,12,Premium,South,Auto-Pay,164.9,93.23
+54,13,3,Standard,South,Auto-Pay,179.94,83.73
+41,31,45,Basic,East,Auto-Pay,166.49,127.48
+46,47,18,Standard,North,Digital Wallet,180.77,85.01
+66,100,40,Standard,East,Digital Wallet,115.09,118.42
+63,109,21,Standard,West,Auto-Pay,164.33,95.53
+70,88,15,Standard,South,Digital Wallet,82.97,83.49
+48,52,33,Premium,South,Bank Transfer,136.59,135.86
+52,56,35,Premium,East,Digital Wallet,197.88,165.96
+77,15,26,Basic,West,Digital Wallet,52.89,71.64
+50,29,8,Basic,South,Auto-Pay,84.08,16.52
+69,8,36,Standard,West,Credit Card,101.21,117.94
+78,5,48,Basic,West,Credit Card,36.22,113.29
+38,29,30,Basic,East,Credit Card,25.4,56.89
+49,47,23,Basic,North,Bank Transfer,167.65,87.0
+40,68,42,Standard,East,Digital Wallet,195.59,156.3
+50,76,44,Basic,North,Credit Card,86.9,102.88
+20,45,14,Standard,West,Auto-Pay,26.65,79.7
+35,2,14,Premium,North,Credit Card,22.5,90.82
+42,27,2,Basic,West,Credit Card,179.35,51.79
+59,95,37,Basic,South,Digital Wallet,98.12,90.71
+48,115,5,Basic,South,Digital Wallet,70.81,35.88
+71,115,38,Premium,South,Digital Wallet,100.53,143.86
+75,36,45,Basic,East,Bank Transfer,70.48,82.25
+20,36,41,Basic,East,Bank Transfer,102.92,93.97
+57,26,47,Basic,West,Credit Card,173.32,135.4
+63,43,14,Standard,South,Digital Wallet,122.54,70.97
+41,27,39,Standard,East,Credit Card,141.98,109.05
+67,69,25,Standard,South,Auto-Pay,79.29,93.48
+49,20,20,Premium,East,Auto-Pay,150.32,126.33
+64,11,2,Basic,North,Digital Wallet,136.66,51.23
+39,74,39,Premium,North,Digital Wallet,32.72,133.99
+40,104,6,Basic,South,Auto-Pay,118.8,49.68
+19,38,17,Premium,West,Digital Wallet,58.78,101.06
+44,6,25,Standard,East,Bank Transfer,162.78,88.81
+59,72,28,Premium,East,Bank Transfer,90.93,127.73
+19,23,2,Basic,North,Digital Wallet,198.99,62.49
+43,47,35,Basic,North,Auto-Pay,27.58,84.97
+34,90,37,Basic,West,Credit Card,158.27,80.01
+57,46,5,Basic,West,Digital Wallet,138.0,54.07
+50,107,1,Basic,West,Digital Wallet,155.82,36.66
+26,12,40,Basic,South,Credit Card,68.43,108.27
+60,90,12,Basic,North,Digital Wallet,103.49,60.44
+71,13,36,Standard,South,Credit Card,161.34,132.51
+65,104,45,Premium,North,Auto-Pay,54.18,149.13
+56,62,23,Standard,North,Bank Transfer,52.95,84.45
+46,82,47,Basic,East,Auto-Pay,114.7,127.96
+59,89,31,Standard,North,Bank Transfer,109.48,117.55
+72,97,11,Basic,North,Credit Card,63.63,51.06
+43,111,10,Premium,South,Bank Transfer,66.63,94.75
+52,104,3,Basic,North,Auto-Pay,62.79,16.03
+67,60,14,Standard,South,Bank Transfer,156.59,91.73
+42,43,16,Premium,West,Credit Card,133.86,114.67
+41,76,10,Premium,North,Bank Transfer,168.16,118.92
+30,108,29,Standard,North,Digital Wallet,195.34,124.59
+77,100,10,Premium,South,Auto-Pay,100.09,118.66
+75,112,12,Premium,West,Digital Wallet,22.67,99.19
+24,68,30,Standard,East,Credit Card,19.14,76.51
+74,5,41,Standard,West,Bank Transfer,66.18,89.34
+53,37,1,Standard,South,Digital Wallet,187.18,62.33
+62,72,5,Standard,West,Digital Wallet,109.41,83.01
+37,106,20,Standard,South,Bank Transfer,61.64,102.98
+18,113,8,Standard,South,Bank Transfer,85.84,62.92
+25,92,43,Basic,East,Auto-Pay,123.73,86.78
+63,31,12,Basic,North,Digital Wallet,134.06,53.48
+33,9,1,Basic,South,Digital Wallet,39.24,42.69
+31,118,20,Basic,South,Credit Card,195.64,73.8
+29,51,28,Basic,East,Auto-Pay,113.51,87.55
+68,29,43,Standard,South,Credit Card,35.78,115.29
+40,78,37,Basic,North,Digital Wallet,179.79,112.99
+32,40,47,Premium,East,Credit Card,24.18,167.54
+45,41,37,Basic,North,Digital Wallet,182.47,112.2
+51,86,12,Basic,North,Digital Wallet,199.35,72.22
+19,11,37,Standard,East,Credit Card,143.08,141.05
+49,23,49,Standard,South,Credit Card,156.38,143.6
+40,1,49,Basic,North,Bank Transfer,74.09,97.1
+39,46,44,Premium,North,Bank Transfer,188.9,174.53
+68,101,28,Premium,North,Bank Transfer,110.65,137.37
+42,21,47,Basic,North,Digital Wallet,149.15,111.28
+75,90,15,Basic,East,Credit Card,185.58,67.88
+79,110,6,Premium,East,Auto-Pay,195.28,108.66
+78,36,44,Standard,West,Digital Wallet,168.31,128.76
+39,54,20,Standard,West,Auto-Pay,67.57,78.9
+75,87,14,Premium,North,Credit Card,193.64,113.68
+75,57,2,Basic,South,Digital Wallet,129.34,50.78
+39,1,9,Standard,North,Auto-Pay,186.82,87.21
+66,63,37,Basic,South,Auto-Pay,138.46,103.71
+69,54,20,Standard,North,Bank Transfer,68.38,82.96
+59,55,26,Standard,West,Bank Transfer,80.3,91.86
+23,115,29,Standard,West,Bank Transfer,114.59,119.14
+32,40,1,Basic,South,Digital Wallet,160.1,47.92
+71,15,35,Basic,North,Credit Card,70.42,101.78
+60,21,6,Standard,South,Credit Card,120.15,58.07
+77,47,37,Standard,West,Bank Transfer,75.67,117.77
+54,73,5,Standard,North,Bank Transfer,165.0,66.13
+50,53,33,Basic,North,Bank Transfer,98.68,80.13
+25,9,49,Premium,South,Auto-Pay,24.58,143.49
+70,74,14,Basic,East,Bank Transfer,41.55,45.04
+77,52,12,Premium,South,Auto-Pay,21.61,89.46
+61,57,42,Basic,West,Credit Card,104.87,116.39
+61,117,20,Standard,West,Digital Wallet,30.2,78.12
+22,26,24,Basic,West,Digital Wallet,31.69,64.55
+56,41,43,Premium,West,Digital Wallet,188.8,160.13
+21,35,34,Standard,West,Digital Wallet,175.8,128.7
+23,63,25,Basic,East,Auto-Pay,95.9,77.3
+62,116,29,Basic,North,Auto-Pay,197.3,92.49
+49,25,39,Basic,South,Bank Transfer,10.04,63.44
+69,90,31,Basic,South,Auto-Pay,126.66,91.54
+47,75,47,Premium,West,Bank Transfer,127.12,168.83
+64,38,43,Standard,South,Bank Transfer,96.91,110.49
+52,2,23,Standard,West,Digital Wallet,85.42,86.37
+72,7,44,Standard,East,Auto-Pay,96.52,130.52
+57,82,38,Standard,East,Auto-Pay,88.84,94.32
+69,91,20,Basic,North,Bank Transfer,148.79,67.98
+33,34,23,Basic,East,Bank Transfer,35.72,66.03
+30,91,45,Standard,East,Credit Card,47.55,129.39
+67,17,16,Premium,North,Credit Card,44.3,130.22
+77,43,42,Basic,South,Bank Transfer,59.87,119.33
+59,59,8,Basic,West,Credit Card,109.8,53.15
+47,108,21,Standard,West,Credit Card,31.13,72.71
+36,51,1,Premium,South,Bank Transfer,174.95,110.62
+34,54,8,Basic,North,Bank Transfer,66.5,37.15
+73,24,29,Standard,South,Auto-Pay,40.88,84.14
+36,25,32,Premium,East,Bank Transfer,138.37,136.89
+45,71,38,Basic,North,Bank Transfer,17.24,76.67
+75,52,5,Basic,North,Digital Wallet,127.79,55.37
+72,70,47,Standard,North,Auto-Pay,142.66,128.27
+43,117,22,Premium,West,Auto-Pay,50.83,113.8
+54,88,47,Basic,South,Auto-Pay,17.97,115.03
+43,33,34,Standard,North,Digital Wallet,79.09,106.48
+70,49,1,Standard,North,Bank Transfer,28.73,67.51
+79,29,26,Standard,North,Auto-Pay,32.13,102.19
+40,63,43,Standard,South,Auto-Pay,58.31,122.35
+26,107,10,Standard,West,Credit Card,66.14,61.97
+29,22,30,Standard,East,Auto-Pay,110.69,115.54
+70,26,18,Standard,West,Bank Transfer,138.89,88.33
+18,28,17,Standard,North,Bank Transfer,122.63,84.77
+75,114,26,Standard,West,Credit Card,38.19,92.44
+75,85,8,Premium,West,Auto-Pay,42.7,92.09
+18,49,47,Basic,East,Auto-Pay,176.97,109.3
+64,71,40,Premium,South,Auto-Pay,116.09,132.29
+51,81,49,Premium,South,Digital Wallet,175.29,183.85
+49,84,12,Basic,West,Auto-Pay,80.59,59.38
+79,105,27,Standard,West,Bank Transfer,126.74,82.81
+71,49,8,Standard,South,Bank Transfer,109.5,63.01
+65,20,25,Basic,South,Digital Wallet,70.63,73.49
+42,118,46,Basic,East,Digital Wallet,99.28,111.3
+57,86,4,Basic,North,Auto-Pay,105.47,26.45
+62,92,33,Basic,West,Credit Card,48.15,78.75
+70,63,1,Premium,South,Digital Wallet,69.85,91.95
+18,61,19,Basic,West,Digital Wallet,160.37,69.24
+33,104,31,Premium,West,Auto-Pay,184.0,148.82
+78,49,16,Standard,South,Auto-Pay,78.36,73.8
+56,71,14,Premium,East,Digital Wallet,68.32,114.96
+22,1,48,Standard,West,Credit Card,47.09,110.57
+39,96,5,Basic,East,Digital Wallet,138.91,36.58
+46,13,41,Standard,South,Auto-Pay,71.39,114.86
+72,94,26,Basic,North,Auto-Pay,197.67,75.05
+20,87,28,Standard,North,Digital Wallet,71.88,68.52
+29,51,2,Premium,West,Credit Card,84.89,100.19
+43,56,6,Basic,South,Digital Wallet,124.63,38.03
+33,83,9,Basic,East,Digital Wallet,162.32,43.49
+68,62,33,Standard,West,Auto-Pay,99.21,98.04
+54,32,41,Premium,South,Credit Card,90.3,137.47
+39,30,25,Standard,South,Bank Transfer,199.17,107.62
+74,29,48,Basic,East,Credit Card,11.99,84.38
+46,49,13,Standard,West,Digital Wallet,180.06,94.79
+31,45,9,Basic,South,Digital Wallet,38.34,48.56
+45,93,13,Standard,South,Digital Wallet,159.33,70.35
+22,30,31,Premium,South,Credit Card,127.41,129.29
+64,16,41,Standard,East,Auto-Pay,74.95,109.67
+66,40,11,Premium,West,Digital Wallet,176.04,114.23
+47,19,4,Basic,West,Digital Wallet,12.45,43.21
+63,18,34,Standard,West,Credit Card,53.07,115.79
+79,1,38,Premium,West,Bank Transfer,117.71,178.59
+69,78,46,Basic,North,Bank Transfer,76.79,76.74
+22,115,4,Premium,North,Auto-Pay,125.97,84.9
+29,47,38,Basic,West,Auto-Pay,14.58,102.41
+33,114,19,Standard,East,Digital Wallet,32.13,53.36
+43,66,6,Premium,North,Credit Card,34.15,107.77
+43,118,34,Standard,South,Digital Wallet,45.96,101.81
+65,92,18,Basic,North,Auto-Pay,97.27,67.05
+38,113,13,Standard,South,Credit Card,152.9,68.98
+56,114,41,Standard,West,Credit Card,182.05,126.19
+53,94,23,Premium,North,Auto-Pay,168.72,153.43
+50,38,19,Standard,East,Bank Transfer,47.41,77.54
+79,51,45,Basic,North,Bank Transfer,93.82,100.19
+47,63,11,Standard,North,Credit Card,47.89,70.9
+54,4,1,Standard,North,Digital Wallet,60.25,50.93
+40,1,24,Standard,West,Bank Transfer,105.67,97.99
+75,8,7,Standard,East,Digital Wallet,22.94,47.49
+27,29,25,Premium,North,Bank Transfer,51.45,115.64
+71,55,21,Standard,East,Bank Transfer,187.72,95.52
+22,103,15,Standard,West,Digital Wallet,98.56,56.74
+53,3,1,Basic,South,Auto-Pay,94.62,44.13
+51,32,12,Basic,North,Bank Transfer,12.77,27.66
+69,10,7,Basic,East,Bank Transfer,57.01,40.52
+48,74,15,Basic,East,Digital Wallet,174.6,82.2
+27,83,21,Standard,West,Auto-Pay,41.28,61.07
+75,110,19,Standard,North,Bank Transfer,88.87,92.84
+36,34,29,Standard,South,Bank Transfer,12.72,83.61
+75,97,25,Premium,East,Auto-Pay,100.88,114.78
+49,87,33,Premium,North,Bank Transfer,13.99,148.32
+18,55,49,Premium,South,Auto-Pay,165.73,169.25
+73,92,32,Standard,East,Auto-Pay,166.72,109.84
+22,32,49,Standard,East,Digital Wallet,159.67,129.19
+62,50,35,Standard,South,Credit Card,63.84,115.75
+21,7,44,Basic,South,Auto-Pay,169.08,105.07
+33,93,38,Basic,West,Digital Wallet,113.17,104.7
+41,8,26,Premium,North,Credit Card,81.02,123.17
+33,65,11,Premium,North,Bank Transfer,128.81,120.87
+72,57,35,Basic,West,Credit Card,12.34,65.44
+19,119,8,Standard,East,Auto-Pay,37.16,47.69
+66,67,46,Premium,South,Auto-Pay,151.04,161.58
+45,88,14,Basic,South,Auto-Pay,56.39,49.33
+49,87,10,Basic,South,Auto-Pay,123.62,51.74
+44,59,2,Premium,East,Auto-Pay,83.17,119.25
+37,72,46,Standard,South,Digital Wallet,172.41,161.47
+41,54,9,Basic,South,Auto-Pay,190.96,67.78
+29,111,3,Standard,West,Digital Wallet,177.88,77.64
+67,101,21,Premium,East,Bank Transfer,61.42,111.23
+52,67,26,Standard,North,Auto-Pay,46.89,76.04
+77,51,8,Basic,West,Auto-Pay,100.14,48.69
+50,97,48,Basic,West,Credit Card,11.39,105.46
+50,92,2,Standard,North,Bank Transfer,14.9,63.4
+78,111,6,Standard,West,Auto-Pay,115.13,82.12
+68,8,28,Standard,East,Auto-Pay,108.89,83.62
+60,34,29,Basic,South,Bank Transfer,198.97,92.87
+54,35,26,Premium,East,Digital Wallet,48.35,101.33
+29,96,25,Basic,North,Auto-Pay,59.04,81.83
+20,88,12,Basic,North,Credit Card,31.57,38.79
+18,78,5,Basic,West,Auto-Pay,184.33,55.48
+50,32,34,Basic,East,Credit Card,157.78,102.93
+57,46,48,Standard,East,Credit Card,166.24,172.98
+27,107,37,Standard,North,Auto-Pay,181.53,127.3
+60,16,15,Basic,East,Auto-Pay,109.73,59.1
+61,68,44,Standard,North,Credit Card,95.73,108.52
+46,116,36,Basic,East,Bank Transfer,72.77,104.72
+30,37,15,Standard,East,Bank Transfer,121.95,80.11
+29,54,43,Premium,East,Auto-Pay,96.31,170.28
+48,85,48,Basic,North,Digital Wallet,95.8,122.04
+63,14,23,Standard,West,Bank Transfer,188.02,100.3
+19,95,6,Basic,East,Auto-Pay,196.97,42.79
+78,55,46,Basic,North,Bank Transfer,161.33,120.37
+68,48,44,Basic,North,Digital Wallet,153.78,105.09
+67,82,43,Standard,East,Auto-Pay,139.31,129.22
+52,7,45,Standard,East,Digital Wallet,41.55,128.92
+40,74,21,Basic,West,Auto-Pay,21.23,36.84
+34,7,23,Premium,North,Digital Wallet,141.24,130.56
+43,33,43,Standard,North,Bank Transfer,148.47,138.04
+25,23,16,Premium,South,Bank Transfer,18.92,107.79
+46,85,47,Standard,North,Digital Wallet,186.33,124.39
+43,19,15,Standard,West,Digital Wallet,27.32,73.78
+27,112,25,Basic,South,Digital Wallet,64.32,82.94
+43,19,36,Basic,South,Auto-Pay,137.75,100.93
+79,36,11,Premium,South,Bank Transfer,42.28,95.4
+51,29,15,Basic,East,Auto-Pay,20.53,61.8
+68,60,4,Premium,East,Bank Transfer,72.92,82.01
+58,82,21,Standard,North,Credit Card,155.53,79.37
+24,2,13,Basic,South,Auto-Pay,88.6,51.58
+21,1,22,Basic,West,Bank Transfer,134.06,80.58
+75,47,19,Basic,East,Bank Transfer,120.13,82.74
+70,69,34,Premium,West,Auto-Pay,14.22,133.0
+67,20,14,Standard,West,Auto-Pay,197.82,104.05
+62,11,4,Basic,East,Bank Transfer,17.87,44.32
+28,106,48,Basic,East,Auto-Pay,193.88,118.41
+46,2,46,Basic,East,Digital Wallet,114.47,106.7
+73,67,27,Standard,East,Auto-Pay,193.0,128.55
+53,87,29,Basic,South,Auto-Pay,31.8,56.4
+42,119,47,Premium,South,Auto-Pay,103.18,163.23
+38,12,28,Basic,South,Bank Transfer,42.21,61.63
+78,20,35,Basic,South,Digital Wallet,19.69,92.56
+74,5,8,Standard,North,Credit Card,127.33,74.58
+53,37,16,Standard,South,Credit Card,49.48,74.16
+27,38,42,Premium,East,Digital Wallet,121.66,173.35
+54,94,36,Standard,West,Digital Wallet,31.35,88.49
+26,9,30,Basic,South,Digital Wallet,73.08,79.85
+41,98,18,Standard,North,Bank Transfer,158.51,90.66
+52,53,2,Basic,East,Credit Card,93.04,45.94
+66,44,49,Basic,West,Digital Wallet,129.27,139.34
+52,99,13,Premium,West,Bank Transfer,133.02,104.79
+65,116,4,Standard,South,Credit Card,170.31,60.43
+53,86,26,Premium,West,Auto-Pay,71.74,112.7
+35,108,25,Standard,South,Bank Transfer,140.59,97.54
+66,24,30,Standard,South,Credit Card,192.71,117.98
+56,81,11,Basic,East,Bank Transfer,148.75,62.99
+49,74,7,Basic,East,Credit Card,103.08,70.04
+41,30,31,Premium,North,Credit Card,129.84,157.52
+40,59,44,Basic,East,Auto-Pay,150.54,126.22
+79,110,10,Premium,East,Bank Transfer,126.33,138.07
+49,87,39,Standard,South,Digital Wallet,13.17,112.81
+54,96,13,Basic,East,Auto-Pay,47.01,62.55
+29,81,31,Standard,South,Auto-Pay,163.99,122.21
+66,114,7,Standard,South,Credit Card,61.8,70.76
+72,115,49,Basic,East,Digital Wallet,149.0,124.18
+30,81,42,Premium,North,Bank Transfer,80.7,141.84
+40,14,42,Standard,North,Digital Wallet,109.16,106.41
+42,9,36,Basic,West,Digital Wallet,22.91,77.97
+52,40,20,Standard,West,Digital Wallet,44.43,86.05
+58,66,4,Premium,East,Digital Wallet,191.87,108.55
+47,109,7,Basic,North,Digital Wallet,179.13,46.94
+34,25,1,Premium,South,Credit Card,133.93,91.3
+66,103,44,Basic,West,Credit Card,97.33,101.28
+79,73,45,Standard,South,Auto-Pay,138.39,131.46
+37,118,42,Standard,West,Credit Card,127.54,129.87
+65,22,47,Basic,East,Auto-Pay,118.02,119.93
+42,107,13,Basic,North,Auto-Pay,21.24,38.79
+39,110,22,Standard,West,Bank Transfer,130.23,106.26
+30,4,21,Standard,North,Digital Wallet,156.09,109.99
+76,26,22,Standard,South,Credit Card,198.88,110.48
+36,58,28,Basic,East,Bank Transfer,12.1,73.59
+66,29,9,Premium,North,Credit Card,148.73,120.92
+53,109,26,Standard,East,Auto-Pay,118.64,86.27
+29,98,9,Premium,North,Credit Card,92.47,111.48
+78,87,15,Basic,South,Digital Wallet,34.24,42.06
+58,37,10,Standard,South,Auto-Pay,87.73,62.75
+36,75,24,Standard,East,Auto-Pay,77.33,91.75
+29,70,42,Basic,South,Bank Transfer,67.54,68.85
+26,18,8,Standard,West,Digital Wallet,148.87,77.74
+24,85,24,Basic,North,Auto-Pay,143.14,90.45
+45,42,16,Standard,South,Digital Wallet,121.91,64.79
+31,100,49,Standard,West,Credit Card,188.35,156.37
+48,41,26,Basic,East,Digital Wallet,76.47,64.49
+69,38,27,Standard,West,Auto-Pay,56.32,94.88
+36,34,37,Standard,East,Bank Transfer,134.62,110.85
+75,17,4,Basic,East,Auto-Pay,47.77,43.79
+64,37,24,Premium,North,Digital Wallet,69.85,131.98
+33,25,19,Premium,North,Digital Wallet,52.67,115.81
+70,102,36,Standard,West,Auto-Pay,23.14,100.92
+22,76,39,Basic,North,Digital Wallet,167.22,98.97
+52,87,10,Standard,North,Credit Card,58.36,65.52
+29,117,25,Standard,North,Auto-Pay,99.88,101.8
+42,106,18,Basic,West,Bank Transfer,18.23,60.12
+69,86,19,Standard,South,Auto-Pay,142.87,99.99
+76,85,36,Standard,North,Credit Card,72.81,93.33
+38,27,10,Standard,North,Credit Card,151.5,79.35
+53,57,33,Standard,West,Credit Card,88.36,97.8
+70,31,5,Standard,South,Credit Card,47.19,66.06
+40,6,47,Premium,North,Credit Card,107.5,149.45
+33,91,49,Basic,East,Bank Transfer,34.8,105.79
+74,40,35,Standard,West,Digital Wallet,93.7,106.87
+56,98,44,Premium,North,Credit Card,70.29,126.79
+62,12,34,Standard,North,Credit Card,183.27,132.76
+70,109,33,Standard,East,Auto-Pay,21.58,95.93
+59,53,21,Standard,East,Bank Transfer,141.86,111.04
+75,71,17,Standard,West,Bank Transfer,44.72,55.97
+56,10,22,Premium,West,Digital Wallet,70.62,112.89
+31,45,48,Standard,East,Bank Transfer,88.95,124.3
+48,17,37,Premium,West,Auto-Pay,182.52,158.52
+75,26,15,Basic,East,Auto-Pay,56.09,38.76
+22,85,35,Basic,North,Digital Wallet,27.35,84.23
+52,92,28,Standard,East,Auto-Pay,70.55,118.12
+40,62,7,Basic,East,Credit Card,29.89,42.68
+46,46,32,Basic,South,Credit Card,34.43,76.58
+60,64,11,Basic,East,Auto-Pay,119.03,40.83
+28,2,10,Basic,East,Digital Wallet,21.57,30.34
+35,54,9,Basic,South,Bank Transfer,15.88,36.96
+64,107,14,Premium,West,Digital Wallet,145.74,109.7
+29,65,13,Basic,South,Bank Transfer,78.71,65.07
+26,51,25,Standard,North,Auto-Pay,33.82,90.28
+27,53,2,Standard,South,Auto-Pay,58.19,85.39
+75,36,35,Premium,North,Credit Card,132.0,134.28
+61,115,7,Basic,West,Bank Transfer,62.35,43.3
+34,26,21,Premium,South,Digital Wallet,103.96,102.19
+78,29,18,Standard,South,Auto-Pay,33.12,49.2
+55,21,3,Standard,West,Digital Wallet,121.74,74.18
+24,11,42,Standard,North,Credit Card,70.05,120.67
+63,40,39,Premium,South,Bank Transfer,129.12,140.76
+30,11,41,Basic,North,Bank Transfer,163.6,108.66
+57,36,49,Standard,South,Auto-Pay,126.21,127.73
+59,113,11,Standard,East,Bank Transfer,66.19,63.45
+26,59,39,Standard,South,Auto-Pay,58.59,104.75
+67,39,24,Premium,West,Credit Card,72.21,109.42
+44,104,46,Basic,West,Bank Transfer,41.28,88.79
+75,99,19,Premium,North,Auto-Pay,44.42,100.65
+19,54,4,Basic,South,Digital Wallet,160.23,56.06
+22,98,26,Basic,North,Auto-Pay,83.1,39.27
+46,55,38,Basic,North,Bank Transfer,92.84,90.49
+54,111,42,Basic,East,Credit Card,122.87,91.08
+55,24,32,Standard,East,Bank Transfer,122.03,96.44
+36,118,39,Basic,West,Bank Transfer,22.8,77.41
+25,22,45,Basic,North,Auto-Pay,167.99,113.78
+65,69,46,Premium,West,Digital Wallet,43.69,146.23
+62,56,36,Premium,South,Bank Transfer,147.38,136.44
+18,33,40,Premium,North,Digital Wallet,156.81,163.08
+39,36,37,Premium,North,Auto-Pay,145.83,138.49
+69,111,33,Standard,South,Digital Wallet,120.01,102.14
+34,20,36,Basic,South,Auto-Pay,12.78,81.03
+24,83,3,Basic,West,Credit Card,78.47,41.31
+42,99,9,Standard,West,Digital Wallet,124.92,67.0
+62,116,8,Basic,South,Digital Wallet,83.62,12.41
+21,107,33,Standard,West,Credit Card,174.06,106.03
+53,81,6,Basic,South,Digital Wallet,68.67,43.89
+23,62,41,Basic,North,Credit Card,65.77,100.78
+77,109,39,Standard,North,Bank Transfer,60.54,110.48
+48,107,4,Standard,East,Auto-Pay,73.23,53.64
+36,98,13,Standard,North,Credit Card,115.91,106.21
+78,73,49,Standard,South,Digital Wallet,144.33,134.58
+61,26,2,Basic,West,Credit Card,135.89,53.78
+71,66,5,Basic,East,Digital Wallet,163.47,39.55
+56,117,44,Premium,West,Bank Transfer,178.32,152.47
+44,73,27,Standard,South,Credit Card,165.06,115.23
+27,73,32,Basic,North,Bank Transfer,13.6,83.92
+43,40,21,Premium,East,Auto-Pay,149.82,121.45
+36,17,8,Basic,South,Digital Wallet,49.6,19.06
+56,1,38,Standard,East,Digital Wallet,35.26,103.08
+79,89,8,Basic,East,Bank Transfer,131.31,57.92
+20,61,3,Standard,North,Auto-Pay,70.75,57.3
+62,43,44,Standard,South,Credit Card,20.85,105.47
+30,104,3,Basic,West,Credit Card,36.15,29.59
+67,42,22,Premium,East,Digital Wallet,10.18,98.88
+45,25,6,Standard,East,Bank Transfer,181.61,65.15
+79,39,2,Basic,West,Bank Transfer,14.68,38.22
+75,35,23,Basic,South,Credit Card,49.8,66.89
+37,3,44,Basic,East,Auto-Pay,89.09,99.41
+45,114,2,Basic,East,Auto-Pay,77.75,30.83
+25,101,38,Standard,East,Credit Card,183.23,123.57
+78,108,17,Premium,South,Credit Card,17.65,103.97
+58,44,35,Standard,South,Bank Transfer,107.32,132.24
+56,51,34,Basic,West,Auto-Pay,139.29,102.55
+18,94,23,Basic,South,Credit Card,187.02,75.46
+20,102,30,Basic,South,Credit Card,127.87,77.31
+30,98,8,Standard,North,Digital Wallet,162.71,68.17
+45,12,22,Standard,West,Credit Card,25.91,76.73
+79,19,44,Basic,East,Credit Card,83.33,92.7
+74,101,36,Standard,South,Auto-Pay,81.05,115.56
+77,44,5,Premium,East,Bank Transfer,178.39,76.39
+66,59,13,Standard,East,Auto-Pay,38.76,75.04
+42,49,29,Premium,North,Bank Transfer,38.86,124.73
+73,61,31,Standard,South,Digital Wallet,72.43,116.17
+50,17,47,Standard,West,Credit Card,20.35,126.57
+55,74,16,Standard,South,Digital Wallet,44.67,65.25
+70,57,42,Standard,East,Bank Transfer,193.39,144.68
+23,55,30,Basic,West,Auto-Pay,91.35,77.84
+75,113,16,Basic,South,Auto-Pay,130.08,44.05
+61,47,12,Basic,East,Digital Wallet,147.96,65.15
+62,12,17,Standard,East,Bank Transfer,79.72,73.07
+49,62,16,Basic,North,Digital Wallet,37.97,52.15
+62,80,12,Premium,North,Digital Wallet,49.25,118.3
+78,88,8,Standard,North,Credit Card,69.52,69.03
+64,83,20,Standard,East,Digital Wallet,130.85,80.62
+38,8,3,Basic,South,Credit Card,85.67,50.82
+33,95,16,Premium,North,Credit Card,11.29,101.69
+71,21,30,Premium,South,Auto-Pay,109.45,121.35
+38,81,45,Standard,North,Credit Card,185.09,117.89
+28,87,23,Basic,West,Credit Card,164.29,68.82
+77,101,28,Standard,West,Auto-Pay,166.79,120.9
+54,118,40,Basic,North,Digital Wallet,161.06,103.24
+53,80,5,Basic,East,Bank Transfer,71.51,41.85
+52,70,20,Standard,North,Bank Transfer,155.39,79.85
+36,72,40,Standard,North,Bank Transfer,37.2,117.74
+37,25,44,Standard,East,Digital Wallet,134.97,103.91
+74,82,1,Premium,West,Credit Card,131.9,87.12
+35,89,30,Standard,South,Bank Transfer,14.86,94.0
+64,12,21,Standard,North,Digital Wallet,159.71,85.18
+58,15,20,Basic,East,Credit Card,181.62,87.51
+66,59,6,Premium,North,Auto-Pay,60.81,80.99
+31,26,22,Basic,East,Bank Transfer,164.35,64.49
+32,105,18,Premium,South,Credit Card,25.66,117.89
+48,109,8,Premium,South,Bank Transfer,123.99,104.85
+18,26,39,Basic,West,Bank Transfer,102.27,100.97
+70,47,32,Standard,East,Bank Transfer,113.73,120.78
+71,32,33,Premium,East,Credit Card,185.98,119.52
+71,10,16,Standard,West,Digital Wallet,175.55,101.5
+20,16,12,Premium,West,Credit Card,159.17,103.74
+33,71,38,Premium,East,Bank Transfer,62.0,130.4
+40,17,34,Standard,West,Credit Card,183.25,125.74
+74,23,14,Basic,South,Auto-Pay,28.53,44.62
+28,26,36,Premium,North,Digital Wallet,172.13,158.35
+29,85,33,Standard,South,Credit Card,72.35,101.31
+27,86,23,Basic,West,Auto-Pay,20.22,60.9
+49,7,45,Basic,East,Digital Wallet,137.18,104.64
+33,14,2,Standard,East,Auto-Pay,53.94,39.96
+25,79,41,Premium,South,Digital Wallet,56.28,132.31
+55,117,21,Premium,East,Credit Card,68.15,113.24
+29,7,2,Standard,West,Auto-Pay,22.1,69.81
+41,9,27,Basic,South,Bank Transfer,43.65,86.76
+45,115,9,Basic,East,Auto-Pay,10.98,29.56
+70,48,1,Premium,North,Digital Wallet,94.63,89.92
+25,72,11,Basic,North,Credit Card,26.01,38.2
+75,114,3,Basic,West,Digital Wallet,139.7,50.77
+45,59,23,Basic,East,Auto-Pay,54.77,68.07
+53,87,26,Standard,West,Auto-Pay,189.28,116.37
+43,93,4,Premium,South,Bank Transfer,175.54,69.67
+25,82,18,Basic,North,Credit Card,64.99,62.4
+75,95,6,Standard,South,Credit Card,158.81,71.78
+77,94,35,Standard,East,Auto-Pay,162.62,112.28
+67,116,22,Premium,West,Credit Card,197.45,145.5
+45,39,43,Basic,West,Bank Transfer,123.59,122.89
+45,99,15,Standard,West,Digital Wallet,25.57,76.85
+54,18,22,Basic,South,Credit Card,132.9,69.41
+58,59,37,Premium,North,Auto-Pay,128.75,134.8
+53,106,42,Standard,South,Digital Wallet,131.29,89.27
+44,103,12,Basic,South,Digital Wallet,68.36,52.64
+71,17,47,Standard,East,Bank Transfer,173.34,147.0
+34,14,49,Standard,East,Auto-Pay,192.3,142.82
+26,31,42,Basic,East,Credit Card,51.37,103.21
+50,24,38,Premium,North,Auto-Pay,26.75,117.67
+70,99,18,Basic,North,Digital Wallet,46.96,55.49
+37,108,45,Standard,East,Auto-Pay,165.9,131.23
+30,60,35,Standard,East,Credit Card,138.56,113.46
+45,45,30,Standard,North,Credit Card,130.85,120.89
+65,98,24,Basic,West,Bank Transfer,86.34,70.94
+46,3,42,Premium,North,Credit Card,119.79,149.73
+30,37,30,Standard,North,Credit Card,68.5,85.53
+63,43,14,Standard,North,Auto-Pay,100.67,95.19
+52,40,6,Standard,East,Auto-Pay,160.68,58.53
+78,90,3,Standard,West,Digital Wallet,196.44,71.23
+23,55,16,Basic,North,Bank Transfer,187.17,93.55
+35,87,7,Basic,East,Auto-Pay,187.43,65.98
+68,108,14,Premium,South,Credit Card,86.42,107.12
+22,39,9,Basic,South,Digital Wallet,99.07,49.72
+64,15,15,Standard,North,Auto-Pay,144.07,75.95
+42,113,21,Premium,South,Bank Transfer,185.22,130.56
+19,4,35,Basic,West,Bank Transfer,36.98,74.8
+27,93,2,Standard,South,Digital Wallet,67.81,56.68
+73,86,27,Standard,South,Digital Wallet,36.46,71.54
+47,25,2,Standard,West,Digital Wallet,126.28,69.07
+67,13,35,Basic,North,Digital Wallet,68.2,98.28
+76,82,18,Basic,North,Digital Wallet,71.96,59.15
+62,33,14,Standard,West,Credit Card,23.47,75.39
+22,16,20,Premium,West,Credit Card,76.46,116.29
+72,109,18,Standard,West,Auto-Pay,173.87,89.39
+73,42,10,Standard,South,Bank Transfer,54.28,54.09
+50,108,25,Basic,West,Credit Card,142.09,70.29
+71,66,2,Standard,East,Credit Card,129.63,69.51
+18,55,25,Basic,South,Credit Card,174.06,83.84
+35,99,33,Premium,North,Auto-Pay,35.13,141.82
+49,42,36,Premium,North,Digital Wallet,195.74,165.3
+64,34,31,Standard,North,Auto-Pay,120.7,117.27
+66,30,14,Premium,South,Bank Transfer,199.14,127.33

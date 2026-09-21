@@ -1,0 +1,75 @@
+======================================================================================
+1. DATA
+  applicants 20,000   variables 34   missing cells 0
+  target LoanAmount: mean 24,883  sd 13,427  range 3,674 to 184,732
+
+======================================================================================
+2. LEAKAGE AUDIT, RUN BEFORE ANY MODEL IS FITTED
+  MonthlyLoanPayment reconstructed from LoanAmount by the amortisation formula:
+    max absolute error 0.000004   correlation 1.00000000
+  TotalDebtToIncomeRatio = (MonthlyDebtPayments + MonthlyLoanPayment) / MonthlyIncome:
+    mean absolute difference 0.00000000
+
+  Both are arithmetic on the target. Neither exists before the loan is sized, so
+  neither can be an input to a model that sizes the loan.
+
+  excluded as post-decision: MonthlyLoanPayment, TotalDebtToIncomeRatio, InterestRate, BaseInterestRate, RiskScore
+  predictors retained: 23 numeric + 5 categorical (EmploymentStatus, EducationLevel, MaritalStatus, HomeOwnershipStatus, LoanPurpose)
+
+======================================================================================
+3. MULTICOLLINEARITY AMONG THE RETAINED PREDICTORS
+                 predictor        VIF
+             MonthlyIncome      49.84
+              AnnualIncome      49.84
+                  NetWorth      40.48
+               TotalAssets      39.80
+                Experience      29.76
+                       Age      29.65
+          TotalLiabilities       1.68
+               CreditScore       1.13
+UtilityBillsPaymentHistory       1.00
+            PaymentHistory       1.00
+
+  strongest predictor pairs:
+    AnnualIncome               <-> MonthlyIncome              r = 0.990
+    Age                        <-> Experience                 r = 0.983
+    NetWorth                   <-> TotalAssets                r = 0.979
+    Experience                 <-> CreditScore                r = 0.328
+    CreditScore                <-> Age                        r = 0.323
+
+======================================================================================
+4. THE COST OF THE AUDIT
+                 feature set model        alpha    test RMSE     test MAE      test R2  non-zero coefs
+with post-decision variables   OLS          NaN       0.0000       0.0000       1.0000               3
+with post-decision variables Ridge       0.0100       0.2103       0.1433       1.0000              44
+with post-decision variables Lasso       0.3981       3.4369       2.1372       1.0000               7
+ pre-decision variables only   OLS          NaN   13020.6306    9779.4126      -0.0043              39
+ pre-decision variables only Ridge   10000.0000   12996.4275    9757.3015      -0.0006              39
+ pre-decision variables only Lasso     199.5262   12995.0055    9754.0390      -0.0004               1
+
+  With the leaky variables the model is near perfect. Without them none of the three
+  explains anything: test R-squared sits at zero, meaning the fitted models predict
+  no better than the mean of the training target.
+
+======================================================================================
+5. RIDGE AND LASSO ACT DIFFERENTLY ON THE COEFFICIENTS
+                                    OLS  Ridge (a=100)  Lasso (a=100)
+TotalAssets                   -1127.653       -775.343        -13.083
+NetWorth                       1040.878        685.135         -0.000
+HomeOwnershipStatus_Own         909.814        851.057         48.940
+MonthlyIncome                  -848.815       -524.507         -0.000
+EmploymentStatus_Unemployed     815.277        734.064          0.000
+AnnualIncome                    811.636        488.009         -0.000
+HomeOwnershipStatus_Other       749.952        675.849          0.000
+Experience                     -574.941       -427.450        -44.665
+Age                             458.831        313.238         -0.000
+MaritalStatus_Married          -418.003       -377.310         -0.000
+MonthlyDebtPayments             341.713        339.019        243.761
+LoanPurpose_Home               -330.221       -306.928         -0.000
+
+  coefficients set exactly to zero:  OLS 0   Ridge 0   Lasso 32 of 39
+  sum of absolute coefficients:      OLS 11591.3   Ridge 9378.9   Lasso 455.7
+  Ridge shrinks every coefficient towards zero but keeps all of them. Lasso removes
+  predictors outright, which is selection rather than shrinkage alone.
+
+figures: figures/q4_fig1.png, figures/q4_fig2.png

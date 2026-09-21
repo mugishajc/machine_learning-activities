@@ -1,0 +1,10 @@
+Variable description 
+
+Age	customer's age
+Account_Duration_Months	account duration in months
+Num_Transactions	number of transactions
+Subscription_Type	subscription type
+Region 	customer's region
+Payment_Method	payment method
+Previous_Expanditure	previous expenditure
+Monthly_Expenditure customer’s monthly expenditure 
