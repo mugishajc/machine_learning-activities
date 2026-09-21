@@ -1,0 +1,46 @@
+==============================================================================
+1. THE MATRIX
+                   predicted fraudulent  predicted legitimate
+actual fraudulent                   120                    30
+actual legitimate                   450                 14400
+
+  total transactions 15,000   actual fraud 150 (1.000%)
+  note: the question states a background fraud rate of about 3%, but the matrix
+  itself gives 150/15000 = 1.00%. All figures below follow the matrix,
+  since that is the evidence supplied. The discrepancy is noted, not resolved.
+  flagged 570 (3.800% of all traffic)
+
+==============================================================================
+2. METRICS, SHOWN AS ARITHMETIC
+  precision   = TP / (TP + FP) = 120 / (120 + 450) = 120/570 = 0.2105  (21.05%)
+  recall      = TP / (TP + FN) = 120 / (120 + 30) = 120/150 = 0.8000  (80.00%)
+  specificity = TN / (TN + FP) = 14400 / (14400 + 450) = 14400/14850 = 0.9697  (96.97%)
+  F1          = 2PR/(P+R) = 2(0.2105)(0.8000) / (0.2105 + 0.8000) = 0.336842 / 1.010526 = 0.3333
+
+  for contrast, accuracy = (TP+TN)/N = (120+14400)/15000 = 0.9680 (96.80%)
+  a model predicting 'legitimate' for everything would score 0.9900 (99.00%) and catch no fraud at all
+
+==============================================================================
+3. QUESTION FOUR(a): THE 2% CASE, WORKED
+  with a 2% fraud rate, the all-legitimate classifier gives:
+    accuracy    = TN/N = 0.98 = 98%
+    recall      = TP/(TP+FN) = 0 / (0 + 0.02N) = 0
+    precision   = TP/(TP+FP) = 0/0, undefined and conventionally reported as 0
+    F1          = 0
+  on 100,000 transactions that is 98,000 correct and 2,000 frauds missed, every one of them.
+
+==============================================================================
+4. WHAT RAISING THE THRESHOLD DOES
+ threshold  TP  FN   FP    TN  precision    recall        F1
+    0.3000 144   6 2430 12420     0.0559    0.9600    0.1057
+    0.5000 123  27  475 14375     0.2057    0.8200    0.3289
+    0.6000  98  52  164 14686     0.3740    0.6533    0.4757
+    0.7000  70  80   28 14822     0.7143    0.4667    0.5645
+    0.8000  39 111    5 14845     0.8864    0.2600    0.4021
+    0.9000  13 137    0 14850     1.0000    0.0867    0.1595
+
+  raising the threshold demands more confidence before flagging, so fewer alerts
+  are raised: false positives fall, precision rises, false negatives rise and
+  recall falls. The two move in opposite directions by construction.
+
+figure: figures/q6_fig1.png

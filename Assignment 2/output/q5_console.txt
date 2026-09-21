@@ -1,0 +1,71 @@
+==================================================================================
+1. AUTOMATIC FEATURE TYPING
+  numerical   28   ranges from 0.00 to 2,619,627
+  ordinal      1   ['EducationLevel'] with a stated order
+  nominal      4   ['EmploymentStatus', 'MaritalStatus', 'HomeOwnershipStatus', 'LoanPurpose']
+  cardinality of nominal columns: {'EmploymentStatus': 3, 'MaritalStatus': 4, 'HomeOwnershipStatus': 4, 'LoanPurpose': 5}
+
+  missing values by column:
+    AnnualIncome            2,574 (12.9%)
+    CreditScore             1,379 (6.9%)
+    EmploymentStatus          814 (4.1%)
+
+==================================================================================
+2. THE FITTED PIPELINE
+  design matrix width after preprocessing: 46
+  held-out ROC AUC          0.9197
+  held-out average precision 0.7836  (base rate 0.100)
+
+              precision    recall  f1-score   support
+
+  no default     0.9615    0.9933    0.9772      4500
+     default     0.9145    0.6420    0.7544       500
+
+    accuracy                         0.9582      5000
+   macro avg     0.9380    0.8177    0.8658      5000
+weighted avg     0.9568    0.9582    0.9549      5000
+
+==================================================================================
+3. PART (b): WHAT FITTING STATISTICS ON EVERYTHING ACTUALLY DOES
+  median of AnnualIncome over the whole dataset : 48,428.50
+  the same median computed within each of 5 folds' training portion:
+    fold 1: 48,567.00   difference from the whole-data median +138.50
+    fold 2: 48,352.50   difference from the whole-data median -76.00
+    fold 3: 48,482.50   difference from the whole-data median +54.00
+    fold 4: 48,442.00   difference from the whole-data median +13.50
+    fold 5: 48,338.50   difference from the whole-data median -90.00
+  spread across folds 228.50
+
+  Using the whole-data median means each validation fold is imputed with a value
+  that was computed partly from itself. The validation rows contributed to the
+  statistic used to fill them, so they are no longer unseen. The same argument
+  applies to StandardScaler, whose mean and standard deviation are estimated the
+  same way, and the effect grows as the statistic becomes more sensitive to
+  individual rows: a median barely moves, a maximum moves entirely.
+
+  preprocessing fitted on everything, then cross-validated : ROC AUC 0.9097
+  preprocessing inside the pipeline, re-fitted per fold     : ROC AUC 0.9097
+  difference -0.0000
+  A Pipeline prevents this because cross_val_score calls fit() on the whole
+  pipeline separately for each fold, so every transformer learns its parameters
+  from that fold's training rows alone and applies them unchanged to the held-out
+  rows. ColumnTransformer carries the same guarantee across all three branches at
+  once, so nothing has to be remembered by hand.
+
+==================================================================================
+4. THE SIZE OF THE LEAK DEPENDS ON THE STATISTIC AND THE SAMPLE
+  median + StandardScaler                n=   200   leaked 0.8606   clean 0.8617   gap -0.0011
+  median + StandardScaler                n= 1,000   leaked 0.9274   clean 0.9275   gap -0.0001
+  median + StandardScaler                n= 5,000   leaked 0.9037   clean 0.9036   gap +0.0000
+  median + StandardScaler                n=20,000   leaked 0.9101   clean 0.9101   gap +0.0000
+
+  median + MinMaxScaler                  n=   200   leaked 0.6106   clean 0.6106   gap +0.0000
+  median + MinMaxScaler                  n= 1,000   leaked 0.7751   clean 0.7829   gap -0.0078
+  median + MinMaxScaler                  n= 5,000   leaked 0.8977   clean 0.8978   gap -0.0002
+
+  StandardScaler uses a mean and a standard deviation, both averages over every
+  row, so removing a fifth of them barely moves either and the leak stays small.
+  MinMaxScaler uses the minimum and maximum, each determined by a single row, so
+  one extreme validation value rescales the entire column. The rule to teach is
+  not that leakage is always large, but that its size tracks how much a single
+  observation can move the statistic being fitted.

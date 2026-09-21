@@ -1,0 +1,43 @@
+==================================================================================
+1. DATA AND COLLINEARITY
+  observations 2,215   numeric predictors 124
+  target crime_rate: mean 567.6  sd 586.8
+  excluded as other measures of the same outcome: 16 columns
+
+  predictor pairs with |r| >= 0.90: 103
+    PolicPerPop            <-> LemasSwFTPerPop        r = 1.0000
+    numbUrban              <-> population             r = 0.9991
+    LemasSwornFT           <-> LemasSwFTFieldOps      r = 0.9981
+    PctRecImmig10          <-> PctRecImmig8           r = 0.9951
+    PctRecImmig5           <-> PctRecImmig8           r = 0.9938
+
+  train 1,661   test 554
+
+==================================================================================
+2. THREE MODELS, IDENTICAL PIPELINE
+model        alpha          MAE         RMSE           R2  non-zero coefficients   sum |coef|  largest |coef|
+  OLS          NaN     245.7568     358.6590       0.5400                    124  373211.2943     181585.3151
+Ridge     650.9675     242.8342     362.2963       0.5306                    124    1381.7366         59.3653
+Lasso       6.2605     240.0126     358.3467       0.5408                     42    1218.3134        194.8782
+
+==================================================================================
+3. WHAT THE PENALTIES DID TO THE COEFFICIENTS
+                         OLS        Ridge        Lasso
+PolicPerPop       181585.315       -0.705       -0.000
+LemasSwFTPerPop  -181554.078       -0.714       -0.000
+PctPersOwnOccup     -769.481       -9.818       -0.000
+PctHousOwnOcc        658.207        0.999        0.000
+TotalPctDiv         -481.414        9.262        0.000
+PctKids2Par         -385.822      -48.348     -194.878
+numbUrban           -337.422       -0.656       -0.000
+NumUnderPov         -280.442       -9.123       -0.000
+MalePctDivorce       266.126       19.209        0.000
+population           248.049       -1.273       -0.000
+
+  coefficients set exactly to zero:  OLS 0   Ridge 0   Lasso 82 of 124
+  sum of absolute coefficients:      OLS 373,211.3   Ridge 1,381.7   Lasso 1,218.3
+  largest single coefficient:        OLS 181,585.3   Ridge 59.4   Lasso 194.9
+
+  the 42 predictors Lasso retained: PctKids2Par, NumInShelters, LemasSwFTFieldOps, agePct12t29, PolicOperBudg, PctForeignBorn, PolicCars, PctPersDenseHous, PctPolicHisp, pctWInvInc, pctWPubAsst, PctHousLess3BR ...
+
+figure: figures/q7_fig1.png

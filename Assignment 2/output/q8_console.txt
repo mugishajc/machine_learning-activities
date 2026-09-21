@@ -1,0 +1,33 @@
+================================================================================
+1. THE DATA AS THE COMPANY SET IT UP
+                        mean          std          min          max
+monthly_spend       4117.736     6437.111       26.718   216444.074
+engagement_rate        0.282        0.158        0.006        0.878
+tenure_months         24.455       13.925        0.909      109.682
+survey_noise           0.043        1.020       -3.464        3.226
+
+  spend range 216,444 against engagement range 0.88: a ratio of about 246,423 to 1
+  variance contributed by spend: 99.999529% of the total across all four features
+
+================================================================================
+2. REPRODUCING THE FAILURE, THEN FIXING IT ONE STEP AT A TIME
+  raw, unstandardised, all four features       k=3  largest cluster  82.7%  silhouette 0.7132
+  standardised                                 k=3  largest cluster  46.2%  silhouette 0.2252
+  standardised, uninformative feature dropped  k=3  largest cluster  48.0%  silhouette 0.3202
+  robust-scaled, top 1% of spend trimmed       k=3  largest cluster  56.9%  silhouette 0.3066
+
+================================================================================
+3. CHOOSING k: INERTIA AND SILHOUETTE DISAGREE, AS THE QUESTION SAYS
+ k      inertia   silhouette  largest cluster  inertia drop %
+ 2    6962.1888       0.2905           0.6470             NaN
+ 3    5365.5314       0.3202           0.4803         22.9333
+ 4    4131.8818       0.3245           0.4893         22.9921
+ 5    3428.4337       0.3428           0.4483         17.0249
+ 6    2993.6293       0.3011           0.3267         12.6823
+ 7    2655.1253       0.2760           0.2413         11.3075
+ 8    2373.6744       0.2785           0.2463         10.6003
+
+  silhouette peaks at k=5; the largest single
+  improvement in inertia is at k=4
+
+figure: figures/q8_fig1.png

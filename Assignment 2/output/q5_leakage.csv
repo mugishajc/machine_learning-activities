@@ -1,0 +1,3 @@
+approach,cv_roc_auc
+fitted on all data,0.909709963115312
+fitted inside pipeline,0.9097132441121734
