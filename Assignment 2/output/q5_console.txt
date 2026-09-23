@@ -1,40 +1,46 @@
+  DAYS_EMPLOYED sentinel 365243 found in 55,374 rows (18.0%); replaced with missing and flagged
 ==================================================================================
 1. AUTOMATIC FEATURE TYPING
-  numerical   28   ranges from 0.00 to 2,619,627
-  ordinal      1   ['EducationLevel'] with a stated order
-  nominal      4   ['EmploymentStatus', 'MaritalStatus', 'HomeOwnershipStatus', 'LoanPurpose']
-  cardinality of nominal columns: {'EmploymentStatus': 3, 'MaritalStatus': 4, 'HomeOwnershipStatus': 4, 'LoanPurpose': 5}
+  numerical   105   ranges from -25,229.00 to 117,000,000
+  ordinal      1   ['NAME_EDUCATION_TYPE'] with a stated order
+  nominal     15   ['NAME_CONTRACT_TYPE', 'CODE_GENDER', 'FLAG_OWN_CAR', 'FLAG_OWN_REALTY', 'NAME_TYPE_SUITE', 'NAME_INCOME_TYPE', 'NAME_FAMILY_STATUS', 'NAME_HOUSING_TYPE', 'OCCUPATION_TYPE', 'WEEKDAY_APPR_PROCESS_START', 'ORGANIZATION_TYPE', 'FONDKAPREMONT_MODE', 'HOUSETYPE_MODE', 'WALLSMATERIAL_MODE', 'EMERGENCYSTATE_MODE']
+  cardinality of nominal columns: {'NAME_CONTRACT_TYPE': 2, 'CODE_GENDER': 3, 'FLAG_OWN_CAR': 2, 'FLAG_OWN_REALTY': 2, 'NAME_TYPE_SUITE': 7, 'NAME_INCOME_TYPE': 8, 'NAME_FAMILY_STATUS': 6, 'NAME_HOUSING_TYPE': 6, 'OCCUPATION_TYPE': 18, 'WEEKDAY_APPR_PROCESS_START': 7, 'ORGANIZATION_TYPE': 58, 'FONDKAPREMONT_MODE': 4, 'HOUSETYPE_MODE': 3, 'WALLSMATERIAL_MODE': 7, 'EMERGENCYSTATE_MODE': 2}
 
-  missing values by column:
-    AnnualIncome            2,574 (12.9%)
-    CreditScore             1,379 (6.9%)
-    EmploymentStatus          814 (4.1%)
+  columns with missing values: 68 of 121   total missing cells 9,207,839 (24.7% of all cells)
+    COMMONAREA_MODE              214,865 (69.9%)
+    COMMONAREA_AVG               214,865 (69.9%)
+    COMMONAREA_MEDI              214,865 (69.9%)
+    NONLIVINGAPARTMENTS_MEDI     213,514 (69.4%)
+    NONLIVINGAPARTMENTS_MODE     213,514 (69.4%)
+    NONLIVINGAPARTMENTS_AVG      213,514 (69.4%)
+    FONDKAPREMONT_MODE           210,295 (68.4%)
+    LIVINGAPARTMENTS_MEDI        210,199 (68.4%)
 
 ==================================================================================
 2. THE FITTED PIPELINE
-  design matrix width after preprocessing: 46
-  held-out ROC AUC          0.9197
-  held-out average precision 0.7836  (base rate 0.100)
+  design matrix width after preprocessing: 191
+  held-out ROC AUC          0.7491
+  held-out average precision 0.2285  (base rate 0.081)
 
               precision    recall  f1-score   support
 
-  no default     0.9615    0.9933    0.9772      4500
-     default     0.9145    0.6420    0.7544       500
+  no default     0.9201    0.9991    0.9580     70672
+     default     0.5362    0.0119    0.0233      6206
 
-    accuracy                         0.9582      5000
-   macro avg     0.9380    0.8177    0.8658      5000
-weighted avg     0.9568    0.9582    0.9549      5000
+    accuracy                         0.9194     76878
+   macro avg     0.7282    0.5055    0.4906     76878
+weighted avg     0.8891    0.9194    0.8825     76878
 
 ==================================================================================
 3. PART (b): WHAT FITTING STATISTICS ON EVERYTHING ACTUALLY DOES
-  median of AnnualIncome over the whole dataset : 48,428.50
+  median of AMT_INCOME_TOTAL over the whole dataset : 147,150.00
   the same median computed within each of 5 folds' training portion:
-    fold 1: 48,567.00   difference from the whole-data median +138.50
-    fold 2: 48,352.50   difference from the whole-data median -76.00
-    fold 3: 48,482.50   difference from the whole-data median +54.00
-    fold 4: 48,442.00   difference from the whole-data median +13.50
-    fold 5: 48,338.50   difference from the whole-data median -90.00
-  spread across folds 228.50
+    fold 1: 145,908.00   difference from the whole-data median -1,242.00
+    fold 2: 148,500.00   difference from the whole-data median +1,350.00
+    fold 3: 148,500.00   difference from the whole-data median +1,350.00
+    fold 4: 147,600.00   difference from the whole-data median +450.00
+    fold 5: 146,771.91   difference from the whole-data median -378.09
+  spread across folds 2,592.00
 
   Using the whole-data median means each validation fold is imputed with a value
   that was computed partly from itself. The validation rows contributed to the
@@ -43,9 +49,9 @@ weighted avg     0.9568    0.9582    0.9549      5000
   same way, and the effect grows as the statistic becomes more sensitive to
   individual rows: a median barely moves, a maximum moves entirely.
 
-  preprocessing fitted on everything, then cross-validated : ROC AUC 0.9097
-  preprocessing inside the pipeline, re-fitted per fold     : ROC AUC 0.9097
-  difference -0.0000
+  preprocessing fitted on everything, then cross-validated : ROC AUC 0.7461
+  preprocessing inside the pipeline, re-fitted per fold     : ROC AUC 0.7461
+  difference +0.0000
   A Pipeline prevents this because cross_val_score calls fit() on the whole
   pipeline separately for each fold, so every transformer learns its parameters
   from that fold's training rows alone and applies them unchanged to the held-out
@@ -54,18 +60,25 @@ weighted avg     0.9568    0.9582    0.9549      5000
 
 ==================================================================================
 4. THE SIZE OF THE LEAK DEPENDS ON THE STATISTIC AND THE SAMPLE
-  median + StandardScaler                n=   200   leaked 0.8606   clean 0.8617   gap -0.0011
-  median + StandardScaler                n= 1,000   leaked 0.9274   clean 0.9275   gap -0.0001
-  median + StandardScaler                n= 5,000   leaked 0.9037   clean 0.9036   gap +0.0000
-  median + StandardScaler                n=20,000   leaked 0.9101   clean 0.9101   gap +0.0000
+  median + StandardScaler                n=   200   leaked 0.6196   clean 0.6210   gap -0.0014
+  median + StandardScaler                n= 1,000   leaked 0.6138   clean 0.6143   gap -0.0005
+  median + StandardScaler                n= 5,000   leaked 0.6778   clean 0.6761   gap +0.0017
+  median + StandardScaler                n=20,000   leaked 0.7316   clean 0.7316   gap -0.0000
 
-  median + MinMaxScaler                  n=   200   leaked 0.6106   clean 0.6106   gap +0.0000
-  median + MinMaxScaler                  n= 1,000   leaked 0.7751   clean 0.7829   gap -0.0078
-  median + MinMaxScaler                  n= 5,000   leaked 0.8977   clean 0.8978   gap -0.0002
+  median + MinMaxScaler                  n=   200   leaked 0.6577   clean 0.6631   gap -0.0054
+  median + MinMaxScaler                  n= 1,000   leaked 0.5911   clean 0.5973   gap -0.0062
+  median + MinMaxScaler                  n= 5,000   leaked 0.6967   clean 0.6973   gap -0.0006
 
-  StandardScaler uses a mean and a standard deviation, both averages over every
-  row, so removing a fifth of them barely moves either and the leak stays small.
-  MinMaxScaler uses the minimum and maximum, each determined by a single row, so
-  one extreme validation value rescales the entire column. The rule to teach is
-  not that leakage is always large, but that its size tracks how much a single
-  observation can move the statistic being fitted.
+  The honest reading: every gap measured is at or below 0.008 and several are
+  negative, which means they are noise. I expected MinMaxScaler to show a clear
+  penalty, because its minimum and maximum are each set by one row, and it did
+  not. On this data the consequence of fitting these transformers on everything
+  is below the resolution of the experiment.
+
+  That does not make the practice acceptable. The mechanism in part (b) is real,
+  the fold medians genuinely differ by 228.50, and the cost of doing it correctly
+  is zero: a Pipeline is no more work than fitting by hand. What the measurement
+  establishes is where the real danger is not. Preprocessing leakage of this kind
+  is a discipline issue with a small measured penalty; a predictor computed from
+  the target is a different category of failure, invisible to cross-validation
+  because it is present in every fold, and fatal rather than marginal.

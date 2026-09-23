@@ -1,9 +1,8 @@
 """
 Question Seven - OLS, Ridge and Lasso under multicollinearity.
 
-prices.csv has not yet been released. The stand-in is a regression problem with more
-severe collinearity than the house-price example in the question: 103 predictor pairs
-correlate at 0.90 or above, and one pair reaches 1.000.
+Runs on the supplied prices.csv: 1,460 Ames house sales, 79 predictors after the
+identifier is removed, mixed numeric and categorical with missing values in both.
 """
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -14,35 +13,44 @@ from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 RANDOM_STATE = 42
-DATA, TARGET = "data/crimes.csv", "crime_rate"     # <-- swap to "data/prices.csv", "SalePrice"
+DATA, TARGET = "data/prices.csv", "SalePrice"
 df = pd.read_csv(DATA, low_memory=False)
-# other measures of the same outcome would leak, exactly as GrLivArea does not but
-# a second sale price would; on prices.csv this list is empty
-# "murder" would miss murdPerPop, so the stems are matched instead. A filter that is
-# nearly right is the failure mode this whole question is about.
-LEAKY = [c for c in df.columns if c != TARGET and any(k in c.lower() for k in
-         ("murd","rape","robb","assault","burgl","larc","autotheft","arson","viol","crime"))]
 y = df[TARGET]
-X = df.drop(columns=[TARGET]+LEAKY).select_dtypes("number").drop(columns=["fold"], errors="ignore")
-X = X.loc[:, X.std() > 0]
+X = df.drop(columns=[TARGET, "Id"], errors="ignore")
+num = [c for c in X.columns if X[c].dtype != object]
+cat = [c for c in X.columns if X[c].dtype == object]
 
 print("="*82); print("1. DATA AND COLLINEARITY")
-print(f"  observations {len(X):,}   numeric predictors {X.shape[1]}")
-print(f"  target {TARGET}: mean {y.mean():,.1f}  sd {y.std():,.1f}")
-print(f"  excluded as other measures of the same outcome: {len(LEAKY)} columns")
-cm = X.corr().abs(); np.fill_diagonal(cm.values, 0)
+print(f"  observations {len(X):,}   predictors {X.shape[1]} ({len(num)} numeric, {len(cat)} categorical)")
+print(f"  target {TARGET}: mean {y.mean():,.0f}  sd {y.std():,.0f}  "
+      f"range {y.min():,.0f} to {y.max():,.0f}  skew {y.skew():.2f}")
+print(f"  missing cells {X.isna().sum().sum():,} across {int((X.isna().sum()>0).sum())} columns")
+print("\n  the two pairs the question names:")
+for a, b in [("GrLivArea", "TotRmsAbvGrd"), ("GarageCars", "GarageArea")]:
+    if a in X and b in X:
+        print(f"    {a:14s} <-> {b:14s} r = {X[a].corr(X[b]):.4f}")
+cm = X[num].corr().abs(); np.fill_diagonal(cm.values, 0)
 pairs = cm.stack().sort_values(ascending=False)
 pairs = pairs[~pairs.index.duplicated()]
-print(f"\n  predictor pairs with |r| >= 0.90: {int((cm.values>=0.90).sum()//2)}")
+print(f"\n  numeric pairs with |r| >= 0.80: {int((cm.values>=0.80).sum()//2)}")
 seen=set(); shown=0
 for (a,b),v in pairs.items():
     if (b,a) in seen: continue
     seen.add((a,b)); print(f"    {a:22s} <-> {b:22s} r = {v:.4f}"); shown+=1
     if shown==5: break
 
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder
+def make_pre():
+    return ColumnTransformer([
+        ("num", Pipeline([("impute", SimpleImputer(strategy="median")),
+                          ("scale", StandardScaler())]), num),
+        ("cat", Pipeline([("impute", SimpleImputer(strategy="constant", fill_value="None")),
+                          ("encode", OneHotEncoder(handle_unknown="ignore", min_frequency=10))]), cat)])
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=.25, random_state=RANDOM_STATE)
 cv = KFold(10, shuffle=True, random_state=RANDOM_STATE)
-alphas = np.logspace(-3, 4, 60)
+alphas = np.logspace(-2, 4, 60)
 print(f"\n  train {len(X_tr):,}   test {len(X_te):,}")
 
 print("\n"+"="*82); print("2. THREE MODELS, IDENTICAL PIPELINE")
@@ -50,7 +58,7 @@ rows, fitted = [], {}
 for name, est, grid in [("OLS",   LinearRegression(), None),
                         ("Ridge", Ridge(random_state=RANDOM_STATE), {"m__alpha": alphas}),
                         ("Lasso", Lasso(random_state=RANDOM_STATE, max_iter=50000), {"m__alpha": alphas})]:
-    pipe = Pipeline([("s", StandardScaler()), ("m", est)])
+    pipe = Pipeline([("s", make_pre()), ("m", est)])
     if grid:
         gs = GridSearchCV(pipe, grid, scoring="neg_root_mean_squared_error", cv=cv, n_jobs=-1).fit(X_tr, y_tr)
         best, alpha = gs.best_estimator_, gs.best_params_["m__alpha"]
@@ -70,7 +78,7 @@ res = pd.DataFrame(rows)
 print(res.to_string(index=False, float_format=lambda v: f"{v:12.4f}"))
 res.to_csv("output/q7_results.csv", index=False)
 
-lasso_fit = Pipeline([("s", StandardScaler()),
+lasso_fit = Pipeline([("s", make_pre()),
                       ("m", Lasso(alpha=res.loc[res.model=="Lasso","alpha"].iloc[0],
                                   random_state=RANDOM_STATE, max_iter=50000))]).fit(X_tr, y_tr)
 print(f"\n  convergence check on the selected Lasso: {lasso_fit.named_steps['m'].n_iter_} iterations")
@@ -79,7 +87,8 @@ print("  alphas, where the penalty is too weak to make the problem well conditio
 print("  those candidates are rejected and the selected model converges comfortably.")
 
 print("\n"+"="*82); print("3. WHAT THE PENALTIES DID TO THE COEFFICIENTS")
-co = pd.DataFrame(fitted, index=X.columns)
+feat = [f.split("__", 1)[1] for f in make_pre().fit(X_tr).get_feature_names_out()]
+co = pd.DataFrame(fitted, index=feat)
 co["|OLS|"] = co.OLS.abs()
 co = co.sort_values("|OLS|", ascending=False).drop(columns="|OLS|")
 print(co.head(10).to_string(float_format=lambda v: f"{v:12.3f}"))

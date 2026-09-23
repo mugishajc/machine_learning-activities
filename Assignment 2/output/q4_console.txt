@@ -1,73 +1,74 @@
+  sub = (X_tr.assign(_y=y_tr).groupby("_y", group_keys=False)
 ================================================================================
 1. DATA
-  rows 20,000   predictors 33 (28 numeric, 5 categorical)
-  positive class 'BankruptcyHistory': 1,048 of 20,000 = 5.240%
-  imbalance ratio 1 : 18
+  rows 1,000,000   predictors 7 (7 numeric, 0 categorical)
+  positive class 'fraud': 87,403 of 1,000,000 = 8.740%
+  imbalance ratio 1 : 10
 
 ================================================================================
 2. STRATIFIED SPLIT
-  train 15,000 rows, positive rate 5.240%
-  test  5,000 rows, positive rate 5.240%
+  train 750,000 rows, positive rate 8.740%
+  test  250,000 rows, positive rate 8.740%
   stratify=y keeps both rates equal to the population rate; without it the test
   positive count would vary by chance and the metrics with it
 
 ================================================================================
 3. BASELINE, UNCONSTRAINED TREE
-  depth reached 21   leaves 181
-  train F1 1.0000   test F1 0.8349
+  depth reached 7   leaves 35
+  train F1 1.0000   test F1 0.9999
   the gap between those two is Question One's 99.6 against 59.4 in miniature
-/Users/jcmugisha/Desktop/MIT91207 ML Assignment 2 - Mugisha 26016815 - 2026-09-21/code/q4_fraud_workflow.py:121: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
   d["depth"] = d.param_clf__max_depth.fillna(99).astype(int)
+  grid searched on a stratified subsample of 149,999 rows (8.740% positive, against 8.740% in the full training set)
 
 ================================================================================
 4-5. CROSS-VALIDATED GRID SEARCH, TRAINING DATA ONLY
   configurations tried 40   folds 5   fits 200
   scoring: average precision, the area under the precision-recall curve
-  best parameters: {'clf__class_weight': None, 'clf__max_depth': 8, 'clf__min_samples_leaf': 10}
-  best cross-validated average precision 0.8620
+  best parameters: {'clf__class_weight': 'balanced', 'clf__max_depth': 8, 'clf__min_samples_leaf': 1}
+  best cross-validated average precision 0.9995
 
   top five configurations:
 param_clf__max_depth  param_clf__min_samples_leaf param_clf__class_weight  mean_train_score  mean_test_score  std_test_score
-                   8                           10                    None            0.9504           0.8620          0.0289
-                   8                           10                balanced            0.9661           0.8540          0.0075
-                  12                           10                    None            0.9687           0.8503          0.0216
-                None                           10                    None            0.9704           0.8499          0.0265
-                  12                           10                balanced            0.9790           0.8365          0.0125
+                  12                            1                balanced            1.0000           0.9995          0.0005
+                None                            1                balanced            1.0000           0.9995          0.0005
+                   8                            1                balanced            1.0000           0.9995          0.0005
+                None                           50                balanced            0.9998           0.9994          0.0003
+                  12                           50                balanced            0.9998           0.9994          0.0003
 
   worst two configurations:
 param_clf__max_depth  param_clf__min_samples_leaf param_clf__class_weight  mean_train_score  mean_test_score  std_test_score
-                   3                            1                balanced            0.6049           0.5854          0.0443
-                   3                          200                balanced            0.5866           0.5663          0.0468
+                   3                           10                balanced            0.9497           0.9496          0.0025
+                   3                            1                balanced            0.9497           0.9496          0.0025
 
   worth reading carefully: the worst configurations here are the SHALLOW trees
-  (max_depth=3, best 0.6818), not the unconstrained ones
-  (max_depth=None, 0.8499 against 0.8620 for the winner).
+  (max_depth=3, best 0.9507), not the unconstrained ones
+  (max_depth=None, 0.9990 against 0.9995 for the winner).
   On this data the binding risk is underfitting, and the tuned depth of 8 gains only
-  0.0121 over no limit at all. The scenario in Question One
+  0.0005 over no limit at all. The scenario in Question One
   is the opposite case, which is why the diagnosis has to be made from the gap
   between training and validation and never assumed from the configuration alone.
 
 ================================================================================
 6. HELD-OUT TEST SET, TWO METRICS
-  F1-score          0.8780   balances precision and recall on the rare class
-  average precision 0.8769   summarises the precision-recall curve over all thresholds
+  F1-score          0.9999   balances precision and recall on the rare class
+  average precision 0.9999   summarises the precision-recall curve over all thresholds
 
   reported for contrast only, not used for selection:
-    accuracy 0.9876, against 0.9476 for predicting the majority class always
-    ROC AUC  0.9652
+    accuracy 1.0000, against 0.9126 for predicting the majority class always
+    ROC AUC  1.0000
 
   confusion matrix:
                  predicted negative  predicted positive
-actual negative                4715                  23
-actual positive                  39                 223
+actual negative              228148                   1
+actual positive                   2               21849
 
               precision    recall  f1-score   support
 
-    negative     0.9918    0.9951    0.9935      4738
-    positive     0.9065    0.8511    0.8780       262
+    negative     1.0000    1.0000    1.0000    228149
+    positive     1.0000    0.9999    0.9999     21851
 
-    accuracy                         0.9876      5000
-   macro avg     0.9492    0.9231    0.9357      5000
-weighted avg     0.9873    0.9876    0.9874      5000
+    accuracy                         1.0000    250000
+   macro avg     1.0000    1.0000    1.0000    250000
+weighted avg     1.0000    1.0000    1.0000    250000
 
 figure: figures/q4_fig1.png

@@ -8,11 +8,9 @@ All eight questions are answered. Every code cell has been run, so outputs,
 tables and figures are saved inside the notebook and it reads without running.
 
 ON THE DATASETS
-  credit.csv, home.csv and prices.csv had not been released when this was
-  written. Questions Four, Five and Seven run against structurally matched
-  stand-ins and say so at the head of each question. Each script reads its file
-  and target from two constants at the top and discovers feature types from the
-  dataframe, so the supplied files substitute with no other change.
+  All three supplied files are used: credit.csv (1,000,000 transactions) for
+  Question 4, home.csv (307,511 applications) for Question 5, and prices.csv
+  (1,460 house sales) for Question 7. They sit in data/ next to the notebook.
 
 TO RE-RUN IT
   Open in Jupyter and choose Run All. Needs pandas, numpy, scikit-learn,

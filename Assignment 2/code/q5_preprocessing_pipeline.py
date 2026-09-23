@@ -2,10 +2,8 @@
 Question Five - heterogeneous preprocessing inside a leakage-proof pipeline,
 plus a numerical demonstration of the leakage mechanism part (b) describes.
 
-home.csv has not yet been released. The stand-in is a credit dataset with the same
-structure the question names: numeric variables on very different ranges, a nominal
-categorical set, and an ordinal education variable. The real file needs only the two
-constants below changed.
+Runs on the supplied home.csv: 307,511 loan applications, 122 columns, heavy
+missingness, a 58-level nominal variable and an ordinal education variable.
 """
 import numpy as np, pandas as pd
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score
@@ -17,18 +15,26 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, average_precision_score, classification_report
 
 RANDOM_STATE = 42
-DATA, TARGET = "data/loan.csv", "PreviousLoanDefaults"   # <-- swap to "data/home.csv", "TARGET"
-ORDINAL = {"EducationLevel": ["High School", "Associate", "Bachelor", "Master", "Doctorate"]}
+DATA, TARGET = "data/home.csv", "TARGET"
+ORDINAL = {"NAME_EDUCATION_TYPE": ["Lower secondary", "Secondary / secondary special",
+                                   "Incomplete higher", "Higher education", "Academic degree"]}
+DROP = ["SK_ID_CURR"]                      # an identifier, never a predictor
 
-df = pd.read_csv(DATA)
-# home.csv ships with missing values; the stand-in does not, so they are introduced
-# here at rates typical of that file, to exercise the imputation branch honestly.
+df = pd.read_csv(DATA, low_memory=False)
 rng = np.random.default_rng(RANDOM_STATE)
-for col, rate in [("AnnualIncome", .13), ("CreditScore", .07), ("EmploymentStatus", .04)]:
-    if col in df.columns:
-        df.loc[rng.random(len(df)) < rate, col] = np.nan
 
-y = df[TARGET].astype(int); X = df.drop(columns=[TARGET])
+# DAYS_EMPLOYED carries 365243 for applicants who are not employed. That is a code, not
+# a duration, and leaving it in place would put a value of a thousand years into every
+# statistic computed on the column. It becomes missing, with a flag preserving the fact.
+SENTINEL = 365243
+if "DAYS_EMPLOYED" in df.columns:
+    n_sent = int((df.DAYS_EMPLOYED == SENTINEL).sum())
+    df["DAYS_EMPLOYED_ANOMALY"] = (df.DAYS_EMPLOYED == SENTINEL).astype(int)
+    df.loc[df.DAYS_EMPLOYED == SENTINEL, "DAYS_EMPLOYED"] = np.nan
+    print(f"  DAYS_EMPLOYED sentinel {SENTINEL} found in {n_sent:,} rows "
+          f"({n_sent/len(df):.1%}); replaced with missing and flagged")
+
+y = df[TARGET].astype(int); X = df.drop(columns=[TARGET] + [c for c in DROP if c in df.columns])
 
 # ---- 1. identify the feature types automatically ----------------------------
 ordinal_cols = [c for c in ORDINAL if c in X.columns]
@@ -41,9 +47,10 @@ print(f"  ordinal     {len(ordinal_cols):2d}   {ordinal_cols} with a stated orde
 print(f"  nominal     {len(categorical):2d}   {categorical}")
 print(f"  cardinality of nominal columns: "
       f"{ {c: int(X[c].nunique()) for c in categorical} }")
-print(f"\n  missing values by column:")
-m = X.isna().sum(); m = m[m > 0]
-for c, v in m.items(): print(f"    {c:22s} {v:6,} ({v/len(X):.1%})")
+m = X.isna().sum(); m = m[m > 0].sort_values(ascending=False)
+print(f"\n  columns with missing values: {len(m)} of {X.shape[1]}   "
+      f"total missing cells {X.isna().sum().sum():,} ({X.isna().mean().mean():.1%} of all cells)")
+for c, v in m.head(8).items(): print(f"    {c:28s} {v:7,} ({v/len(X):.1%})")
 
 # ---- 2-6. one branch per type, combined by ColumnTransformer ----------------
 numeric_branch = Pipeline([("impute", SimpleImputer(strategy="median")),
@@ -78,7 +85,7 @@ print("\n"+classification_report(y_te, model.predict(X_te), digits=4,
 
 # ---- part (b): the leakage mechanism, measured -------------------------------
 print("="*82); print("3. PART (b): WHAT FITTING STATISTICS ON EVERYTHING ACTUALLY DOES")
-col = "AnnualIncome"
+col = "AMT_INCOME_TOTAL"
 full_median = X[col].median()
 print(f"  median of {col} over the whole dataset : {full_median:,.2f}")
 print("  the same median computed within each of 5 folds' training portion:")

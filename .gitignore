@@ -8,3 +8,7 @@ Assignment 1.pdf
 *Gitare*
 *Nobel*
 *26016298*
+# Lecturer-supplied datasets: home.csv is 158 MB, above GitHub's 100 MB file limit,
+# and credit.csv is 73 MB. Both are downloaded from Moodle, not stored here.
+Assignment 2/data/home.csv
+Assignment 2/data/credit.csv

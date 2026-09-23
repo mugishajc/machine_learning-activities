@@ -1,10 +1,8 @@
 """
 Question Four(b) - the imbalanced-classification workflow the question specifies.
 
-The supplied file credit.csv has not yet been released, so the script runs against a
-stand-in with the same shape: a financial dataset with a rare binary outcome. Swapping
-to the real file is the two lines marked below; nothing else changes, because the
-workflow never refers to a column by name.
+Runs on the supplied credit.csv: 1,000,000 card transactions, seven predictors and a
+binary fraud flag.
 """
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -19,13 +17,13 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 
 RANDOM_STATE = 42
-DATA, TARGET = "data/loan.csv", "BankruptcyHistory"     # <-- swap to "data/credit.csv", "Class"
+DATA, TARGET = "data/credit.csv", "fraud"
 
 # ---- 1. separate the predictors from the binary target -----------------------
 df = pd.read_csv(DATA)
 y = df[TARGET].astype(int)
 X = df.drop(columns=[TARGET])
-# a target-derived column would leak; on credit.csv there is none to drop
+# every predictor here is measured at transaction time, so none is target-derived
 num = [c for c in X.columns if X[c].dtype != object]
 cat = [c for c in X.columns if X[c].dtype == object]
 print("="*80); print("1. DATA")
@@ -63,9 +61,19 @@ grid = {"clf__max_depth":        [3, 5, 8, 12, None],
         "clf__min_samples_leaf": [1, 10, 50, 200],
         "clf__class_weight":     [None, "balanced"]}
 cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
+# The grid is searched on a stratified subsample. At 750,000 training rows a 40-point
+# grid over 5 folds is 200 tree fits, and the cross-validated ranking is already stable
+# at a fraction of that size. The winning configuration is then refitted on everything.
+SEARCH_N = 150_000
+sub = (X_tr.assign(_y=y_tr).groupby("_y", group_keys=False)
+        .apply(lambda g: g.sample(min(len(g), int(SEARCH_N*len(g)/len(y_tr))),
+                                  random_state=RANDOM_STATE)))
+Xs, ys = sub.drop(columns="_y"), sub["_y"]
 search = GridSearchCV(baseline, grid, scoring="average_precision",
-                      cv=cv, n_jobs=-1, refit=True, return_train_score=True)
-search.fit(X_tr, y_tr)
+                      cv=cv, n_jobs=-1, refit=False, return_train_score=True)
+search.fit(Xs, ys)
+print(f"  grid searched on a stratified subsample of {len(Xs):,} rows "
+      f"({ys.mean():.3%} positive, against {y_tr.mean():.3%} in the full training set)")
 print("\n"+"="*80); print("4-5. CROSS-VALIDATED GRID SEARCH, TRAINING DATA ONLY")
 print(f"  configurations tried {len(search.cv_results_['params'])}   folds {cv.get_n_splits()}   "
       f"fits {len(search.cv_results_['params'])*cv.get_n_splits()}")
@@ -91,7 +99,7 @@ print(f"  between training and validation and never assumed from the configurati
 res.to_csv("output/q4_gridsearch.csv", index=False)
 
 # ---- 6. exactly two metrics, both appropriate under imbalance ----------------
-best = search.best_estimator_
+best = baseline.set_params(**search.best_params_).fit(X_tr, y_tr)   # refit on all training rows
 y_pred = best.predict(X_te)
 y_prob = best.predict_proba(X_te)[:, 1]
 f1 = f1_score(y_te, y_pred)

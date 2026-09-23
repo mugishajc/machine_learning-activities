@@ -265,11 +265,6 @@ which is why `StratifiedKFold` should be the default for any classification prob
 
 # Question Four: imbalance and an automated workflow
 
-Note on data: `credit.csv` had not been released when this was written. Part (b) runs
-against a structurally matched stand-in, a financial dataset with a rare binary outcome
-at 5.24% positive. The script reads its file and target from two constants at the top and
-discovers feature types from the dataframe, so the supplied file substitutes directly.
-
 ## 4(a) Why 98% accuracy can mean nothing
 
 Let the dataset contain N transactions, of which 2% are fraudulent and 98% legitimate.
@@ -302,50 +297,64 @@ precision-recall curve across thresholds instead of committing to one.
 
 ## 4(b) The workflow
 
-The script is in this notebook. `credit.csv` has not been released yet, so it runs
-against a stand-in with the same structure, a financial dataset with a rare binary
-outcome at 5.24% positive. The two constants at the top of the script are the only
-change needed when the real file arrives, because nothing downstream refers to a column
-by name: the feature types are discovered from the dataframe.
-
-Measured on the stand-in:
+The script is in this notebook, run on the supplied `credit.csv`: 1,000,000 card
+transactions, seven predictors and a binary fraud flag at 8.740% positive.
 
 ```
-rows 20,000   predictors 33   positive rate 5.240%   imbalance ratio 1 : 18
+rows 1,000,000   predictors 7, all numeric   fraud 87,403 = 8.740%   ratio 1 : 10
+train 750,000 (8.740% positive)   test 250,000 (8.740% positive)
 
-baseline unconstrained tree   depth 27   leaves 1,589
-                              train F1 0.9995   test F1 0.8234
+baseline unconstrained tree   depth 7   leaves 35
+                              train F1 1.0000   test F1 0.9999
 
-grid search                   40 configurations x 5 stratified folds = 200 fits
-                              scoring: average precision
-best                          max_depth 8, min_samples_leaf 10, class_weight None
-                              cross-validated average precision 0.8620
+grid search                   40 configurations x 5 stratified folds
+                              scored on average precision
+best                          max_depth 8, min_samples_leaf 1, class_weight balanced
+                              cross-validated average precision 0.9995
 
 held-out test set
-  F1-score          0.8780
-  average precision 0.8769
-  (accuracy 0.9876, against 0.9476 for always predicting the majority class)
+  F1-score          0.9999
+  average precision 0.9999
+  (accuracy 1.0000, against 0.9126 for always predicting the majority class)
+
+confusion matrix        predicted legitimate   predicted fraud
+  actual legitimate               228,148                   1
+  actual fraud                          2              21,849
 ```
 
-Three design points are worth drawing out. The search is scored on average precision and not accuracy, for the reason in 4(a). The folds are stratified, so each holds
-the same 5.24% positive rate and the fold scores are comparable. And `GridSearchCV` is
-fitted on the training partition only, so the test set contributes nothing to the
-selection and its score remains an honest estimate.
+Three design points carry the workflow. The search is scored on average precision, for
+the reason in 4(a). The folds are stratified, so each holds the same 8.740% and the fold
+scores are comparable. And the grid is fitted on the training partition alone, so the
+test score remains an honest estimate. One practical addition: at 750,000 training rows a
+40-point grid over five folds is 200 tree fits, so the search runs on a stratified
+subsample of 150,000 and the winning configuration is then refitted on all 750,000.
 
-The grid also produced a result worth reading carefully. The worst configurations are
-the shallow trees, `max_depth=3` reaching only 0.6818, while the unconstrained tree
-reaches 0.8499 against the winner's 0.8620. On this data the binding risk is
-underfitting, and constraining depth to 8 buys only 0.0121 over no limit at all. That is
-the opposite of the situation in Question One, which is exactly why the diagnosis must
-come from the gap between training and validation performance and can never be read off
-the configuration.
+Two results need comment, because both cut against what the question's framing suggests.
+
+The unconstrained tree did not overfit. With `max_depth=None` and `min_samples_leaf=1`,
+the settings that produced Question One's 40-point collapse, this tree stopped at depth 7
+with 35 leaves and scored 1.0000 on training against 0.9999 on test. It stopped because
+the nodes became pure, not because a limit stopped it. Unlimited capacity produces
+overfitting only when the data contains noise for the model to fit, and this data barely
+does.
+
+A score of 0.9999 demands scrutiny before it is reported, so I checked whether it came
+from leakage. It does not. No single predictor carries the signal: the strongest,
+`ratio_to_median_purchase_price`, reaches an average precision of 0.4949 on its own, and
+the weakest reach 0.09. The separation is genuinely multivariate, and every one of the
+seven is a property of the transaction observable as it happens, so none is derived from
+the label. The dataset is synthetic and its generating rule is close to deterministic,
+which is a property of this file rather than a finding about fraud detection. On real card
+data, published models reach average precision in the region of 0.8, and a result like
+this one would be a reason to audit the extract, not to celebrate.
+
+The grid confirms the point. The worst configurations are the shallow trees, with
+`max_depth=3` reaching 0.9507, while the unconstrained tree reaches 0.9990 against the
+winner's 0.9995. Constraining depth buys 0.0005. The binding risk here is underfitting,
+the reverse of Question One, which is why the diagnosis must come from the gap between
+training and validation performance and can never be read off the configuration.
 
 # Question Five: preprocessing a heterogeneous credit dataset
-
-Note on data: `home.csv` had not been released when this was written. Part (c) runs
-against a credit dataset carrying the same structure the question describes: numeric
-variables on very different ranges, nominal categoricals, and an ordinal education
-variable. Two constants at the top of the script switch it to the supplied file.
 
 ## 5(a) The preprocessing strategy
 
@@ -406,47 +415,78 @@ itself, and the same applies to the scaler's mean and standard deviation, which 
 sums over all N observations. The validation fold is no longer unseen, so the score it
 produces is not an estimate of performance on new data.
 
-Measured on the stand-in, the fold statistics do differ:
+Measured on `home.csv`, the fold statistics do differ:
 
 ```
-median of AnnualIncome over the whole dataset : 48,428.50
-  fold 1: 48,567.00   difference +138.50
-  fold 2: 48,352.50   difference  -76.00
-  fold 3: 48,482.50   difference  +54.00
-  fold 4: 48,442.00   difference  +13.50
-  fold 5: 48,338.50   difference  -90.00
-spread across folds 228.50
+median of AMT_INCOME_TOTAL over the whole dataset : 147,150.00
+  fold 1: 145,908.00   difference -1,242.00
+  fold 2: 148,500.00   difference +1,350.00
+  fold 3: 148,500.00   difference +1,350.00
+  fold 4: 147,600.00   difference   +450.00
+  fold 5: 146,771.91   difference   -378.09
 ```
 
-The honest finding is that the consequence is negligible here. Fitting the transformers
-on everything and then cross-validating gives ROC AUC 0.9097; fitting them inside the
-pipeline gives 0.9097. Repeating at sample sizes from 200 to 20,000, and swapping
-StandardScaler for MinMaxScaler, the largest gap observed is 0.008 and several are
-negative, which is noise. I expected MinMaxScaler to show a clear penalty, since its
-minimum and maximum are each set by a single row, and it did not.
+The honest finding is that the consequence is small. Fitting the transformers on
+everything and then cross-validating, against fitting them inside the pipeline, moves
+the cross-validated ROC AUC by less than a thousandth. Repeating at sample sizes from
+200 upward, and swapping StandardScaler for MinMaxScaler, the gaps stay at that order
+and several are negative, which is noise. I expected MinMaxScaler to show a clear
+penalty, since its minimum and maximum are each set by a single row, and it did not.
 
-That result does not license the practice. It locates the danger instead of dismissing it. The correct approach costs nothing, so the argument for discipline stands on its
-own. And the measurement usefully separates two things often taught as one: preprocessing
-leakage of this kind is a hygiene issue with a small measured penalty, whereas a
-predictor computed from the target is a different category of failure, undetectable by
-cross-validation because it is present in every fold, and fatal rather than marginal.
+That result does not license the practice. It locates the danger rather than dismissing
+it. The correct approach costs nothing, so the argument for discipline stands on its own.
+And the measurement separates two things often taught as one: preprocessing leakage of
+this kind is a hygiene issue with a small measured penalty, whereas a predictor computed
+from the target is a different category of failure, undetectable by cross-validation
+because it is present in every fold, and fatal rather than marginal.
 
 A `Pipeline` prevents the hygiene failure structurally. When `cross_val_score` or
 `GridSearchCV` evaluates a pipeline, it calls `fit` on the entire object separately for
 each fold, so every transformer estimates its parameters from that fold's training rows
-alone and then only `transform` is applied to the held-out rows. The guarantee is
-enforced by the fit/transform separation and not by the analyst remembering the order. `ColumnTransformer` extends the same guarantee across branches, applying the
-numeric, ordinal and nominal treatments in parallel to their own column subsets and
-concatenating the result, so one object carries the whole preprocessing specification
-and can be persisted and reloaded at scoring time unchanged.
+alone and only `transform` is applied to the held-out rows. The guarantee is enforced by
+the fit/transform separation rather than by the analyst remembering the order.
+`ColumnTransformer` extends the same guarantee across branches, applying the numeric,
+ordinal and nominal treatments in parallel to their own column subsets and concatenating
+the result, so one object carries the whole preprocessing specification and can be
+persisted and reloaded at scoring time unchanged.
 
 ## 5(c) The script
 
-Implemented in this notebook. It identifies the three feature types from the dataframe, not from a hand-written list, builds one branch per type, combines them with
-`ColumnTransformer`, places a classifier in the parent `Pipeline`, and evaluates on a
-stratified held-out split. Measured on the stand-in: design matrix 46 columns after
-encoding, held-out ROC AUC 0.9197 and average precision 0.7836 against a base rate of
-0.100.
+Implemented in this notebook on the supplied `home.csv`: 307,511 loan applications and
+122 columns. It discovers the three feature types from the dataframe rather than from a
+hand-written list, builds one branch per type, combines them with `ColumnTransformer`,
+places a classifier in the parent `Pipeline`, and evaluates on a stratified held-out
+split.
+
+```
+DAYS_EMPLOYED sentinel 365243 found in 55,374 rows (18.0%), flagged and set to missing
+
+feature typing   105 numerical
+                   1 ordinal    NAME_EDUCATION_TYPE, order stated explicitly
+                  15 nominal    ORGANIZATION_TYPE 58 levels, OCCUPATION_TYPE 18
+
+missing data     68 of 121 columns, 9,207,839 cells, 24.7% of the matrix
+                 worst: COMMONAREA_MODE / AVG / MEDI at 69.9%
+
+design matrix    191 columns after imputation, ordinal coding and one-hot encoding
+held-out         ROC AUC 0.7491   average precision 0.2285   base rate 0.081
+```
+
+The sentinel is worth drawing out, because it is the failure this question is really
+about. `DAYS_EMPLOYED` carries 365243 for applicants who are not employed. That is a
+code, not a duration: read literally it says a thousand years of employment. It appears
+in 18.0% of rows, so leaving it in place would corrupt the mean, the standard deviation
+and every scaled value derived from them, and no imputation strategy would help because
+the value is not missing. It is handled by setting those entries to missing and adding a
+flag, which preserves the fact that the applicant is unemployed while removing the
+absurd number.
+
+One result connects directly to Questions Four and Six. At the default 0.5 threshold the
+model reaches ROC AUC 0.7491 but recall on the defaulting class of only 0.0119. It
+almost never predicts default, because with an 8.1% base rate the probability rarely
+crosses 0.5. The model discriminates usefully and is nearly useless as a classifier at
+that threshold, which is exactly why the threshold is a separate decision from the model,
+and why average precision at 0.2285 against a base rate of 0.081 is the honest summary.
 
 # Question Six: thresholds and the metrics that survive imbalance
 
@@ -571,13 +611,9 @@ almost no fraud operation actually holds.
 
 # Question Seven: OLS, Ridge and Lasso
 
-Note on data: `prices.csv` had not been released when this was written. The stand-in is a
-regression problem carrying more severe multicollinearity than the house-price example in
-the question: 103 predictor pairs correlate at 0.90 or above and one pair reaches 1.000.
-
-`prices.csv` has not been released, so the stand-in is a regression problem with more
-severe collinearity than the house-price example: 103 predictor pairs correlate at 0.90
-or above and one pair reaches 1.000.
+Worked on the supplied `prices.csv`: 1,460 Ames house sales, 79 predictors after the
+identifier is dropped, 36 numeric and 43 categorical, with 7,829 missing cells across 19
+columns. Target `SalePrice` has a mean of 180,921 and a skew of 1.88.
 
 ## 7(a) Experimental procedure
 
@@ -607,57 +643,69 @@ approaches singularity and its inverse becomes enormous. The estimates stay unbi
 their variance explodes. The data determines the joint contribution of a correlated
 group but cannot apportion it among the members, so noise settles the split.
 
-The measurement makes this concrete. Two predictors in the stand-in correlate at 1.000,
-and OLS assigns them:
+The measurement makes this concrete on `prices.csv`. Both pairs the question names are
+present:
 
 ```
-PolicPerPop      +181,585.315
-LemasSwFTPerPop  -181,554.078
+GrLivArea  <-> TotRmsAbvGrd   r = 0.8255
+GarageCars <-> GarageArea     r = 0.8825
 ```
 
-Two coefficients of roughly 181,000 in opposite directions, summing to about 31. The
-model has discovered that it can add an arbitrarily large multiple of one and subtract
-the same multiple of the other without changing a single prediction. Read literally it
-claims two near-identical measures of police staffing have vast and opposing effects on
-crime, which is not a finding but the arithmetic of a near-singular matrix.
+and once the 43 categorical columns are one-hot encoded the design matrix widens to 253
+columns on 1,095 training rows, which is where the real damage appears. `PoolQC` is
+absent for almost every house, so its encoded columns are near-complementary, and OLS
+assigns them:
+
+```
+PoolQC_None        +323,230.450
+PoolQC_infrequent  -323,230.450
+```
+
+Two coefficients of 323,230 dollars in opposite directions, cancelling to nothing. The
+model has found that it can add an arbitrarily large multiple of one and subtract the
+same multiple of the other without changing a single prediction. Read literally it claims
+the presence of a pool record moves a house price by a third of a million dollars in each
+direction at once, which is not a finding but the arithmetic of a near-singular matrix.
 
 Ridge adds a penalty on the sum of squared coefficients. Adding a constant to the
-diagonal of the cross-product matrix makes it well-conditioned again, which is precisely
-why the variance falls. The estimator becomes biased, and that is the intended trade.
-Because the squared penalty grows steeply, Ridge prefers several small coefficients to
-one large one, so it splits a shared effect between correlated predictors and does not choose: the same pair becomes −0.705 and −0.714.
+diagonal of the cross-product matrix makes it well-conditioned again, which is why the
+variance falls. The estimator becomes biased, and that is the intended trade. Because
+the squared penalty grows steeply, Ridge prefers several small coefficients to one large
+one, so it splits a shared effect between correlated predictors and does not choose: the
+same pair becomes +1,992 and -1,992.
 
 Lasso penalises the sum of absolute coefficients. The mechanism for exact zeros is the
-geometry of that constraint. The L1 constraint region is a diamond with vertices on the
-axes, and the optimum occurs where the elliptical contours of the squared-error surface
-first touch that region. Because the diamond has corners while the ellipse is smooth,
-contact happens at a corner for a wide range of positions, and a corner is exactly a
-point where one or more coefficients equal zero. The L2 constraint region is a sphere
-with no corners, so contact almost never occurs on an axis and Ridge shrinks without
-eliminating. Equivalently, the absolute-value penalty has a constant gradient right down
-to zero, so it keeps pushing a small coefficient all the way there, while the squared
-penalty's gradient vanishes as the coefficient approaches zero. Lasso set both members of
-the r = 1.000 pair to exactly zero.
+geometry of that constraint. The L1 region is a diamond with vertices on the axes, and
+the optimum lies where the elliptical contours of the squared-error surface first touch
+it. Because the diamond has corners while the ellipse is smooth, contact happens at a
+corner over a wide range of positions, and a corner is exactly a point where one or more
+coefficients equal zero. The L2 region is a sphere with no corners, so contact almost
+never occurs on an axis and Ridge shrinks without eliminating. Equivalently, the absolute
+penalty has a constant gradient right down to zero and keeps pushing a small coefficient
+all the way there, while the squared penalty's gradient vanishes as the coefficient
+approaches zero. Lasso set both `PoolQC` columns to exactly zero.
 
 ```
-coefficients set exactly to zero:  OLS 0   Ridge 0   Lasso 82 of 124
-sum of absolute coefficients:      OLS 373,211.3   Ridge 1,381.7   Lasso 1,218.3
-largest single coefficient:        OLS 181,585.3   Ridge 59.4   Lasso 194.9
+coefficients set exactly to zero:  OLS 0   Ridge 0   Lasso 174 of 253
+sum of absolute coefficients:      OLS 2,340,988   Ridge 736,892   Lasso 451,855
+largest single coefficient:        OLS 323,230     Ridge 17,032    Lasso 37,993
 ```
 
 ## 7(c) The script and its results
 
-| Model | alpha | MAE | RMSE | R² | Non-zero coefficients |
+| Model | alpha | MAE | RMSE | R2 | Non-zero coefficients |
 |---|---|---|---|---|---|
-| OLS | | 245.7568 | 358.6590 | 0.5400 | 124 |
-| Ridge | 650.97 | 242.8342 | 362.2963 | 0.5306 | 124 |
-| Lasso | 6.26 | 240.0126 | 358.3467 | 0.5408 | 42 |
+| OLS | | 20,069.22 | 30,056.12 | 0.8710 | 253 |
+| Ridge | 28.68 | 18,493.38 | 29,673.30 | 0.8743 | 253 |
+| Lasso | 235.98 | 17,953.14 | 29,261.88 | 0.8778 | 78 |
 
-The result that matters is not which R² is highest. It is that OLS's largest coefficient
-is 181,585 and Ridge's is 59.4, a factor of three thousand, while their R² values differ
-by 0.009. The predictions are almost identical; the explanations are not remotely. A
-practitioner reading only the error metrics would never learn that one of these models
-is telling a false story about what drives the outcome.
+Lasso wins on all three measures while using 78 coefficients against 253, so on this data
+the choice is not a trade at all. The result that matters more is the contrast between
+the last two columns of the coefficient summary: OLS's largest coefficient is 323,230
+dollars and Ridge's is 17,032, a factor of nineteen, while their R2 differs by 0.003. The
+predictions are nearly identical and the explanations are not remotely. A practitioner
+reading only the error metrics would never learn that one of these models is telling a
+false story about what drives a house price.
 
 ## 7(d) Interpreting the supplied results
 
@@ -680,7 +728,7 @@ How many predictors each retains. If Lasso reaches 0.74 with 15 predictors while
 needs all 80 for 0.76, the two points of R² are bought with 65 additional fields to
 collect, validate, store and monitor. That is an operating cost, not a free gain.
 
-Whether the coefficients are stable and readable. The stand-in demonstrates that OLS
+Whether the coefficients are stable and readable. The measurement above demonstrates that OLS
 coefficients can be meaningless while its predictions are fine. For a property valuation
 that a customer may query, a model whose coefficients flip sign between refits is not
 defensible whatever its R².
