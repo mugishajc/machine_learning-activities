@@ -12,3 +12,5 @@ Assignment 1.pdf
 # and credit.csv is 73 MB. Both are downloaded from Moodle, not stored here.
 Assignment 2/data/home.csv
 Assignment 2/data/credit.csv
+config.bat
+node_modules
