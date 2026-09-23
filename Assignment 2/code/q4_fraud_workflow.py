@@ -4,6 +4,7 @@ Question Four(b) - the imbalanced-classification workflow the question specifies
 Runs on the supplied credit.csv: 1,000,000 card transactions, seven predictors and a
 binary fraud flag.
 """
+import utils.session
 import numpy as np, pandas as pd, matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, StratifiedKFold, GridSearchCV
